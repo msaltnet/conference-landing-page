@@ -39,6 +39,40 @@ body {
     height: 70px;
 }
 
+/* 언어 선택 버튼 스타일 */
+.language-selector {
+    display: flex;
+    gap: 5px;
+    margin-left: 20px;
+}
+
+.lang-btn {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    color: #495057;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.lang-btn:hover {
+    background: #e9ecef;
+    border-color: #adb5bd;
+}
+
+.lang-btn.active {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.lang-btn.active:hover {
+    background: #0056b3;
+    border-color: #0056b3;
+}
+
 .nav-logo h2 {
     color: #2c3e50;
     font-size: 1.5rem;
@@ -892,6 +926,15 @@ section {
 @media screen and (max-width: 768px) {
     .hamburger {
         display: flex;
+    }
+    
+    .language-selector {
+        margin-left: 10px;
+    }
+    
+    .lang-btn {
+        padding: 4px 8px;
+        font-size: 0.8rem;
     }
     
     .nav-menu {

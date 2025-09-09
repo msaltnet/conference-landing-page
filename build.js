@@ -211,6 +211,31 @@ async function build() {
       copyDir(path.join(config.sourceDir, 'js'), path.join(config.distDir, 'js'));
     }
     
+    // 영어 버전 폴더 복사
+    const enSourceDir = path.join(config.sourceDir, 'en');
+    const enDistDir = path.join(config.distDir, 'en');
+    
+    if (fs.existsSync(enSourceDir)) {
+      ensureDir(enDistDir);
+      
+      // 영어 버전 HTML 복사
+      const enHtmlPath = path.join(enSourceDir, 'index.html');
+      if (fs.existsSync(enHtmlPath)) {
+        copyFile(enHtmlPath, path.join(enDistDir, 'index.html'));
+      }
+      
+      // 영어 버전 데이터 폴더 복사
+      const enDataDir = path.join(enSourceDir, 'data');
+      if (fs.existsSync(enDataDir)) {
+        copyDir(enDataDir, path.join(enDistDir, 'data'));
+      }
+      
+      // 영어 버전 assets 폴더 복사
+      copyDir(path.join(config.sourceDir, 'assets'), path.join(enDistDir, 'assets'));
+      copyDir(path.join(config.sourceDir, 'css'), path.join(enDistDir, 'css'));
+      copyDir(path.join(config.sourceDir, 'js'), path.join(enDistDir, 'js'));
+    }
+    
     // 빌드 정보 생성
     const buildInfo = {
       buildTime: new Date().toISOString(),
@@ -226,6 +251,32 @@ async function build() {
     
     const buildInfoPath = path.join(config.distDir, 'build-info.json');
     fs.writeFileSync(buildInfoPath, JSON.stringify(buildInfo, null, 2));
+    
+    // 영어 버전 빌드 정보 생성
+    if (fs.existsSync(enDistDir)) {
+      const enEventDataPath = path.join(enDistDir, 'data', 'event-info.json');
+      if (fs.existsSync(enEventDataPath)) {
+        const enEventData = JSON.parse(fs.readFileSync(enEventDataPath, 'utf8'));
+        const enProgramDataPath = path.join(enDistDir, 'data', 'program-schedule.json');
+        const enProgramData = fs.existsSync(enProgramDataPath) ? 
+          JSON.parse(fs.readFileSync(enProgramDataPath, 'utf8')) : programData;
+        
+        const enBuildInfo = {
+          buildTime: new Date().toISOString(),
+          version: require('./package.json').version,
+          environment: config.isProduction ? 'production' : 'development',
+          eventData: enEventData,
+          programData: {
+            totalPrograms: enProgramData.programs.length,
+            locations: enProgramData.locations,
+            categories: enProgramData.categories
+          }
+        };
+        
+        const enBuildInfoPath = path.join(enDistDir, 'build-info.json');
+        fs.writeFileSync(enBuildInfoPath, JSON.stringify(enBuildInfo, null, 2));
+      }
+    }
     
     console.log(`✅ 빌드 완료: ${config.distDir} 폴더에 산출물이 저장되었습니다.`);
     console.log(`📁 환경: ${config.isProduction ? 'production' : 'development'}`);

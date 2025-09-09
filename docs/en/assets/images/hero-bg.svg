@@ -1,0 +1,65 @@
+<svg width="1200" height="600" viewBox="0 0 1200 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 배경 그라데이션 -->
+  <rect width="1200" height="600" fill="url(#bgGradient)"/>
+  
+  <!-- 하단 그라데이션 오버레이 -->
+  <rect width="1200" height="300" y="300" fill="url(#overlayGradient)"/>
+  
+  <!-- 기하학적 패턴들 -->
+  <g opacity="0.1">
+    <!-- 원형 패턴 -->
+    <circle cx="200" cy="150" r="80" fill="white"/>
+    <circle cx="1000" cy="450" r="120" fill="white"/>
+    <circle cx="600" cy="100" r="60" fill="white"/>
+    
+    <!-- 사각형 패턴 -->
+    <rect x="50" y="400" width="100" height="100" fill="white" transform="rotate(45 100 450)"/>
+    <rect x="950" y="50" width="80" height="80" fill="white" transform="rotate(30 990 90)"/>
+    
+    <!-- 삼각형 패턴 -->
+    <polygon points="300,500 350,400 400,500" fill="white"/>
+    <polygon points="800,200 850,100 900,200" fill="white"/>
+  </g>
+  
+  <!-- 네트워크 라인들 -->
+  <g stroke="white" stroke-width="2" opacity="0.2" fill="none">
+    <line x1="100" y1="200" x2="300" y2="150"/>
+    <line x1="300" y1="150" x2="500" y2="300"/>
+    <line x1="500" y1="300" x2="700" y2="200"/>
+    <line x1="700" y1="200" x2="900" y2="250"/>
+    <line x1="200" y1="400" x2="400" y2="350"/>
+    <line x1="400" y1="350" x2="600" y2="450"/>
+    <line x1="600" y1="450" x2="800" y2="400"/>
+    <line x1="800" y1="400" x2="1000" y2="350"/>
+  </g>
+  
+  <!-- 점들 -->
+  <g fill="white" opacity="0.3">
+    <circle cx="150" cy="300" r="3"/>
+    <circle cx="350" cy="250" r="2"/>
+    <circle cx="550" cy="400" r="4"/>
+    <circle cx="750" cy="300" r="2"/>
+    <circle cx="950" cy="200" r="3"/>
+    <circle cx="250" cy="500" r="2"/>
+    <circle cx="450" cy="450" r="3"/>
+    <circle cx="650" cy="350" r="2"/>
+    <circle cx="850" cy="500" r="4"/>
+  </g>
+  
+  <defs>
+    <!-- 메인 배경 그라데이션 -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3c72;stop-opacity:1" />
+      <stop offset="25%" style="stop-color:#2a5298;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="75%" style="stop-color:#764ba2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4c63e0;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- 오버레이 그라데이션 -->
+    <linearGradient id="overlayGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:transparent;stop-opacity:0" />
+      <stop offset="100%" style="stop-color:#1e3c72;stop-opacity:0.8" />
+    </linearGradient>
+  </defs>
+</svg>

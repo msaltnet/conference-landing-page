@@ -1,0 +1,74 @@
+<svg width="1200" height="600" viewBox="0 0 1200 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 배경 -->
+  <rect width="1200" height="600" fill="url(#bgGradient)"/>
+  
+  <!-- 회로판 패턴 -->
+  <g stroke="#00ff88" stroke-width="2" fill="none" opacity="0.3">
+    <!-- 수평선들 -->
+    <line x1="0" y1="100" x2="1200" y2="100"/>
+    <line x1="0" y1="200" x2="1200" y2="200"/>
+    <line x1="0" y1="300" x2="1200" y2="300"/>
+    <line x1="0" y1="400" x2="1200" y2="400"/>
+    <line x1="0" y1="500" x2="1200" y2="500"/>
+    
+    <!-- 수직선들 -->
+    <line x1="100" y1="0" x2="100" y2="600"/>
+    <line x1="200" y1="0" x2="200" y2="600"/>
+    <line x1="300" y1="0" x2="300" y2="600"/>
+    <line x1="400" y1="0" x2="400" y2="600"/>
+    <line x1="500" y1="0" x2="500" y2="600"/>
+    <line x1="600" y1="0" x2="600" y2="600"/>
+    <line x1="700" y1="0" x2="700" y2="600"/>
+    <line x1="800" y1="0" x2="800" y2="600"/>
+    <line x1="900" y1="0" x2="900" y2="600"/>
+    <line x1="1000" y1="0" x2="1000" y2="600"/>
+    <line x1="1100" y1="0" x2="1100" y2="600"/>
+  </g>
+  
+  <!-- 회로 연결점들 -->
+  <g fill="#00ff88" opacity="0.6">
+    <circle cx="200" cy="100" r="4"/>
+    <circle cx="400" cy="200" r="4"/>
+    <circle cx="600" cy="300" r="4"/>
+    <circle cx="800" cy="400" r="4"/>
+    <circle cx="1000" cy="500" r="4"/>
+    <circle cx="300" cy="150" r="3"/>
+    <circle cx="500" cy="250" r="3"/>
+    <circle cx="700" cy="350" r="3"/>
+    <circle cx="900" cy="450" r="3"/>
+  </g>
+  
+  <!-- 데이터 흐름 화살표들 -->
+  <g fill="#00ff88" opacity="0.4">
+    <polygon points="150,100 170,90 170,110"/>
+    <polygon points="350,200 370,190 370,210"/>
+    <polygon points="550,300 570,290 570,310"/>
+    <polygon points="750,400 770,390 770,410"/>
+    <polygon points="950,500 970,490 970,510"/>
+  </g>
+  
+  <!-- 바이너리 코드 패턴 -->
+  <g fill="white" opacity="0.1" font-family="monospace" font-size="12">
+    <text x="50" y="50">01001000</text>
+    <text x="200" y="80">11010101</text>
+    <text x="400" y="120">00110011</text>
+    <text x="600" y="160">11100000</text>
+    <text x="800" y="200">10101010</text>
+    <text x="1000" y="240">01110111</text>
+    <text x="100" y="350">10011001</text>
+    <text x="300" y="390">01010101</text>
+    <text x="500" y="430">11001100</text>
+    <text x="700" y="470">00111100</text>
+    <text x="900" y="510">10110110</text>
+  </g>
+  
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a;stop-opacity:1" />
+      <stop offset="25%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#16213e;stop-opacity:1" />
+      <stop offset="75%" style="stop-color:#0f3460;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0a0a0a;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+</svg>

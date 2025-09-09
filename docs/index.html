@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,21 +40,25 @@
             </div>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="#about" class="nav-link">행사 소개</a>
+                    <a href="#about" class="nav-link" data-ko="행사 소개" data-en="About">행사 소개</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#program" class="nav-link">프로그램 소개</a>
+                    <a href="#program" class="nav-link" data-ko="프로그램 소개" data-en="Program">프로그램 소개</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#events" class="nav-link">이벤트 소개</a>
+                    <a href="#events" class="nav-link" data-ko="이벤트 소개" data-en="Events">이벤트 소개</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#info" class="nav-link">행사 안내</a>
+                    <a href="#info" class="nav-link" data-ko="행사 안내" data-en="Info">행사 안내</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#location" class="nav-link">장소 안내</a>
+                    <a href="#location" class="nav-link" data-ko="장소 안내" data-en="Location">장소 안내</a>
                 </li>
             </ul>
+            <div class="language-selector">
+                <button class="lang-btn active" data-lang="ko">한국어</button>
+                <button class="lang-btn" data-lang="en">English</button>
+            </div>
             <div class="hamburger">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -66,11 +70,11 @@
     <!-- 히어로 섹션 -->
     <section class="hero">
         <div class="hero-container">
-            <h1 class="hero-title">Conference 2024</h1>
-            <p class="hero-subtitle">미래를 위한 기술과 혁신의 만남</p>
+            <h1 class="hero-title" data-ko="Conference 2024" data-en="Conference 2024">Conference 2024</h1>
+            <p class="hero-subtitle" data-ko="미래를 위한 기술과 혁신의 만남" data-en="Technology and Innovation for the Future">미래를 위한 기술과 혁신의 만남</p>
             <div class="hero-date">
-                <span class="date-text">2024년 12월 15일 (일)</span>
-                <span class="time-text">오전 9시 - 오후 6시</span>
+                <span class="date-text" data-ko="2024년 12월 15일 (일)" data-en="December 15, 2024 (Sunday)">2024년 12월 15일 (일)</span>
+                <span class="time-text" data-ko="오전 9시 - 오후 6시" data-en="9:00 AM - 6:00 PM">오전 9시 - 오후 6시</span>
             </div>
             <a href="#" id="registration-button" class="cta-image-button" target="_blank" rel="noopener noreferrer">
                 <img src="assets/images/register-button.svg" alt="지금 등록하기" id="registration-image">
@@ -81,11 +85,11 @@
     <!-- 카운트다운 타이머 섹션 -->
     <section class="countdown-section">
         <div class="countdown-container">
-            <h2 class="countdown-title">행사까지 남은 시간</h2>
-            <p class="countdown-subtitle">곧 만나볼 수 있는 특별한 시간을 기다려주세요</p>
+            <h2 class="countdown-title" data-ko="행사까지 남은 시간" data-en="Time Until Event">행사까지 남은 시간</h2>
+            <p class="countdown-subtitle" data-ko="곧 만나볼 수 있는 특별한 시간을 기다려주세요" data-en="Please wait for the special time we can meet soon">곧 만나볼 수 있는 특별한 시간을 기다려주세요</p>
             <div class="countdown-timer">
                 <div class="countdown-item">
-                    <div class="countdown-label">시간</div>
+                    <div class="countdown-label" data-ko="시간" data-en="Hours">시간</div>
                     <div class="flip-clock">
                         <div class="flip-card" data-unit="hours">
                             <div class="flip-card-face front">00</div>
@@ -94,7 +98,7 @@
                     </div>
                 </div>
                 <div class="countdown-item">
-                    <div class="countdown-label">분</div>
+                    <div class="countdown-label" data-ko="분" data-en="Minutes">분</div>
                     <div class="flip-clock">
                         <div class="flip-card" data-unit="minutes">
                             <div class="flip-card-face front">00</div>
@@ -103,7 +107,7 @@
                     </div>
                 </div>
                 <div class="countdown-item">
-                    <div class="countdown-label">초</div>
+                    <div class="countdown-label" data-ko="초" data-en="Seconds">초</div>
                     <div class="flip-clock">
                         <div class="flip-card" data-unit="seconds">
                             <div class="flip-card-face front">00</div>
@@ -118,10 +122,10 @@
     <!-- 행사 소개 섹션 -->
     <section id="about" class="about">
         <div class="container">
-            <h2 class="section-title">행사 소개</h2>
+            <h2 class="section-title" data-ko="행사 소개" data-en="About">행사 소개</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>Conference 2024는 업계 최고의 전문가들과 함께하는 기술 컨퍼런스입니다. 
+                    <p data-ko="Conference 2024는 업계 최고의 전문가들과 함께하는 기술 컨퍼런스입니다. 최신 기술 트렌드와 혁신적인 아이디어를 공유하고, 네트워킹의 기회를 제공합니다." data-en="Conference 2024 is a technology conference featuring industry-leading experts. We share the latest technology trends and innovative ideas while providing networking opportunities.">Conference 2024는 업계 최고의 전문가들과 함께하는 기술 컨퍼런스입니다. 
                     최신 기술 트렌드와 혁신적인 아이디어를 공유하고, 네트워킹의 기회를 제공합니다.</p>
                 </div>
             </div>
@@ -137,7 +141,7 @@
     <!-- 프로그램 소개 섹션 -->
     <section id="program" class="program">
         <div class="container">
-            <h2 class="section-title">프로그램 소개</h2>
+            <h2 class="section-title" data-ko="프로그램 소개" data-en="Program">프로그램 소개</h2>
             <div class="program-schedule">
                 <!-- 프로그램 일정 테이블이 여기에 동적으로 추가됩니다 -->
             </div>
@@ -147,9 +151,9 @@
     <!-- 이벤트 소개 섹션 -->
     <section id="events" class="events">
         <div class="container">
-            <h2 class="section-title">이벤트 소개</h2>
+            <h2 class="section-title" data-ko="이벤트 소개" data-en="Events">이벤트 소개</h2>
             <div class="events-content">
-                <p>특별한 이벤트와 네트워킹 세션을 통해 더욱 풍부한 경험을 제공합니다.</p>
+                <p data-ko="특별한 이벤트와 네트워킹 세션을 통해 더욱 풍부한 경험을 제공합니다." data-en="We provide a richer experience through special events and networking sessions.">특별한 이벤트와 네트워킹 세션을 통해 더욱 풍부한 경험을 제공합니다.</p>
             </div>
             <div class="section-images" id="events-images">
                 <!-- 이벤트 이미지들이 여기에 동적으로 추가됩니다 -->
@@ -167,9 +171,9 @@
     <!-- 안내 섹션 -->
     <section id="info" class="info">
         <div class="container">
-            <h2 class="section-title">행사 안내</h2>
+            <h2 class="section-title" data-ko="행사 안내" data-en="Info">행사 안내</h2>
             <div class="info-content">
-                <p>참가자들을 위한 중요 안내사항을 확인해주세요.</p>
+                <p data-ko="참가자들을 위한 중요 안내사항을 확인해주세요." data-en="Please check important information for participants.">참가자들을 위한 중요 안내사항을 확인해주세요.</p>
             </div>
             <div class="section-images" id="info-images">
                 <!-- 안내 이미지들이 여기에 동적으로 추가됩니다 -->
@@ -186,9 +190,9 @@
     <!-- 장소 안내 섹션 -->
     <section id="location" class="location">
         <div class="container">
-            <h2 class="section-title">장소 안내</h2>
+            <h2 class="section-title" data-ko="장소 안내" data-en="Location">장소 안내</h2>
             <div class="location-content">
-                <p>행사 장소 정보와 교통편 안내를 확인하세요.</p>
+                <p data-ko="행사 장소 정보와 교통편 안내를 확인하세요." data-en="Please check event venue information and transportation guide.">행사 장소 정보와 교통편 안내를 확인하세요.</p>
             </div>
             <div class="section-images" id="location-images">
                 <!-- 장소 이미지들이 여기에 동적으로 추가됩니다 -->
@@ -219,9 +223,9 @@
         <div class="container">
             <p>&copy; 2025 msalt.net. All rights reserved.</p>
             <div class="build-info">
-                <span class="build-version">버전: <span id="build-version">-</span></span>
+                <span class="build-version" data-ko="버전: " data-en="Version: ">버전: <span id="build-version">-</span></span>
                 <span class="build-separator">|</span>
-                <span class="build-time">빌드: <span id="build-time">-</span></span>
+                <span class="build-time" data-ko="빌드: " data-en="Build: ">빌드: <span id="build-time">-</span></span>
             </div>
         </div>
     </footer>

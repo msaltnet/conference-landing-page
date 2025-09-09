@@ -1,0 +1,280 @@
+{
+  "programs": [
+    {
+      "id": 1,
+      "date": "2025-12-15",
+      "time": "09:00-09:30",
+      "location": "Room 201",
+      "title": "Registration & Networking",
+      "content": "Registration and networking time. Please greet other participants and receive your name tag.",
+      "speaker": "All",
+      "affiliation": "Organizer",
+      "category": "Registration"
+    },
+    {
+      "id": 2,
+      "date": "2025-12-15",
+      "time": "09:30-10:30",
+      "location": "Room 201",
+      "title": "Keynote: Future Direction of Technology",
+      "content": "We discuss the development direction of future technologies such as AI, blockchain, and IoT, and our preparation for them. We explore technology trends and business opportunities together.",
+      "speaker": "Kim Tech",
+      "affiliation": "Tech Leaders",
+      "category": "Keynote"
+    },
+    {
+      "id": 3,
+      "date": "2025-12-15",
+      "time": "10:45-11:45",
+      "location": "Room 202",
+      "title": "Session 1: AI and Machine Learning",
+      "content": "We explore the latest AI technologies and real-world applications of machine learning. We cover various AI technologies including deep learning, natural language processing, and computer vision.",
+      "speaker": "Lee AI",
+      "affiliation": "AI Research Lab",
+      "category": "Tech Session"
+    },
+    {
+      "id": 4,
+      "date": "2025-12-15",
+      "time": "10:45-11:45",
+      "location": "Room 203",
+      "title": "Session 2: Cloud Computing",
+      "content": "We cover the present and future of cloud technology and enterprise cloud migration strategies. We compare major cloud platforms including AWS, Azure, and GCP.",
+      "speaker": "Park Cloud",
+      "affiliation": "Cloud Solutions",
+      "category": "Tech Session"
+    },
+    {
+      "id": 10,
+      "date": "2025-12-15",
+      "time": "10:45-11:45",
+      "location": "Room 205",
+      "title": "Session 3: Mobile Development",
+      "content": "We learn about the latest trends in iOS and Android app development and cross-platform development tools. We cover various technologies including React Native and Flutter.",
+      "speaker": "Kim Mobile",
+      "affiliation": "Mobile Team",
+      "category": "Tech Session"
+    },
+    {
+      "id": 5,
+      "date": "2025-12-15",
+      "time": "12:45-14:00",
+      "location": "Lobby",
+      "title": "Lunch & Networking",
+      "content": "We have lunch and networking time. Please freely communicate with other participants and exchange information.",
+      "speaker": "All",
+      "affiliation": "Organizer",
+      "category": "Networking"
+    },
+    {
+      "id": 6,
+      "date": "2025-12-15",
+      "time": "14:00-15:00",
+      "location": "Room 201",
+      "title": "Session 7: Web Development Trends",
+      "content": "We learn about the latest web development technologies and frameworks. We cover frontend technologies like React, Vue, Angular and backend technologies like Node.js and Python.",
+      "speaker": "Choi Web",
+      "affiliation": "Web Tech",
+      "category": "Tech Session"
+    },
+    {
+      "id": 14,
+      "date": "2025-12-15",
+      "time": "14:00-15:00",
+      "location": "Room 202",
+      "title": "Session 8: Blockchain and Cryptocurrency",
+      "content": "We explore the principles of blockchain technology and real-world applications. We cover the latest blockchain trends including smart contracts, DeFi, and NFTs.",
+      "speaker": "Park Blockchain",
+      "affiliation": "Blockchain Lab",
+      "category": "Tech Session"
+    },
+    {
+      "id": 15,
+      "date": "2025-12-15",
+      "time": "14:00-15:00",
+      "location": "Room 203",
+      "title": "Session 9: IoT and Smart City",
+      "content": "We learn about IoT technology and smart city construction. We cover sensor networks, data collection, and real-time monitoring systems.",
+      "speaker": "Lee IoT",
+      "affiliation": "IoT Research Lab",
+      "category": "Tech Session"
+    },
+    {
+      "id": 16,
+      "date": "2025-12-15",
+      "time": "14:00-15:00",
+      "location": "Room 205",
+      "title": "Session 10: UI/UX Design",
+      "content": "We learn about design methodologies centered on user experience and the latest design tools. We cover tool usage including Figma, Sketch, and Adobe XD.",
+      "speaker": "Kim Design",
+      "affiliation": "Design Team",
+      "category": "Tech Session"
+    },
+    {
+      "id": 7,
+      "date": "2025-12-15",
+      "time": "15:15-16:15",
+      "location": "Room 201",
+      "title": "Session 14: Data Science",
+      "content": "We share real-world applications of big data analysis and data science. We learn about data analysis tools and machine learning model building methods.",
+      "speaker": "Jung Data",
+      "affiliation": "Data Lab",
+      "category": "Tech Session"
+    },
+    {
+      "id": 20,
+      "date": "2025-12-15",
+      "time": "15:15-16:15",
+      "location": "Room 202",
+      "title": "Session 15: Edge Computing",
+      "content": "We explore the concept of edge computing and real-world applications. We cover efficient data processing methods between IoT devices and the cloud.",
+      "speaker": "Park Edge",
+      "affiliation": "Edge Team",
+      "category": "Tech Session"
+    },
+    {
+      "id": 21,
+      "date": "2025-12-15",
+      "time": "15:15-16:15",
+      "location": "Room 203",
+      "title": "Session 16: Serverless Architecture",
+      "content": "We learn about the pros and cons of serverless computing and actual implementation methods. We cover serverless platforms like AWS Lambda and Azure Functions.",
+      "speaker": "Lee Serverless",
+      "affiliation": "Serverless Team",
+      "category": "Tech Session"
+    },
+    {
+      "id": 22,
+      "date": "2025-12-15",
+      "time": "15:15-16:15",
+      "location": "Room 205",
+      "title": "Session 17: Machine Learning Ops",
+      "content": "We learn about machine learning model deployment and operations. We cover MLOps pipeline construction and model monitoring methods.",
+      "speaker": "Kim MLOps",
+      "affiliation": "ML Team",
+      "category": "Tech Session"
+    },
+    {
+      "id": 23,
+      "date": "2025-12-15",
+      "time": "15:15-16:15",
+      "location": "Room 205",
+      "title": "Session 18: Graph Database",
+      "content": "We explore the characteristics and applications of graph databases. We cover relational data processing methods using Neo4j, Amazon Neptune, etc.",
+      "speaker": "Jung Graph",
+      "affiliation": "Graph Team",
+      "category": "Tech Session"
+    },
+    {
+      "id": 8,
+      "date": "2025-12-15",
+      "time": "16:30-17:30",
+      "location": "Room 201",
+      "title": "Panel Discussion: Future of Technology",
+      "content": "We discuss the future of technology with experts. We discuss future prospects in various technology fields including AI, blockchain, and quantum computing.",
+      "speaker": "Panel",
+      "affiliation": "Various",
+      "category": "Discussion"
+    },
+    {
+      "id": 26,
+      "date": "2025-12-15",
+      "time": "16:30-17:30",
+      "location": "Room 202",
+      "title": "Panel Discussion: Startup Ecosystem",
+      "content": "We listen to experts' experiences and advice on startup creation and growth. We discuss from various perspectives including investment, marketing, and technology development.",
+      "speaker": "Panel",
+      "affiliation": "Startup",
+      "category": "Discussion"
+    },
+    {
+      "id": 27,
+      "date": "2025-12-15",
+      "time": "16:30-18:00",
+      "location": "Room 203",
+      "title": "In-depth Discussion: Future of Remote Work",
+      "content": "We discuss the changes brought by remote work after COVID-19 and future prospects. We cover various aspects including collaboration tools, communication, and productivity.",
+      "speaker": "Panel",
+      "affiliation": "HR Team",
+      "category": "Discussion"
+    },
+    {
+      "id": 28,
+      "date": "2025-12-15",
+      "time": "16:30-17:30",
+      "location": "Room 202",
+      "title": "Panel Discussion: Startup Ecosystem",
+      "content": "We listen to experts' experiences and advice on startup creation and growth. We discuss from various perspectives including investment, marketing, and technology development.",
+      "speaker": "Panel",
+      "affiliation": "Startup",
+      "category": "Discussion"
+    },
+    {
+      "id": 30,
+      "date": "2025-12-15",
+      "time": "16:30-17:30",
+      "location": "Room 205",
+      "title": "Panel Discussion: Digital Transformation",
+      "content": "We discuss challenges and solutions in the process of enterprise digital transformation. We cover various perspectives including organizational change, technology adoption, and employee education.",
+      "speaker": "Panel",
+      "affiliation": "DX Team",
+      "category": "Discussion"
+    },
+    {
+      "id": 9,
+      "date": "2025-12-15",
+      "time": "17:30-18:00",
+      "location": "Lobby",
+      "title": "Closing & Networking",
+      "content": "We wrap up the conference and have a final networking time. Please exchange contact information with other participants and explore future collaboration opportunities.",
+      "speaker": "All",
+      "affiliation": "Organizer",
+      "category": "Closing"
+    }
+  ],
+  "locations": [
+    "Room 201",
+    "Room 202", 
+    "Room 203",
+    "Room 205",
+    "Lobby"
+  ],
+  "categories": [
+    {
+      "name": "Keynote",
+      "color": "#e74c3c",
+      "backgroundColor": "#fdf2f2",
+      "borderColor": "#fecaca"
+    },
+    {
+      "name": "Tech Session",
+      "color": "#3498db",
+      "backgroundColor": "#f0f9ff",
+      "borderColor": "#bfdbfe"
+    },
+    {
+      "name": "Discussion",
+      "color": "#9b59b6",
+      "backgroundColor": "#faf5ff",
+      "borderColor": "#e9d5ff"
+    },
+    {
+      "name": "Networking",
+      "color": "#27ae60",
+      "backgroundColor": "#f0fdf4",
+      "borderColor": "#bbf7d0"
+    },
+    {
+      "name": "Registration",
+      "color": "#f39c12",
+      "backgroundColor": "#fffbeb",
+      "borderColor": "#fed7aa"
+    },
+    {
+      "name": "Closing",
+      "color": "#95a5a6",
+      "backgroundColor": "#f8fafc",
+      "borderColor": "#e2e8f0"
+    }
+  ]
+}

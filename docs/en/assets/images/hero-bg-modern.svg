@@ -1,0 +1,76 @@
+<svg width="1200" height="600" viewBox="0 0 1200 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 배경 -->
+  <rect width="1200" height="600" fill="url(#bgGradient)"/>
+  
+  <!-- 큰 원형 요소들 -->
+  <g opacity="0.1">
+    <circle cx="300" cy="150" r="120" fill="white"/>
+    <circle cx="900" cy="450" r="150" fill="white"/>
+    <circle cx="600" cy="300" r="80" fill="white"/>
+  </g>
+  
+  <!-- 중간 크기 원형들 -->
+  <g opacity="0.15">
+    <circle cx="150" cy="400" r="60" fill="white"/>
+    <circle cx="1050" cy="200" r="70" fill="white"/>
+    <circle cx="450" cy="500" r="50" fill="white"/>
+    <circle cx="750" cy="100" r="40" fill="white"/>
+  </g>
+  
+  <!-- 작은 원형들 -->
+  <g opacity="0.2">
+    <circle cx="100" cy="100" r="20" fill="white"/>
+    <circle cx="1100" cy="500" r="25" fill="white"/>
+    <circle cx="200" cy="300" r="15" fill="white"/>
+    <circle cx="1000" cy="350" r="18" fill="white"/>
+    <circle cx="500" cy="150" r="22" fill="white"/>
+    <circle cx="800" cy="550" r="16" fill="white"/>
+  </g>
+  
+  <!-- 기하학적 도형들 -->
+  <g opacity="0.1">
+    <!-- 삼각형들 -->
+    <polygon points="50,200 100,150 150,200" fill="white"/>
+    <polygon points="1050,400 1100,350 1150,400" fill="white"/>
+    <polygon points="400,50 450,0 500,50" fill="white"/>
+    
+    <!-- 사각형들 -->
+    <rect x="80" y="450" width="60" height="60" fill="white" transform="rotate(45 110 480)"/>
+    <rect x="1060" y="80" width="50" height="50" fill="white" transform="rotate(30 1085 105)"/>
+    <rect x="350" y="350" width="40" height="40" fill="white" transform="rotate(60 370 370)"/>
+  </g>
+  
+  <!-- 선형 패턴들 -->
+  <g stroke="white" stroke-width="1" opacity="0.1" fill="none">
+    <!-- 대각선들 -->
+    <line x1="0" y1="0" x2="1200" y2="600"/>
+    <line x1="0" y1="600" x2="1200" y2="0"/>
+    <line x1="0" y1="200" x2="1200" y2="400"/>
+    <line x1="0" y1="400" x2="1200" y2="200"/>
+    
+    <!-- 수평선들 -->
+    <line x1="0" y1="150" x2="1200" y2="150"/>
+    <line x1="0" y1="300" x2="1200" y2="300"/>
+    <line x1="0" y1="450" x2="1200" y2="450"/>
+  </g>
+  
+  <!-- 그리드 패턴 -->
+  <g stroke="white" stroke-width="0.5" opacity="0.05" fill="none">
+    <defs>
+      <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+        <path d="M 50 0 L 0 0 0 50" fill="none" stroke="white" stroke-width="0.5"/>
+      </pattern>
+    </defs>
+    <rect width="1200" height="600" fill="url(#grid)"/>
+  </g>
+  
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="25%" style="stop-color:#764ba2;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#f093fb;stop-opacity:1" />
+      <stop offset="75%" style="stop-color:#f5576c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4facfe;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+</svg>

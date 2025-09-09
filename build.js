@@ -104,6 +104,54 @@ async function build() {
     if (fs.existsSync(htmlPath)) {
       let htmlContent = fs.readFileSync(htmlPath, 'utf8');
       
+      // 섹션 이미지들 삽입
+      if (eventData.sectionImages) {
+        // 행사 소개 섹션 이미지 삽입
+        if (eventData.sectionImages.about && eventData.sectionImages.about.length > 0) {
+          const aboutImagesHtml = eventData.sectionImages.about.map(img => 
+            `<img src="${img}" alt="행사 소개 이미지" class="section-image">`
+          ).join('\n');
+          
+          htmlContent = htmlContent.replace(
+            '    </section>\r\n\r\n    <!-- 프로그램 소개 섹션 -->',
+            `    </section>\r\n\r\n    <!-- 행사 소개 이미지들 -->\r\n    <div class="section-images-container">\r\n${aboutImagesHtml}\r\n    </div>\r\n\r\n    <!-- 프로그램 소개 섹션 -->`
+          );
+        }
+        
+        // 이벤트 소개 섹션 이미지 삽입
+        if (eventData.sectionImages.events && eventData.sectionImages.events.length > 0) {
+          const eventsImagesHtml = eventData.sectionImages.events.map(img => 
+            `<img src="${img}" alt="이벤트 소개 이미지" class="section-image">`
+          ).join('\n');
+          htmlContent = htmlContent.replace(
+            '    </section>\r\n\r\n    <!-- 안내 섹션 -->',
+            `    </section>\r\n\r\n    <!-- 이벤트 소개 이미지들 -->\r\n    <div class="section-images-container">\r\n${eventsImagesHtml}\r\n    </div>\r\n\r\n    <!-- 안내 섹션 -->`
+          );
+        }
+        
+        // 행사 안내 섹션 이미지 삽입
+        if (eventData.sectionImages.info && eventData.sectionImages.info.length > 0) {
+          const infoImagesHtml = eventData.sectionImages.info.map(img => 
+            `<img src="${img}" alt="행사 안내 이미지" class="section-image">`
+          ).join('\n');
+          htmlContent = htmlContent.replace(
+            '    </section>\r\n\r\n    <!-- 장소 안내 섹션 -->',
+            `    </section>\r\n\r\n    <!-- 행사 안내 이미지들 -->\r\n    <div class="section-images-container">\r\n${infoImagesHtml}\r\n    </div>\r\n\r\n    <!-- 장소 안내 섹션 -->`
+          );
+        }
+        
+        // 장소 안내 섹션 이미지 삽입
+        if (eventData.sectionImages.location && eventData.sectionImages.location.length > 0) {
+          const locationImagesHtml = eventData.sectionImages.location.map(img => 
+            `<img src="${img}" alt="장소 안내 이미지" class="section-image">`
+          ).join('\n');
+          htmlContent = htmlContent.replace(
+            '    </section>\r\n\r\n    <!-- 모달 -->',
+            `    </section>\r\n\r\n    <!-- 장소 안내 이미지들 -->\r\n    <div class="section-images-container">\r\n${locationImagesHtml}\r\n    </div>\r\n\r\n    <!-- 모달 -->`
+          );
+        }
+      }
+      
       // 개발 모드에서는 JSON 파일을 그대로 사용
       if (!config.isProduction) {
         // CSS와 JS를 인라인으로 삽입하지 않고 링크로 유지

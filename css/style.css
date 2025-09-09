@@ -835,6 +835,43 @@ section {
     color: #ecf0f1;
 }
 
+/* 섹션 이미지 스타일 */
+.section-images-container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section-image {
+    max-width: 1200px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 섹션 이미지 반응형 디자인 */
+@media screen and (max-width: 1200px) {
+    .section-image {
+        max-width: 100%;
+        margin: 0 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .section-image {
+        margin: 0 10px;
+        border-radius: 4px;
+    }
+}
+
 /* 반응형 디자인 */
 @media screen and (max-width: 768px) {
     .hamburger {

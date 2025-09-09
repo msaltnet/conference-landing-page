@@ -9,5 +9,26 @@
   "registrationUrl": "https://example.com/register",
   "registrationButtonImage": "assets/images/register-button.svg",
   "registrationButtonAlt": "지금 등록하기",
-  "countdownTarget": "2025-12-15T09:00:00+09:00"
+  "countdownTarget": "2025-12-15T09:00:00+09:00",
+  "sectionImages": {
+    "about": [
+      "assets/images/sections/about-1.svg",
+      "assets/images/sections/about-2.svg"
+    ],
+    "events": [
+      "assets/images/sections/events-1.svg",
+      "assets/images/sections/events-2.svg",
+      "assets/images/sections/events-3.svg"
+    ],
+    "info": [
+      "assets/images/sections/info-1.svg",
+      "assets/images/sections/info-2.svg"
+    ],
+    "location": [
+      "assets/images/sections/location-1.svg",
+      "assets/images/sections/location-2.svg",
+      "assets/images/sections/location-3.svg",
+      "assets/images/sections/location-4.svg"
+    ]
+  }
 }

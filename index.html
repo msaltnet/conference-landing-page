@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conference Landing Page</title>
+    <meta name="description" content="컨퍼런스 랜딩 페이지 - 행사 정보, 프로그램, 이벤트, 안내사항을 한눈에 확인하세요">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 네비게이션 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Conference 2024</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">행사 소개</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#program" class="nav-link">프로그램 소개</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#events" class="nav-link">이벤트 소개</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#info" class="nav-link">안내</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#location" class="nav-link">Location</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 히어로 섹션 -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1 class="hero-title">Conference 2024</h1>
+            <p class="hero-subtitle">미래를 위한 기술과 혁신의 만남</p>
+            <div class="hero-date">
+                <span class="date-text">2024년 12월 15일 (일)</span>
+                <span class="time-text">오전 9시 - 오후 6시</span>
+            </div>
+            <button class="cta-button">지금 등록하기</button>
+        </div>
+    </section>
+
+    <!-- 행사 소개 섹션 -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">행사 소개</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Conference 2024는 업계 최고의 전문가들과 함께하는 기술 컨퍼런스입니다. 
+                    최신 기술 트렌드와 혁신적인 아이디어를 공유하고, 네트워킹의 기회를 제공합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 프로그램 소개 섹션 -->
+    <section id="program" class="program">
+        <div class="container">
+            <h2 class="section-title">프로그램 소개</h2>
+            <div class="program-schedule">
+                <!-- 프로그램 일정이 여기에 동적으로 추가됩니다 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 이벤트 소개 섹션 -->
+    <section id="events" class="events">
+        <div class="container">
+            <h2 class="section-title">이벤트 소개</h2>
+            <div class="events-content">
+                <p>특별한 이벤트와 네트워킹 세션을 통해 더욱 풍부한 경험을 제공합니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 안내 섹션 -->
+    <section id="info" class="info">
+        <div class="container">
+            <h2 class="section-title">안내</h2>
+            <div class="info-content">
+                <p>참가자들을 위한 중요 안내사항을 확인해주세요.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location 섹션 -->
+    <section id="location" class="location">
+        <div class="container">
+            <h2 class="section-title">Location</h2>
+            <div class="location-content">
+                <p>행사 장소 정보와 교통편 안내를 확인하세요.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 모달 -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-body">
+                <!-- 모달 내용이 여기에 동적으로 추가됩니다 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Conference. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

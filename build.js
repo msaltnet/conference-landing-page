@@ -104,6 +104,38 @@ async function build() {
     if (fs.existsSync(htmlPath)) {
       let htmlContent = fs.readFileSync(htmlPath, 'utf8');
       
+      // 히어로 배경 이미지 처리
+      if (eventData.heroBackgroundImage) {
+        // 히어로 섹션에 배경 이미지 스타일 추가
+        const heroStyle = `
+    <style>
+      .hero {
+        background-image: url('${eventData.heroBackgroundImage}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+      }
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%);
+        z-index: 1;
+      }
+      .hero .hero-container {
+        position: relative;
+        z-index: 2;
+      }
+    </style>`;
+        
+        // head 태그 안에 스타일 삽입
+        htmlContent = htmlContent.replace('</head>', `${heroStyle}\n</head>`);
+      }
+      
       // 섹션 이미지들 삽입
       if (eventData.sectionImages) {
         // 행사 소개 섹션 이미지 삽입

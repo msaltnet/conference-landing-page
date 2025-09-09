@@ -11,6 +11,7 @@
 - 📊 **JSON 기반 데이터 관리** - 행사 정보를 쉽게 수정하고 관리
 - 🔍 **데이터 검증 시스템** - 잘못된 데이터 입력 시 빌드 실패로 오류 방지
 - 🚀 **최적화된 성능** - 프로덕션 빌드 시 자동 최적화
+- 🖼️ **히어로 배경 이미지** - 커스텀 배경 이미지로 히어로 섹션 꾸미기
 
 ## 🛠️ 기술 스택
 
@@ -225,6 +226,28 @@ npm run build:prod
 
 ### 애니메이션 조정
 CSS 애니메이션의 지속 시간과 효과를 `css/style.css`에서 조정할 수 있습니다.
+
+### 히어로 배경 이미지 설정
+`data/event-info.json` 파일에서 히어로 섹션의 배경 이미지를 설정할 수 있습니다:
+
+```json
+{
+  "heroBackgroundImage": "assets/images/hero-bg.svg"
+}
+```
+
+#### 제공되는 샘플 이미지들:
+- `hero-bg.svg` - 기본 그라데이션 배경
+- `hero-bg-tech.svg` - 기술/IT 테마 (회로판 스타일)
+- `hero-bg-modern.svg` - 모던한 기하학적 패턴
+- `hero-bg-minimal.svg` - 미니멀한 디자인
+
+#### 사용법:
+1. 원하는 이미지를 `assets/images/` 폴더에 추가
+2. `data/event-info.json`에서 `heroBackgroundImage` 필드 수정
+3. `npm run build` 실행
+
+배경 이미지가 없으면 기본 그라데이션 배경이 표시됩니다.
 
 ## 📱 반응형 지원
 

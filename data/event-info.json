@@ -10,6 +10,7 @@
   "registrationButtonImage": "assets/images/register-button.svg",
   "registrationButtonAlt": "지금 등록하기",
   "countdownTarget": "2025-12-15T09:00:00+09:00",
+  "heroBackgroundImage": "assets/images/hero-bg.svg",
   "sectionImages": {
     "about": [
       "assets/images/sections/about-1.svg",

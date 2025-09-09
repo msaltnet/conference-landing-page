@@ -97,15 +97,20 @@ function switchLanguage(lang) {
     
     currentLanguage = lang;
     
-    // URL 업데이트
+    // URL 업데이트 - 서빙되는 host path를 고려한 절대 경로 사용
     const currentPath = window.location.pathname;
+    const basePath = window.location.pathname.replace(/\/en.*$/, '') || '';
+    
     if (lang === 'en') {
         if (!currentPath.startsWith('/en')) {
-            window.history.pushState({}, '', '/en');
+            const newPath = basePath + '/en';
+            window.location.href = newPath;
+            return; // 페이지 이동이므로 이후 코드 실행하지 않음
         }
     } else {
         if (currentPath.startsWith('/en')) {
-            window.history.pushState({}, '', '/');
+            window.location.href = basePath + '/';
+            return; // 페이지 이동이므로 이후 코드 실행하지 않음
         }
     }
     
@@ -286,9 +291,11 @@ window.addEventListener('resize', function() {
 async function loadProgramData() {
     try {
         let fileName;
-        if (currentLanguage === 'en') {
+        const isEnPath = window.location.pathname.startsWith('/en');
+        
+        if (currentLanguage === 'en' || isEnPath) {
             // 영어 버전일 때는 -en.json 파일 사용
-            fileName = 'data/program-schedule-en.json';
+            fileName = isEnPath ? '../data/program-schedule-en.json' : 'data/program-schedule-en.json';
         } else {
             // 한국어 버전일 때는 기본 파일 사용
             fileName = 'data/program-schedule.json';
@@ -466,9 +473,11 @@ function groupProgramsByTime(programs) {
 async function loadEventInfo() {
     try {
         let fileName;
-        if (currentLanguage === 'en') {
+        const isEnPath = window.location.pathname.startsWith('/en');
+        
+        if (currentLanguage === 'en' || isEnPath) {
             // 영어 버전일 때는 -en.json 파일 사용
-            fileName = 'data/event-info-en.json';
+            fileName = isEnPath ? '../data/event-info-en.json' : 'data/event-info-en.json';
         } else {
             // 한국어 버전일 때는 기본 파일 사용
             fileName = 'data/event-info.json';
@@ -732,8 +741,8 @@ async function loadBuildInfo() {
     try {
         // 현재 경로에 따라 build-info.json 경로 결정
         const isEnPath = window.location.pathname.startsWith('/en');
-        const buildInfoPath = isEnPath ? 'build-info.json' : 'build-info.json';
-        
+        const buildInfoPath = isEnPath ? '../build-info.json' : 'build-info.json';
+    
         console.log('빌드 정보 로드 시도:', buildInfoPath);
         const response = await fetch(buildInfoPath);
         if (!response.ok) {

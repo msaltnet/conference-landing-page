@@ -1,5 +1,12 @@
+// 전역 변수
+let eventInfo = null;
+let countdownInterval = null;
+
 // DOM이 로드된 후 실행
 document.addEventListener('DOMContentLoaded', function() {
+    
+    // 행사 정보 로드
+    loadEventInfo();
     // 모바일 네비게이션 토글
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
@@ -179,4 +186,321 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+    
+    // 스크롤 애니메이션
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+    
+    // 카운트다운 섹션 애니메이션
+    const countdownSection = document.querySelector('.countdown-section');
+    if (countdownSection) {
+        countdownSection.style.opacity = '0';
+        countdownSection.style.transform = 'translateY(30px)';
+        countdownSection.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        observer.observe(countdownSection);
+    }
+    
+    // 창 크기 변경 시 카드 너비 재조정
+    window.addEventListener('resize', function() {
+        if (eventInfo && eventInfo.countdownTarget) {
+            const targetDate = new Date(eventInfo.countdownTarget).getTime();
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+            
+            if (distance > 0) {
+                const totalHours = Math.floor(distance / (1000 * 60 * 60));
+                const hoursElement = document.querySelector('[data-unit="hours"]');
+                if (hoursElement) {
+                    adjustCardWidth(hoursElement, totalHours);
+                }
+            }
+        }
+    });
 });
+
+// 행사 정보 로드 함수
+async function loadEventInfo() {
+    try {
+        const response = await fetch('data/event-info.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        eventInfo = await response.json();
+        
+        // 페이지 정보 업데이트
+        updatePageInfo();
+        
+        // 카운트다운 시작
+        startCountdown();
+    } catch (error) {
+        // 기본값으로 설정
+        eventInfo = {
+            eventName: "Conference 2024",
+            eventSubtitle: "미래를 위한 기술과 혁신의 만남",
+            eventDate: "2024-12-15",
+            eventTime: "09:00",
+            eventEndTime: "18:00",
+            countdownTarget: "2024-12-15T09:00:00+09:00"
+        };
+        updatePageInfo();
+        startCountdown();
+    }
+}
+
+// 페이지 정보 업데이트 함수
+function updatePageInfo() {
+    if (!eventInfo) return;
+    
+    // 제목 업데이트
+    const heroTitle = document.querySelector('.hero-title');
+    const navLogo = document.querySelector('.nav-logo h2');
+    if (heroTitle) heroTitle.textContent = eventInfo.eventName;
+    if (navLogo) navLogo.textContent = eventInfo.eventName;
+    
+    // 부제목 업데이트
+    const heroSubtitle = document.querySelector('.hero-subtitle');
+    if (heroSubtitle) heroSubtitle.textContent = eventInfo.eventSubtitle;
+    
+    // 날짜 업데이트
+    if (eventInfo.eventDate) {
+        const eventDate = new Date(eventInfo.eventDate);
+        const formattedDate = eventDate.toLocaleDateString('ko-KR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            weekday: 'long'
+        });
+        
+        const dateText = document.querySelector('.date-text');
+        if (dateText) {
+            dateText.textContent = formattedDate;
+        }
+    }
+    
+    // 시간 업데이트
+    if (eventInfo.eventTime && eventInfo.eventEndTime) {
+        const timeText = document.querySelector('.time-text');
+        if (timeText) {
+            timeText.textContent = `오전 ${eventInfo.eventTime} - 오후 ${eventInfo.eventEndTime}`;
+        }
+    }
+}
+
+// 카운트다운 시작 함수
+function startCountdown() {
+    if (!eventInfo || !eventInfo.countdownTarget) {
+        return;
+    }
+    
+    // DOM 요소가 준비될 때까지 기다림
+    const countdownTimer = document.querySelector('.countdown-timer');
+    if (!countdownTimer) {
+        setTimeout(startCountdown, 100);
+        return;
+    }
+    const targetDate = new Date(eventInfo.countdownTarget).getTime();
+    
+    // 유효한 날짜인지 확인
+    if (isNaN(targetDate)) {
+        return;
+    }
+    
+    // 카운트다운 업데이트 함수
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+        
+        if (distance < 0) {
+            // 카운트다운 완료
+            showCountdownComplete();
+            clearInterval(countdownInterval);
+            return;
+        }
+        
+        // 시간 계산 (일 제외, 총 시간을 시:분:초로 표시)
+        const totalHours = Math.floor(distance / (1000 * 60 * 60));
+        const hours = totalHours; // 총 시간을 그대로 표시 (24시간 제한 없음)
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        // 카운트다운 업데이트
+        updateCountdownDisplay(hours, minutes, seconds);
+        
+        // 초기 로드 시 시간 카드 너비 조정
+        const hoursElement = document.querySelector('[data-unit="hours"]');
+        if (hoursElement) {
+            adjustCardWidth(hoursElement, hours);
+        }
+    }
+    
+    // 즉시 실행
+    updateCountdown();
+    
+    // 1초마다 업데이트
+    countdownInterval = setInterval(updateCountdown, 1000);
+}
+
+// 카운트다운 표시 업데이트 함수
+function updateCountdownDisplay(hours, minutes, seconds) {
+    const countdownTimer = document.querySelector('.countdown-timer');
+    if (!countdownTimer) {
+        return;
+    }
+    
+    // 각 시간 단위별로 업데이트 (일 제외)
+    updateTimeUnit('hours', hours);
+    updateTimeUnit('minutes', minutes);
+    updateTimeUnit('seconds', seconds);
+}
+
+// 개별 시간 단위 업데이트 함수
+function updateTimeUnit(unit, value) {
+    const unitElement = document.querySelector(`[data-unit="${unit}"]`);
+    if (!unitElement) {
+        return;
+    }
+    
+    const frontFace = unitElement.querySelector('.flip-card-face.front');
+    if (!frontFace) {
+        return;
+    }
+    
+    const currentValue = frontFace.textContent;
+    const newValue = value.toString().padStart(2, '0');
+    
+    // 값이 변경된 경우에만 플립 애니메이션 실행
+    if (currentValue !== newValue) {
+        flipCard(unitElement, newValue);
+        
+        // 시간 카드의 너비 조정 (시간 단위만)
+        if (unit === 'hours') {
+            adjustCardWidth(unitElement, value);
+        }
+    }
+}
+
+// 카드 너비 조정 함수
+function adjustCardWidth(cardElement, value) {
+    const flipClock = cardElement.closest('.flip-clock');
+    if (!flipClock) return;
+    
+    // 화면 크기에 따른 기본 너비 설정
+    const isMobile = window.innerWidth <= 480;
+    const isTablet = window.innerWidth <= 768;
+    
+    let baseWidth, digitWidth, minWidth;
+    
+    if (isMobile) {
+        baseWidth = 60;
+        digitWidth = 20;
+        minWidth = 60;
+    } else if (isTablet) {
+        baseWidth = 100;
+        digitWidth = 30;
+        minWidth = 100;
+    } else {
+        baseWidth = 120;
+        digitWidth = 40;
+        minWidth = 120;
+    }
+    
+    // 자릿수에 따라 너비 계산
+    const digitCount = value.toString().length;
+    const newWidth = baseWidth + (digitCount - 2) * digitWidth;
+    
+    // 최소 너비 보장
+    const finalWidth = Math.max(newWidth, minWidth);
+    
+    flipClock.style.width = `${finalWidth}px`;
+}
+
+// 카드 플립 애니메이션 함수
+function flipCard(cardElement, newValue) {
+    const frontFace = cardElement.querySelector('.flip-card-face.front');
+    const backFace = cardElement.querySelector('.flip-card-face.back');
+    const flipCardElement = cardElement; // cardElement 자체가 .flip-card입니다
+    
+    if (!frontFace || !backFace || !flipCardElement) {
+        return;
+    }
+    
+    // 새 값을 뒷면에 설정
+    backFace.textContent = newValue;
+    
+    // 플립 애니메이션 시작
+    flipCardElement.classList.add('flip-animation');
+    
+    // 애니메이션 완료 후 값 교체
+    setTimeout(() => {
+        frontFace.textContent = newValue;
+        flipCardElement.classList.remove('flip-animation');
+    }, 300);
+}
+
+// 카운트다운 완료 표시 함수
+function showCountdownComplete() {
+    const countdownTimer = document.querySelector('.countdown-timer');
+    if (!countdownTimer) return;
+    
+    countdownTimer.innerHTML = `
+        <div class="countdown-complete">
+            <h3>🎉 행사가 시작되었습니다! 🎉</h3>
+            <p>지금 바로 참여해보세요!</p>
+        </div>
+    `;
+}
+
+// 카운트다운 HTML 생성 함수
+function createCountdownHTML() {
+    return `
+        <div class="countdown-timer">
+            <div class="countdown-item">
+                <div class="countdown-label">일</div>
+                <div class="flip-clock">
+                    <div class="flip-card" data-unit="days">
+                        <div class="flip-card-face front">00</div>
+                        <div class="flip-card-face back">00</div>
+                    </div>
+                </div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-label">시간</div>
+                <div class="flip-clock">
+                    <div class="flip-card" data-unit="hours">
+                        <div class="flip-card-face front">00</div>
+                        <div class="flip-card-face back">00</div>
+                    </div>
+                </div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-label">분</div>
+                <div class="flip-clock">
+                    <div class="flip-card" data-unit="minutes">
+                        <div class="flip-card-face front">00</div>
+                        <div class="flip-card-face back">00</div>
+                    </div>
+                </div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-label">초</div>
+                <div class="flip-clock">
+                    <div class="flip-card" data-unit="seconds">
+                        <div class="flip-card-face front">00</div>
+                        <div class="flip-card-face back">00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}

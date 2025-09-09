@@ -1,101 +1,162 @@
 # Conference Landing Page
 
-컨퍼런스 랜딩 페이지 프로젝트입니다.
+플립클락 스타일의 카운트다운 타이머가 포함된 컨퍼런스 랜딩 페이지입니다.
 
-## 프로젝트 개요
+## ✨ 주요 기능
 
-컨퍼런스 정보를 효과적으로 전달하고 참가자들에게 필요한 정보를 제공하는 랜딩 페이지입니다.
+- 🕐 **플립클락 스타일 카운트다운 타이머** - 시:분:초 형태의 아름다운 애니메이션
+- 📱 **완전 반응형 디자인** - 모바일, 태블릿, 데스크톱 모든 화면 지원
+- 🎨 **현대적인 UI/UX** - 그라데이션과 3D 효과가 적용된 세련된 디자인
+- ⚡ **빌드 시스템** - npm 기반의 개발/프로덕션 빌드 환경
+- 📊 **JSON 기반 데이터 관리** - 행사 정보를 쉽게 수정하고 관리
+- 🚀 **최적화된 성능** - 프로덕션 빌드 시 자동 최적화
 
-## 주요 기능
+## 🛠️ 기술 스택
 
-### 1. 메인 페이지
-- 상단에 5개의 주요 메뉴 네비게이션 제공
-- 반응형 디자인으로 다양한 디바이스에서 최적화된 사용자 경험
+- **Frontend**: HTML5, CSS3, Vanilla JavaScript
+- **Build Tools**: Node.js, npm
+- **Optimization**: Terser, CleanCSS, HTML Minifier
+- **Development**: Live Server
 
-### 2. 메뉴 구성
+## 📦 설치 및 실행
 
-#### 행사 소개
-- 컨퍼런스의 기본 정보 전달
-- 행사 개요, 목적, 주요 특징 등 간단한 정보 제공
+### 1. 의존성 설치
+```bash
+npm install
+```
 
-#### 프로그램 소개
-- 프로그램 일정표를 시간순으로 표시
-- 각 프로그램 항목 클릭 시 세부 내용이 모달 창으로 표시
-- 모달을 통한 상세 정보 확인 가능
+### 2. 개발 서버 실행
+```bash
+npm run dev
+# 또는
+npm start
+```
+개발 서버가 http://localhost:3000 에서 실행됩니다.
 
-#### 이벤트 소개
-- 컨퍼런스와 관련된 이벤트 정보 전달
-- 특별 이벤트, 네트워킹 세션 등 간단한 정보 제공
+### 3. 프로덕션 빌드
+```bash
+# 개발용 빌드 (JSON 파일 유지)
+npm run build
 
-#### 안내
-- 참가자들을 위한 중요 안내사항
-- 등록 방법, 준비물, 주의사항 등 간단한 정보 제공
+# 프로덕션 빌드 (최적화 적용)
+npm run build:prod
+```
 
-#### Location
-- 행사 장소 정보 전달
-- 주소, 교통편, 주차 안내 등 간단한 정보 제공
+### 4. 빌드 결과 미리보기
+```bash
+npm run preview
+```
 
-## 기술 스택
-
-- HTML5
-- CSS3
-- JavaScript (ES6+)
-- 반응형 웹 디자인
-
-## 프로젝트 구조
+## 📁 프로젝트 구조
 
 ```
 conference-landing-page/
-├── index.html          # 메인 페이지
+├── data/
+│   └── event-info.json          # 행사 정보 설정 파일
 ├── css/
-│   └── style.css       # 스타일시트
+│   └── style.css               # 스타일시트 (플립클락 포함)
 ├── js/
-│   └── main.js         # 메인 JavaScript
-├── assets/
-│   ├── images/         # 이미지 파일
-│   └── icons/          # 아이콘 파일
-└── README.md           # 프로젝트 문서
+│   └── main.js                 # 메인 JavaScript 로직
+├── assets/                     # 이미지, 아이콘 등 정적 파일
+├── dist/                       # 빌드 출력 디렉토리
+├── build.js                    # 빌드 스크립트
+├── package.json                # 프로젝트 설정
+└── index.html                  # 메인 HTML 파일
 ```
 
-## 개발 요구사항
+## ⚙️ 행사 정보 설정
 
-1. **반응형 디자인**: 모바일, 태블릿, 데스크톱에서 최적화
-2. **접근성**: 웹 접근성 가이드라인 준수
-3. **성능**: 빠른 로딩 속도와 부드러운 사용자 경험
-4. **크로스 브라우저**: 주요 브라우저에서 동일한 경험 제공
+`data/event-info.json` 파일을 수정하여 행사 정보를 변경할 수 있습니다:
 
-## 모달 기능 상세
+```json
+{
+  "eventName": "Conference 2024",
+  "eventSubtitle": "미래를 위한 기술과 혁신의 만남",
+  "eventDate": "2024-12-15",
+  "eventTime": "09:00",
+  "eventEndTime": "18:00",
+  "eventLocation": "서울 코엑스 컨벤션센터",
+  "eventDescription": "Conference 2024는 업계 최고의 전문가들과 함께하는 기술 컨퍼런스입니다.",
+  "registrationUrl": "#",
+  "countdownTarget": "2024-12-15T09:00:00+09:00"
+}
+```
 
-- 프로그램 항목 클릭 시 모달 창 표시
-- 모달 외부 클릭 또는 닫기 버튼으로 모달 닫기
-- ESC 키로 모달 닫기
-- 모달 내용: 프로그램 제목, 시간, 설명, 발표자 정보 등
+### 설정 항목 설명
 
-## 개발 진행 상황
+- `eventName`: 행사명
+- `eventSubtitle`: 행사 부제목
+- `eventDate`: 행사 날짜 (YYYY-MM-DD 형식)
+- `eventTime`: 행사 시작 시간 (HH:MM 형식)
+- `eventEndTime`: 행사 종료 시간 (HH:MM 형식)
+- `eventLocation`: 행사 장소
+- `eventDescription`: 행사 설명
+- `registrationUrl`: 등록 링크
+- `countdownTarget`: 카운트다운 목표 시간 (ISO 8601 형식)
 
-### TODO 리스트
+## 🚀 배포
 
-- [ ] **프로젝트 설정** - 프로젝트 기본 구조 설정 (폴더 생성, 기본 파일들 생성)
-- [ ] **HTML 구조** - HTML 기본 구조 작성 (메타데이터, 네비게이션, 섹션들)
-- [ ] **CSS 기초** - CSS 리셋 및 기본 스타일 설정
-- [ ] **네비게이션** - 상단 네비게이션 메뉴 스타일링
-- [ ] **히어로 섹션** - 메인 히어로 섹션 구현
-- [ ] **행사 소개** - 행사 소개 섹션 구현
-- [ ] **프로그램 소개** - 프로그램 소개 섹션 구현 (시간표 레이아웃)
-- [ ] **모달 기능** - 프로그램 모달 기능 구현 (JavaScript)
-- [ ] **이벤트 소개** - 이벤트 소개 섹션 구현
-- [ ] **안내 섹션** - 안내 섹션 구현
-- [ ] **Location 섹션** - Location 섹션 구현
-- [ ] **반응형 디자인** - 반응형 디자인 적용 (모바일, 태블릿)
-- [ ] **스크롤링** - 부드러운 스크롤링 및 네비게이션 기능
-- [ ] **접근성** - 접근성 개선 (키보드 네비게이션, ARIA 라벨 등)
-- [ ] **성능 최적화** - 성능 최적화 (이미지 최적화, CSS/JS 압축 등)
-- [ ] **테스트** - 크로스 브라우저 테스트 및 버그 수정
+### 1. 프로덕션 빌드
+```bash
+npm run build:prod
+```
 
-## 향후 확장 가능성
+### 2. 배포
+`dist/` 폴더의 내용을 웹 서버에 업로드하면 됩니다.
 
-- 다국어 지원
-- 온라인 등록 기능
-- 실시간 스트리밍 연동
-- 소셜 미디어 연동
-- 관리자 대시보드
+## 🎨 커스터마이징
+
+### 색상 변경
+`css/style.css` 파일에서 CSS 변수를 수정하여 색상을 변경할 수 있습니다:
+
+```css
+:root {
+  --primary-color: #2c3e50;
+  --secondary-color: #34495e;
+  --accent-color: #3498db;
+}
+```
+
+### 애니메이션 조정
+CSS 애니메이션의 지속 시간과 효과를 `css/style.css`에서 조정할 수 있습니다.
+
+## 📱 반응형 지원
+
+- **데스크톱**: 1200px 이상
+- **태블릿**: 768px - 1199px
+- **모바일**: 767px 이하
+
+## 🔧 개발 명령어
+
+```bash
+# 개발 서버 시작
+npm run dev
+
+# 개발용 빌드
+npm run build
+
+# 프로덕션 빌드
+npm run build:prod
+
+# 빌드 결과 미리보기
+npm run preview
+
+# 빌드 파일 정리
+npm run clean
+```
+
+## 📄 라이선스
+
+MIT License
+
+## 🤝 기여하기
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📞 문의
+
+프로젝트에 대한 문의사항이 있으시면 이슈를 생성해 주세요.

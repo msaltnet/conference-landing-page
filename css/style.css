@@ -85,6 +85,265 @@ body {
     margin-top: 70px;
 }
 
+/* 카운트다운 타이머 섹션 */
+.countdown-section {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: white;
+    text-align: center;
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.countdown-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+.countdown-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.countdown-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #ecf0f1;
+    animation: fadeInUp 1s ease-out;
+}
+
+.countdown-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    opacity: 0.9;
+    color: #bdc3c7;
+    animation: fadeInUp 1s ease-out 0.2s both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    animation: fadeInUp 1s ease-out 0.4s both;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 140px;
+    transition: transform 0.3s ease;
+    flex: 0 0 auto;
+}
+
+.countdown-item:hover {
+    transform: translateY(-5px);
+}
+
+.countdown-label {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: #bdc3c7;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+
+.flip-clock {
+    position: relative;
+    min-width: 120px;
+    width: auto;
+    height: 140px;
+    perspective: 1000px;
+    transition: all 0.3s ease;
+    padding: 0 10px;
+}
+
+.flip-clock:hover {
+    transform: scale(1.05);
+}
+
+.flip-card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+}
+
+.flip-card.flipped {
+    transform: rotateX(-180deg);
+}
+
+.flip-card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    background: linear-gradient(145deg, #ecf0f1, #bdc3c7);
+    box-shadow: 
+        0 8px 16px rgba(0,0,0,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.3),
+        inset 0 -1px 0 rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.flip-card-face.back {
+    transform: rotateX(180deg);
+    background: linear-gradient(145deg, #34495e, #2c3e50);
+    color: #ecf0f1;
+}
+
+.flip-card-face::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.1), transparent);
+    border-radius: 8px 8px 0 0;
+}
+
+.flip-card-face::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to top, rgba(0,0,0,0.1), transparent);
+    border-radius: 0 0 8px 8px;
+}
+
+/* 카운트다운 애니메이션 */
+@keyframes flip {
+    0% {
+        transform: rotateX(0deg);
+    }
+    50% {
+        transform: rotateX(-90deg);
+    }
+    100% {
+        transform: rotateX(0deg);
+    }
+}
+
+.flip-animation {
+    animation: flip 0.6s ease-in-out;
+}
+
+/* 카운트다운 완료 상태 */
+.countdown-complete {
+    font-size: 2rem;
+    color: #e74c3c;
+    font-weight: 700;
+    text-align: center;
+    padding: 2rem;
+    background: rgba(231, 76, 60, 0.1);
+    border-radius: 10px;
+    border: 2px solid #e74c3c;
+}
+
+/* 반응형 디자인 - 카운트다운 */
+@media screen and (max-width: 768px) {
+    .countdown-timer {
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+    
+    .countdown-item {
+        min-width: 80px;
+    }
+    
+    .flip-clock {
+        width: 80px;
+        height: 100px;
+    }
+    
+    .flip-card-face {
+        font-size: 2.5rem;
+    }
+    
+    .time-separator {
+        font-size: 3rem;
+        height: 100px;
+    }
+    
+    .countdown-title {
+        font-size: 2.5rem;
+    }
+    
+    .countdown-subtitle {
+        font-size: 1.1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .countdown-timer {
+        gap: 0.8rem;
+    }
+    
+    .countdown-item {
+        min-width: 60px;
+    }
+    
+    .flip-clock {
+        min-width: 60px;
+        height: 80px;
+    }
+    
+    .flip-card-face {
+        font-size: 2rem;
+    }
+    
+    .countdown-label {
+        font-size: 0.9rem;
+    }
+    
+    .countdown-title {
+        font-size: 2rem;
+    }
+}
+
 .hero-container {
     max-width: 800px;
     margin: 0 auto;

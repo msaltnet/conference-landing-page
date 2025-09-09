@@ -1,8 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const { minify: minifyJS } = require('terser');
-const CleanCSS = require('clean-css');
-const { minify: minifyHTML } = require('html-minifier-terser');
 
 // 검증 함수들 import
 const { validateProgramData } = require('./js/validator.js');
@@ -45,82 +42,7 @@ function copyDir(src, dest) {
   }
 }
 
-// CSS 최적화 함수
-function optimizeCSS(cssContent) {
-  if (!config.isProduction) return cssContent;
-  
-  try {
-    const minifier = new CleanCSS();
-    const result = minifier.minify(cssContent);
-    return result.styles;
-  } catch (error) {
-    console.warn('CSS 최적화 실패:', error.message);
-    return cssContent;
-  }
-}
 
-// JavaScript 최적화 함수
-async function optimizeJS(jsContent) {
-  if (!config.isProduction) return jsContent;
-  
-  try {
-    const result = await minifyJS(jsContent, {
-      compress: {
-        drop_console: true,
-        drop_debugger: true
-      },
-      mangle: {
-        toplevel: false
-      }
-    });
-    return result.code;
-  } catch (error) {
-    console.warn('JavaScript 최적화 실패:', error.message);
-    return jsContent;
-  }
-}
-
-// HTML 최적화 함수
-async function optimizeHTML(htmlContent) {
-  if (!config.isProduction) return htmlContent;
-  
-  try {
-    return await minifyHTML(htmlContent, {
-      removeComments: true,
-      collapseWhitespace: true,
-      removeRedundantAttributes: true,
-      useShortDoctype: true,
-      removeEmptyAttributes: true,
-      removeOptionalTags: true,
-      removeEmptyElements: false,
-      lint: false,
-      keepClosingSlash: false,
-      caseSensitive: false,
-      minifyJS: false, // 이미 별도로 최적화됨
-      minifyCSS: false  // 이미 별도로 최적화됨
-    });
-  } catch (error) {
-    console.warn('HTML 최적화 실패:', error.message);
-    return htmlContent;
-  }
-}
-
-// HTML 템플릿 처리 함수
-function processHTML(htmlContent, eventData) {
-  // JSON 데이터를 HTML에 직접 삽입
-  const processedHTML = htmlContent
-    .replace(/{{EVENT_NAME}}/g, eventData.eventName || 'Conference 2024')
-    .replace(/{{EVENT_SUBTITLE}}/g, eventData.eventSubtitle || '미래를 위한 기술과 혁신의 만남')
-    .replace(/{{EVENT_DATE}}/g, eventData.eventDate || '2024-12-15')
-    .replace(/{{EVENT_TIME}}/g, eventData.eventTime || '09:00')
-    .replace(/{{EVENT_END_TIME}}/g, eventData.eventEndTime || '18:00')
-    .replace(/{{EVENT_LOCATION}}/g, eventData.eventLocation || '서울 코엑스 컨벤션센터')
-    .replace(/{{EVENT_DESCRIPTION}}/g, eventData.eventDescription || 'Conference 2024는 업계 최고의 전문가들과 함께하는 기술 컨퍼런스입니다.')
-    .replace(/{{COUNTDOWN_TARGET}}/g, eventData.countdownTarget || '2024-12-15T09:00:00+09:00')
-    .replace(/{{REGISTRATION_URL}}/g, eventData.registrationUrl || '#');
-  
-  return processedHTML;
-}
 
 // 프로그램 데이터 검증 함수
 function validateProgramDataFile() {
@@ -165,10 +87,7 @@ async function build() {
     // 프로그램 데이터 검증
     const programData = validateProgramDataFile();
     
-    // dist/docs 디렉토리 정리
-    if (fs.existsSync(config.distDir)) {
-      fs.rmSync(config.distDir, { recursive: true });
-    }
+    // dist/docs 디렉토리 생성 (기존 폴더가 있으면 덮어쓰기)
     ensureDir(config.distDir);
     
     // 이벤트 데이터 로드
@@ -191,34 +110,7 @@ async function build() {
         const distHtmlPath = path.join(config.distDir, 'index.html');
         fs.writeFileSync(distHtmlPath, htmlContent);
       } else {
-        // 프로덕션 모드에서는 템플릿 처리
-        htmlContent = processHTML(htmlContent, eventData);
-        
-        // CSS 인라인 삽입
-        const cssPath = path.join(config.sourceDir, 'css', 'style.css');
-        if (fs.existsSync(cssPath)) {
-          let cssContent = fs.readFileSync(cssPath, 'utf8');
-          cssContent = optimizeCSS(cssContent);
-          htmlContent = htmlContent.replace(
-            '<link rel="stylesheet" href="css/style.css">',
-            `<style>${cssContent}</style>`
-          );
-        }
-        
-        // JavaScript 인라인 삽입
-        const jsPath = path.join(config.sourceDir, 'js', 'main.js');
-        if (fs.existsSync(jsPath)) {
-          let jsContent = fs.readFileSync(jsPath, 'utf8');
-          jsContent = await optimizeJS(jsContent);
-          htmlContent = htmlContent.replace(
-            '<script src="js/main.js"></script>',
-            `<script>${jsContent}</script>`
-          );
-        }
-        
-        // HTML 최적화
-        htmlContent = await optimizeHTML(htmlContent);
-        
+        // 프로덕션 모드에서도 별도 파일로 유지 (템플릿 처리 제거)
         const distHtmlPath = path.join(config.distDir, 'index.html');
         fs.writeFileSync(distHtmlPath, htmlContent);
       }
@@ -234,6 +126,9 @@ async function build() {
     } else {
       // 프로덕션 모드: 필요한 파일만 복사
       copyDir(path.join(config.sourceDir, 'assets'), path.join(config.distDir, 'assets'));
+      copyDir(path.join(config.sourceDir, 'data'), path.join(config.distDir, 'data'));
+      copyDir(path.join(config.sourceDir, 'css'), path.join(config.distDir, 'css'));
+      copyDir(path.join(config.sourceDir, 'js'), path.join(config.distDir, 'js'));
     }
     
     // 빌드 정보 생성

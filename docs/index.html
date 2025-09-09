@@ -1,1 +1,171 @@
-<!doctype html><html lang="ko"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Conference Landing Page</title><meta name="description" content="컨퍼런스 랜딩 페이지 - 행사 정보, 프로그램, 이벤트, 안내사항을 한눈에 확인하세요"><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;line-height:1.6;color:#333;background-color:#fff}.container{max-width:1200px;margin:0 auto;padding:0 20px}.navbar{background-color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.1);position:fixed;top:0;width:100%;z-index:1000}.nav-container{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;height:70px}.nav-logo h2{color:#2c3e50;font-size:1.5rem;font-weight:700}.nav-menu{display:flex;list-style:none;gap:2rem}.nav-link{text-decoration:none;color:#333;font-weight:500;transition:color .3s ease}.nav-link:hover{color:#3498db}.hamburger{display:none;flex-direction:column;cursor:pointer}.bar{width:25px;height:3px;background-color:#333;margin:3px 0;transition:.3s}.hero{background:linear-gradient(135deg,#667eea 0,#764ba2 100%);color:#fff;text-align:center;padding:120px 0 80px;margin-top:70px}.countdown-section{background:linear-gradient(135deg,#2c3e50 0,#34495e 100%);color:#fff;text-align:center;padding:80px 0;position:relative;overflow:hidden}.countdown-section::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);animation:shimmer 3s infinite}@keyframes shimmer{0%{left:-100%}100%{left:100%}}.countdown-container{max-width:800px;margin:0 auto;padding:0 20px}.countdown-title{font-size:2.5rem;font-weight:700;margin-bottom:1rem;color:#ecf0f1;animation:fadeInUp 1s ease-out}.countdown-subtitle{font-size:1.2rem;margin-bottom:3rem;opacity:.9;color:#bdc3c7;animation:fadeInUp 1s ease-out .2s both}@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}.countdown-timer{display:flex;justify-content:center;gap:3rem;margin-bottom:2rem;flex-wrap:wrap;animation:fadeInUp 1s ease-out .4s both}.countdown-item{display:flex;flex-direction:column;align-items:center;min-width:140px;transition:transform .3s ease;flex:0 0 auto}.countdown-item:hover{transform:translateY(-5px)}.countdown-label{font-size:1rem;margin-bottom:1rem;color:#bdc3c7;font-weight:500;text-transform:uppercase;letter-spacing:1px}.flip-clock{position:relative;min-width:120px;width:auto;height:140px;perspective:1000px;transition:all .3s ease;padding:0 10px}.flip-clock:hover{transform:scale(1.05)}.flip-card{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .6s}.flip-card.flipped{transform:rotateX(-180deg)}.flip-card-face{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;font-weight:700;color:#2c3e50;background:linear-gradient(145deg,#ecf0f1,#bdc3c7);box-shadow:0 8px 16px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.3),inset 0 -1px 0 rgba(0,0,0,.1);border:1px solid rgba(255,255,255,.2)}.flip-card-face.back{transform:rotateX(180deg);background:linear-gradient(145deg,#34495e,#2c3e50);color:#ecf0f1}.flip-card-face::before{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(to bottom,rgba(255,255,255,.1),transparent);border-radius:8px 8px 0 0}.flip-card-face::after{content:'';position:absolute;bottom:0;left:0;right:0;height:50%;background:linear-gradient(to top,rgba(0,0,0,.1),transparent);border-radius:0 0 8px 8px}@keyframes flip{0%{transform:rotateX(0)}50%{transform:rotateX(-90deg)}100%{transform:rotateX(0)}}.flip-animation{animation:flip .6s ease-in-out}.countdown-complete{font-size:2rem;color:#e74c3c;font-weight:700;text-align:center;padding:2rem;background:rgba(231,76,60,.1);border-radius:10px;border:2px solid #e74c3c}@media screen and (max-width:768px){.countdown-timer{gap:1.5rem;padding:1.5rem}.countdown-item{min-width:80px}.flip-clock{width:80px;height:100px}.flip-card-face{font-size:2.5rem}.time-separator{font-size:3rem;height:100px}.countdown-title{font-size:2.5rem}.countdown-subtitle{font-size:1.1rem}}@media screen and (max-width:480px){.countdown-timer{gap:.8rem}.countdown-item{min-width:60px}.flip-clock{min-width:60px;height:80px}.flip-card-face{font-size:2rem}.countdown-label{font-size:.9rem}.countdown-title{font-size:2rem}}.hero-container{max-width:800px;margin:0 auto;padding:0 20px}.hero-title{font-size:3.5rem;font-weight:700;margin-bottom:1rem}.hero-subtitle{font-size:1.3rem;margin-bottom:2rem;opacity:.9}.hero-date{margin-bottom:2rem}.date-text,.time-text{display:block;font-size:1.1rem;margin-bottom:.5rem}.cta-button{background-color:#e74c3c;color:#fff;border:none;padding:15px 30px;font-size:1.1rem;font-weight:600;border-radius:5px;cursor:pointer;transition:background-color .3s ease}.cta-button:hover{background-color:#c0392b}.cta-image-button{display:inline-block;text-decoration:none;transition:transform .3s ease,opacity .3s ease;border-radius:8px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,.2)}.cta-image-button:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 8px 25px rgba(0,0,0,.3)}.cta-image-button img{display:block;max-width:100%;height:auto;border:none;transition:filter .3s ease}.cta-image-button:hover img{filter:brightness(1.1)}section{padding:80px 0}.section-title{text-align:center;font-size:2.5rem;margin-bottom:3rem;color:#2c3e50}.about{background-color:#f8f9fa}.about-content{max-width:800px;margin:0 auto;text-align:center}.about-text p{font-size:1.1rem;line-height:1.8;color:#666}.program{background-color:#fff}.program-schedule{max-width:1200px;margin:0 auto;overflow-x:auto}.program-table{width:100%;border-collapse:collapse;margin:0 auto;background-color:#fff;border-radius:10px;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,.1)}.program-table thead{background:linear-gradient(135deg,#667eea 0,#764ba2 100%);color:#fff}.program-table th{padding:15px 10px;text-align:center;font-weight:600;font-size:.9rem;border-right:1px solid rgba(255,255,255,.2)}.program-table th:last-child{border-right:none}.program-table .time-column{min-width:120px;background:linear-gradient(135deg,#2c3e50 0,#34495e 100%)}.program-table .location-column{min-width:200px}.program-table tbody tr{border-bottom:1px solid #e9ecef;transition:background-color .3s ease;height:100px}.program-table tbody tr:hover{background-color:#f8f9fa}.program-table tbody tr:last-child{border-bottom:none}.program-table td{padding:10px;vertical-align:middle;border-right:1px solid #e9ecef;height:100px}.program-table td:last-child{border-right:none}.time-cell{background-color:#f8f9fa;font-weight:600;color:#2c3e50;text-align:center;font-size:.9rem;vertical-align:middle;height:100px}.program-cell{height:100px;position:relative;vertical-align:middle;text-align:center}.program-item-table{background:linear-gradient(135deg,#f8f9fa 0,#e9ecef 100%);border:1px solid #dee2e6;border-radius:8px;padding:8px;cursor:pointer;transition:all .3s ease;height:80px;width:100%;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box;margin:0 auto}.program-item-table:hover{background:linear-gradient(135deg,#e9ecef 0,#dee2e6 100%);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.15);border-color:#3498db}.program-title-table{font-size:.9rem;font-weight:600;color:#2c3e50;margin-bottom:4px;line-height:1.3}.program-speaker-table{font-size:.8rem;color:#666;margin-bottom:2px}.program-category-table{font-size:.75rem;color:var(--category-color,#3498db);font-weight:500;background-color:var(--category-bg-color,rgba(52,152,219,.1));border:1px solid var(--category-border-color,rgba(52,152,219,.2));padding:2px 6px;border-radius:10px;display:inline-block;margin-top:4px;transition:all .3s ease}.program-category-table:hover{background-color:var(--category-bg-color-hover,rgba(52,152,219,.2));transform:scale(1.05)}.program-item{display:flex;align-items:center;padding:20px;margin-bottom:15px;background-color:#f8f9fa;border-radius:10px;cursor:pointer;transition:all .3s ease;border-left:4px solid #3498db}.program-item:hover{background-color:#e9ecef;transform:translateX(5px);box-shadow:0 5px 15px rgba(0,0,0,.1)}.program-time{font-weight:600;color:#2c3e50;min-width:150px;font-size:.9rem}.program-info{flex:1;margin-left:20px}.program-title{font-size:1.2rem;color:#2c3e50;margin-bottom:5px}.program-speaker{color:#666;font-size:.9rem}.events{background-color:#f8f9fa}.events-content{text-align:center}.events-content p{font-size:1.1rem;color:#666}.info{background-color:#fff}.info-content{text-align:center}.info-content p{font-size:1.1rem;color:#666}.location{background-color:#f8f9fa}.location-content{text-align:center}.location-content p{font-size:1.1rem;color:#666}.modal{display:none;position:fixed;z-index:2000;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.5);animation:fadeIn .3s ease}@keyframes fadeIn{from{opacity:0}to{opacity:1}}.modal-content{background-color:#fff;margin:5% auto;padding:30px;border-radius:15px;width:80%;max-width:600px;position:relative;animation:slideIn .3s ease;box-shadow:0 20px 40px rgba(0,0,0,.2)}@keyframes slideIn{from{opacity:0;transform:translateY(-50px)}to{opacity:1;transform:translateY(0)}}.close{color:#aaa;float:right;font-size:28px;font-weight:700;cursor:pointer;position:absolute;right:20px;top:15px;transition:color .3s ease}.close:hover{color:#000}.modal-body h2{color:#2c3e50;margin-bottom:15px;font-size:1.8rem}.modal-time{background-color:#3498db;color:#fff;padding:8px 15px;border-radius:20px;display:inline-block;font-size:.9rem;font-weight:600;margin-bottom:15px}.modal-location{background-color:#27ae60;color:#fff;padding:6px 12px;border-radius:15px;display:inline-block;font-size:.85rem;font-weight:600;margin-bottom:10px}.modal-speaker{color:#666;font-size:1rem;margin-bottom:10px;font-weight:500}.modal-category{background-color:var(--category-color,#3498db);color:#fff;padding:4px 10px;border-radius:12px;display:inline-block;font-size:.8rem;font-weight:500;margin-bottom:20px;transition:all .3s ease}.modal-category:hover{background-color:var(--category-color-hover,#2980b9);transform:scale(1.05)}.modal-description{color:#555;line-height:1.6;font-size:1.1rem}.footer{background-color:#2c3e50;color:#fff;text-align:center;padding:30px 0}@media screen and (max-width:768px){.hamburger{display:flex}.nav-menu{position:fixed;left:-100%;top:70px;flex-direction:column;background-color:#fff;width:100%;text-align:center;transition:.3s;box-shadow:0 10px 27px rgba(0,0,0,.05);padding:2rem 0}.nav-menu.active{left:0}.nav-menu li{margin:1rem 0}.hero-title{font-size:2.5rem}.hero-subtitle{font-size:1.1rem}.section-title{font-size:2rem}section{padding:60px 0}}@media screen and (max-width:480px){.hero-title{font-size:2rem}.hero-subtitle{font-size:1rem}.cta-button{padding:12px 24px;font-size:1rem}.cta-image-button{max-width:250px}.cta-image-button img{width:100%;height:auto}.program-item{flex-direction:column;align-items:flex-start;padding:15px}.program-time{min-width:auto;margin-bottom:10px;font-size:.8rem}.program-info{margin-left:0}.program-title{font-size:1.1rem}.program-table{font-size:.8rem}.program-table th{padding:10px 5px;font-size:.8rem}.program-table td{padding:8px 5px}.program-title-table{font-size:.8rem}.program-speaker-table{font-size:.7rem}.program-category-table{font-size:.65rem;padding:1px 4px}.program-item-table{padding:6px;height:60px}.program-table tbody tr{height:80px}.program-table td{height:80px;vertical-align:middle}.time-cell{height:80px;vertical-align:middle}.program-cell{height:80px;vertical-align:middle;text-align:center}.modal-content{width:95%;margin:10% auto;padding:20px}}</style><nav class="navbar"><div class="nav-container"><div class="nav-logo"><h2>Conference 2024</h2></div><ul class="nav-menu"><li class="nav-item"><a href="#about" class="nav-link">행사 소개</a><li class="nav-item"><a href="#program" class="nav-link">프로그램 소개</a><li class="nav-item"><a href="#events" class="nav-link">이벤트 소개</a><li class="nav-item"><a href="#info" class="nav-link">안내</a><li class="nav-item"><a href="#location" class="nav-link">Location</a></ul><div class="hamburger"><span class="bar"></span> <span class="bar"></span> <span class="bar"></span></div></div></nav><section class="hero"><div class="hero-container"><h1 class="hero-title">Conference 2024</h1><p class="hero-subtitle">미래를 위한 기술과 혁신의 만남<div class="hero-date"><span class="date-text">2024년 12월 15일 (일)</span> <span class="time-text">오전 9시 - 오후 6시</span></div><a href="#" id="registration-button" class="cta-image-button" target="_blank" rel="noopener noreferrer"><img src="assets/images/register-button.svg" alt="지금 등록하기" id="registration-image"></a></div></section><section class="countdown-section"><div class="countdown-container"><h2 class="countdown-title">행사까지 남은 시간</h2><p class="countdown-subtitle">곧 만나볼 수 있는 특별한 시간을 기다려주세요<div class="countdown-timer"><div class="countdown-item"><div class="countdown-label">시간</div><div class="flip-clock"><div class="flip-card" data-unit="hours"><div class="flip-card-face front">00</div><div class="flip-card-face back">00</div></div></div></div><div class="countdown-item"><div class="countdown-label">분</div><div class="flip-clock"><div class="flip-card" data-unit="minutes"><div class="flip-card-face front">00</div><div class="flip-card-face back">00</div></div></div></div><div class="countdown-item"><div class="countdown-label">초</div><div class="flip-clock"><div class="flip-card" data-unit="seconds"><div class="flip-card-face front">00</div><div class="flip-card-face back">00</div></div></div></div></div></div></section><section id="about" class="about"><div class="container"><h2 class="section-title">행사 소개</h2><div class="about-content"><div class="about-text"><p>Conference 2024는 업계 최고의 전문가들과 함께하는 기술 컨퍼런스입니다. 최신 기술 트렌드와 혁신적인 아이디어를 공유하고, 네트워킹의 기회를 제공합니다.</div></div></div></section><section id="program" class="program"><div class="container"><h2 class="section-title">프로그램 소개</h2><div class="program-schedule"></div></div></section><section id="events" class="events"><div class="container"><h2 class="section-title">이벤트 소개</h2><div class="events-content"><p>특별한 이벤트와 네트워킹 세션을 통해 더욱 풍부한 경험을 제공합니다.</div></div></section><section id="info" class="info"><div class="container"><h2 class="section-title">안내</h2><div class="info-content"><p>참가자들을 위한 중요 안내사항을 확인해주세요.</div></div></section><section id="location" class="행사 장소"><div class="container"><h2 class="section-title">Location</h2><div class="location-content"><p>행사 장소 정보와 교통편 안내를 확인하세요.</div></div></section><div id="modal" class="modal"><div class="modal-content"><span class="close">&times;</span><div class="modal-body"></div></div></div><footer class="footer"><div class="container"><p>&copy; 2025 msalt.net. All rights reserved.</div></footer><script>let eventInfo=null,countdownInterval=null,programData=null;function openModal(e,t=null){const n=document.getElementById("modal"),o=document.querySelector(".modal-body");if(n&&o){!t&&programData&&programData.categories&&(t=getCategoryInfo(e.category,programData.categories));const a=t||{color:"#3498db",backgroundColor:"rgba(52, 152, 219, 0.1)",borderColor:"rgba(52, 152, 219, 0.2)"};o.innerHTML=`\n            <h2>${e.title}</h2>\n            <div class="modal-time">${e.time}</div>\n            <div class="modal-location">장소: ${e.location}</div>\n            <div class="modal-speaker">발표자: ${e.speaker} (${e.affiliation})</div>\n            <div class="modal-category" style="\n                --category-color: ${a.color};\n                --category-color-hover: ${a.color.replace("#","#")};\n            ">${e.category}</div>\n            <div class="modal-description">${e.content}</div>\n        `,n.style.display="block",document.body.style.overflow="hidden"}}function closeModal(){const e=document.getElementById("modal");e&&(e.style.display="none",document.body.style.overflow="auto")}document.addEventListener("DOMContentLoaded",function(){loadEventInfo(),loadProgramData();const e=document.querySelector(".hamburger"),t=document.querySelector(".nav-menu");e&&t&&e.addEventListener("click",function(){e.classList.toggle("active"),t.classList.toggle("active")});document.querySelectorAll(".nav-link").forEach(n=>{n.addEventListener("click",function(n){n.preventDefault();const o=this.getAttribute("href"),a=document.querySelector(o);if(a){const e=a.offsetTop-70;window.scrollTo({top:e,behavior:"smooth"})}t.classList.contains("active")&&(t.classList.remove("active"),e.classList.remove("active"))})}),createProgramSchedule()}),document.addEventListener("DOMContentLoaded",function(){const e=document.querySelector(".close"),t=document.getElementById("modal");e&&e.addEventListener("click",closeModal),t&&t.addEventListener("click",function(e){e.target===t&&closeModal()}),document.addEventListener("keydown",function(e){"Escape"===e.key&&closeModal()})}),window.addEventListener("scroll",function(){const e=document.querySelector(".navbar");e&&(window.scrollY>50?(e.style.backgroundColor="rgba(255, 255, 255, 0.95)",e.style.backdropFilter="blur(10px)"):(e.style.backgroundColor="#fff",e.style.backdropFilter="none"))});const observerOptions={threshold:.1,rootMargin:"0px 0px -50px 0px"},observer=new IntersectionObserver(function(e){e.forEach(e=>{e.isIntersecting&&(e.target.style.opacity="1",e.target.style.transform="translateY(0)")})},observerOptions);async function loadProgramData(){try{const e=await fetch("data/program-schedule.json");if(!e.ok)throw new Error(`HTTP error! status: ${e.status}`);programData=await e.json(),createProgramSchedule()}catch(e){programData={programs:[],locations:[],categories:[]}}}function createProgramSchedule(){if(!programData||!programData.programs)return;const e=document.querySelector(".program-schedule");if(!e)return;e.innerHTML="";const t=createProgramTable(programData.programs,programData.locations,programData.categories);e.appendChild(t)}function createProgramTable(e,t,n){const o=document.createElement("table");o.className="program-table";const a=document.createElement("thead"),r=document.createElement("tr"),c=document.createElement("th");c.textContent="시간",c.className="time-column",r.appendChild(c),t.forEach(e=>{const t=document.createElement("th");t.textContent=e,t.className="location-column",r.appendChild(t)}),a.appendChild(r),o.appendChild(a);const i=groupProgramsByTime(e),d=document.createElement("tbody");return i.forEach(e=>{const o=document.createElement("tr");o.className="time-row";const a=document.createElement("td");a.textContent=e.time,a.className="time-cell",o.appendChild(a),t.forEach(t=>{const a=document.createElement("td");a.className="program-cell";const r=e.programs.find(e=>e.location===t);if(r){const e=document.createElement("div");e.className="program-item-table";const t=getCategoryInfo(r.category,n);e.innerHTML=`\n                    <div class="program-title-table">${r.title}</div>\n                    <div class="program-speaker-table">${r.speaker}</div>\n                    <div class="program-category-table" style="\n                        --category-color: ${t.color};\n                        --category-bg-color: ${t.backgroundColor};\n                        --category-border-color: ${t.borderColor};\n                        --category-bg-color-hover: ${t.backgroundColor.replace("0.1","0.2")};\n                    ">${r.category}</div>\n                `,e.addEventListener("click",function(){openModal(r,t)}),a.appendChild(e)}o.appendChild(a)}),d.appendChild(o)}),o.appendChild(d),o}function getCategoryInfo(e,t){const n=t.find(t=>"string"==typeof t?t===e:t.name===e);return"object"==typeof n&&null!==n?{color:n.color||"#3498db",backgroundColor:n.backgroundColor||"rgba(52, 152, 219, 0.1)",borderColor:n.borderColor||"rgba(52, 152, 219, 0.2)"}:{color:"#3498db",backgroundColor:"rgba(52, 152, 219, 0.1)",borderColor:"rgba(52, 152, 219, 0.2)"}}function groupProgramsByTime(e){const t={};return e.forEach(e=>{t[e.time]||(t[e.time]={time:e.time,programs:[]}),t[e.time].programs.push(e)}),Object.values(t).sort((e,t)=>e.time.localeCompare(t.time))}async function loadEventInfo(){try{const e=await fetch("data/event-info.json");if(!e.ok)throw new Error(`HTTP error! status: ${e.status}`);eventInfo=await e.json(),updatePageInfo(),startCountdown()}catch(e){eventInfo={eventName:"Conference 2024",eventSubtitle:"미래를 위한 기술과 혁신의 만남",eventDate:"2024-12-15",eventTime:"09:00",eventEndTime:"18:00",registrationUrl:"#",registrationButtonImage:"assets/images/register-button.svg",registrationButtonAlt:"지금 등록하기",countdownTarget:"2024-12-15T09:00:00+09:00"},updatePageInfo(),startCountdown()}}function updatePageInfo(){if(!eventInfo)return;const e=document.querySelector(".hero-title"),t=document.querySelector(".nav-logo h2");e&&(e.textContent=eventInfo.eventName),t&&(t.textContent=eventInfo.eventName);const n=document.querySelector(".hero-subtitle");if(n&&(n.textContent=eventInfo.eventSubtitle),eventInfo.eventDate){const e=new Date(eventInfo.eventDate).toLocaleDateString("ko-KR",{year:"numeric",month:"long",day:"numeric",weekday:"long"}),t=document.querySelector(".date-text");t&&(t.textContent=e)}if(eventInfo.eventTime&&eventInfo.eventEndTime){const e=document.querySelector(".time-text");e&&(e.textContent=`오전 ${eventInfo.eventTime} - 오후 ${eventInfo.eventEndTime}`)}const o=document.querySelector("#registration-button"),a=document.querySelector("#registration-image");o&&eventInfo.registrationUrl&&(o.href=eventInfo.registrationUrl),a&&eventInfo.registrationButtonImage&&(a.src=eventInfo.registrationButtonImage),a&&eventInfo.registrationButtonAlt&&(a.alt=eventInfo.registrationButtonAlt)}function startCountdown(){if(!eventInfo||!eventInfo.countdownTarget)return;if(!document.querySelector(".countdown-timer"))return void setTimeout(startCountdown,100);const e=new Date(eventInfo.countdownTarget).getTime();function t(){const t=(new Date).getTime(),n=e-t;if(n<0)return showCountdownComplete(),void clearInterval(countdownInterval);const o=Math.floor(n/36e5);updateCountdownDisplay(o,Math.floor(n%36e5/6e4),Math.floor(n%6e4/1e3));const a=document.querySelector('[data-unit="hours"]');a&&adjustCardWidth(a,o)}isNaN(e)||(t(),countdownInterval=setInterval(t,1e3))}function updateCountdownDisplay(e,t,n){document.querySelector(".countdown-timer")&&(updateTimeUnit("hours",e),updateTimeUnit("minutes",t),updateTimeUnit("seconds",n))}function updateTimeUnit(e,t){const n=document.querySelector(`[data-unit="${e}"]`);if(!n)return;const o=n.querySelector(".flip-card-face.front");if(!o)return;const a=o.textContent,r=t.toString().padStart(2,"0");a!==r&&(flipCard(n,r),"hours"===e&&adjustCardWidth(n,t))}function adjustCardWidth(e,t){const n=e.closest(".flip-clock");if(!n)return;const o=window.innerWidth<=480,a=window.innerWidth<=768;let r,c,i;o?(r=60,c=20,i=60):a?(r=100,c=30,i=100):(r=120,c=40,i=120);const d=r+(t.toString().length-2)*c,l=Math.max(d,i);n.style.width=`${l}px`}function flipCard(e,t){const n=e.querySelector(".flip-card-face.front"),o=e.querySelector(".flip-card-face.back"),a=e;n&&o&&a&&(o.textContent=t,a.classList.add("flip-animation"),setTimeout(()=>{n.textContent=t,a.classList.remove("flip-animation")},300))}function showCountdownComplete(){const e=document.querySelector(".countdown-timer");e&&(e.innerHTML='\n        <div class="countdown-complete">\n            <h3>🎉 행사가 시작되었습니다! 🎉</h3>\n            <p>지금 바로 참여해보세요!</p>\n        </div>\n    ')}function createCountdownHTML(){return'\n        <div class="countdown-timer">\n            <div class="countdown-item">\n                <div class="countdown-label">일</div>\n                <div class="flip-clock">\n                    <div class="flip-card" data-unit="days">\n                        <div class="flip-card-face front">00</div>\n                        <div class="flip-card-face back">00</div>\n                    </div>\n                </div>\n            </div>\n            <div class="countdown-item">\n                <div class="countdown-label">시간</div>\n                <div class="flip-clock">\n                    <div class="flip-card" data-unit="hours">\n                        <div class="flip-card-face front">00</div>\n                        <div class="flip-card-face back">00</div>\n                    </div>\n                </div>\n            </div>\n            <div class="countdown-item">\n                <div class="countdown-label">분</div>\n                <div class="flip-clock">\n                    <div class="flip-card" data-unit="minutes">\n                        <div class="flip-card-face front">00</div>\n                        <div class="flip-card-face back">00</div>\n                    </div>\n                </div>\n            </div>\n            <div class="countdown-item">\n                <div class="countdown-label">초</div>\n                <div class="flip-clock">\n                    <div class="flip-card" data-unit="seconds">\n                        <div class="flip-card-face front">00</div>\n                        <div class="flip-card-face back">00</div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    '}document.addEventListener("DOMContentLoaded",function(){const e=document.querySelector(".countdown-section");e&&(e.style.opacity="0",e.style.transform="translateY(30px)",e.style.transition="opacity 0.8s ease, transform 0.8s ease",observer.observe(e))}),window.addEventListener("resize",function(){if(eventInfo&&eventInfo.countdownTarget){const e=new Date(eventInfo.countdownTarget).getTime()-(new Date).getTime();if(e>0){const t=Math.floor(e/36e5),n=document.querySelector('[data-unit="hours"]');n&&adjustCardWidth(n,t)}}});</script>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conference Landing Page</title>
+    <meta name="description" content="컨퍼런스 랜딩 페이지 - 행사 정보, 프로그램, 이벤트, 안내사항을 한눈에 확인하세요">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 네비게이션 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Conference 2024</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">행사 소개</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#program" class="nav-link">프로그램 소개</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#events" class="nav-link">이벤트 소개</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#info" class="nav-link">안내</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#location" class="nav-link">Location</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 히어로 섹션 -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1 class="hero-title">Conference 2024</h1>
+            <p class="hero-subtitle">미래를 위한 기술과 혁신의 만남</p>
+            <div class="hero-date">
+                <span class="date-text">2024년 12월 15일 (일)</span>
+                <span class="time-text">오전 9시 - 오후 6시</span>
+            </div>
+            <a href="#" id="registration-button" class="cta-image-button" target="_blank" rel="noopener noreferrer">
+                <img src="assets/images/register-button.svg" alt="지금 등록하기" id="registration-image">
+            </a>
+        </div>
+    </section>
+
+    <!-- 카운트다운 타이머 섹션 -->
+    <section class="countdown-section">
+        <div class="countdown-container">
+            <h2 class="countdown-title">행사까지 남은 시간</h2>
+            <p class="countdown-subtitle">곧 만나볼 수 있는 특별한 시간을 기다려주세요</p>
+            <div class="countdown-timer">
+                <div class="countdown-item">
+                    <div class="countdown-label">시간</div>
+                    <div class="flip-clock">
+                        <div class="flip-card" data-unit="hours">
+                            <div class="flip-card-face front">00</div>
+                            <div class="flip-card-face back">00</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-label">분</div>
+                    <div class="flip-clock">
+                        <div class="flip-card" data-unit="minutes">
+                            <div class="flip-card-face front">00</div>
+                            <div class="flip-card-face back">00</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-label">초</div>
+                    <div class="flip-clock">
+                        <div class="flip-card" data-unit="seconds">
+                            <div class="flip-card-face front">00</div>
+                            <div class="flip-card-face back">00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 행사 소개 섹션 -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">행사 소개</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Conference 2024는 업계 최고의 전문가들과 함께하는 기술 컨퍼런스입니다. 
+                    최신 기술 트렌드와 혁신적인 아이디어를 공유하고, 네트워킹의 기회를 제공합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 프로그램 소개 섹션 -->
+    <section id="program" class="program">
+        <div class="container">
+            <h2 class="section-title">프로그램 소개</h2>
+            <div class="program-schedule">
+                <!-- 프로그램 일정 테이블이 여기에 동적으로 추가됩니다 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 이벤트 소개 섹션 -->
+    <section id="events" class="events">
+        <div class="container">
+            <h2 class="section-title">이벤트 소개</h2>
+            <div class="events-content">
+                <p>특별한 이벤트와 네트워킹 세션을 통해 더욱 풍부한 경험을 제공합니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 안내 섹션 -->
+    <section id="info" class="info">
+        <div class="container">
+            <h2 class="section-title">안내</h2>
+            <div class="info-content">
+                <p>참가자들을 위한 중요 안내사항을 확인해주세요.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location 섹션 -->
+    <section id="location" class="행사 장소">
+        <div class="container">
+            <h2 class="section-title">Location</h2>
+            <div class="location-content">
+                <p>행사 장소 정보와 교통편 안내를 확인하세요.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 모달 -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-body">
+                <!-- 모달 내용이 여기에 동적으로 추가됩니다 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 msalt.net. All rights reserved.</p>
+            <div class="build-info">
+                <span class="build-version">버전: <span id="build-version">-</span></span>
+                <span class="build-separator">|</span>
+                <span class="build-time">빌드: <span id="build-time">-</span></span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 {
-  "buildTime": "2025-09-09T05:41:49.818Z",
+  "buildTime": "2025-09-09T06:54:47.841Z",
   "version": "1.0.0",
   "environment": "production",
   "eventData": {
@@ -13,10 +13,32 @@
     "registrationUrl": "https://example.com/register",
     "registrationButtonImage": "assets/images/register-button.svg",
     "registrationButtonAlt": "지금 등록하기",
-    "countdownTarget": "2025-12-15T09:00:00+09:00"
+    "countdownTarget": "2025-12-15T09:00:00+09:00",
+    "heroBackgroundImage": "assets/images/hero-bg.svg",
+    "sectionImages": {
+      "about": [
+        "assets/images/sections/about-1.svg",
+        "assets/images/sections/about-2.svg"
+      ],
+      "events": [
+        "assets/images/sections/events-1.svg",
+        "assets/images/sections/events-2.svg",
+        "assets/images/sections/events-3.svg"
+      ],
+      "info": [
+        "assets/images/sections/info-1.svg",
+        "assets/images/sections/info-2.svg"
+      ],
+      "location": [
+        "assets/images/sections/location-1.svg",
+        "assets/images/sections/location-2.svg",
+        "assets/images/sections/location-3.svg",
+        "assets/images/sections/location-4.svg"
+      ]
+    }
   },
   "programData": {
-    "totalPrograms": 22,
+    "totalPrograms": 21,
     "locations": [
       "201호",
       "202호",

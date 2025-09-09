@@ -83,6 +83,24 @@ body {
     text-align: center;
     padding: 120px 0 80px;
     margin-top: 70px;
+    position: relative;
+}
+
+/* 히어로 배경 이미지가 있을 때의 오버레이 */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%);
+    z-index: 1;
+}
+
+.hero .hero-container {
+    position: relative;
+    z-index: 2;
 }
 
 /* 카운트다운 타이머 섹션 */
@@ -417,13 +435,13 @@ body {
 
 /* 섹션 공통 스타일 */
 section {
-    padding: 80px 0;
+    padding: 120px 0;
 }
 
 .section-title {
     text-align: center;
     font-size: 2.5rem;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
     color: #2c3e50;
 }
 
@@ -436,6 +454,7 @@ section {
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
+    padding: 2rem 0;
 }
 
 .about-text p {
@@ -495,7 +514,7 @@ section {
 .program-table tbody tr {
     border-bottom: 1px solid #e9ecef;
     transition: background-color 0.3s ease;
-    height: 100px; /* 행 높이 고정 */
+    height: auto; /* 행 높이 자동 조정 */
 }
 
 .program-table tbody tr:hover {
@@ -510,7 +529,7 @@ section {
     padding: 10px;
     vertical-align: middle;
     border-right: 1px solid #e9ecef;
-    height: 100px; /* 셀 높이 고정 */
+    height: auto; /* 셀 높이 자동 조정 */
 }
 
 .program-table td:last-child {
@@ -524,11 +543,11 @@ section {
     text-align: center;
     font-size: 0.9rem;
     vertical-align: middle;
-    height: 100px; /* 시간 셀 높이 고정 */
+    height: auto; /* 시간 셀 높이 자동 조정 */
 }
 
 .program-cell {
-    height: 100px; /* 프로그램 셀 높이 고정 */
+    height: auto; /* 프로그램 셀 높이 자동 조정 */
     position: relative;
     vertical-align: middle;
     text-align: center;
@@ -538,10 +557,11 @@ section {
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     border: 1px solid #dee2e6;
     border-radius: 8px;
-    padding: 8px;
+    padding: 12px 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-    height: 80px; /* 고정 높이 */
+    min-height: 80px; /* 최소 높이 설정 */
+    height: auto; /* 높이 자동 조정 */
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -638,6 +658,7 @@ section {
 
 .events-content {
     text-align: center;
+    padding: 2rem 0;
 }
 
 .events-content p {
@@ -652,6 +673,7 @@ section {
 
 .info-content {
     text-align: center;
+    padding: 2rem 0;
 }
 
 .info-content p {
@@ -666,6 +688,7 @@ section {
 
 .location-content {
     text-align: center;
+    padding: 2rem 0;
 }
 
 .location-content p {
@@ -830,6 +853,41 @@ section {
     color: #ecf0f1;
 }
 
+/* 섹션 이미지 스타일 */
+.section-images-container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section-image {
+    max-width: 1200px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 섹션 이미지 반응형 디자인 */
+@media screen and (max-width: 1200px) {
+    .section-image {
+        max-width: 100%;
+        margin: 0 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .section-image {
+        margin: 0 10px;
+    }
+}
+
 /* 반응형 디자인 */
 @media screen and (max-width: 768px) {
     .hamburger {
@@ -880,7 +938,7 @@ section {
     }
     
     section {
-        padding: 60px 0;
+        padding: 80px 0;
     }
 }
 
@@ -955,26 +1013,27 @@ section {
     }
     
     .program-item-table {
-        padding: 6px;
-        height: 60px; /* 모바일에서도 고정 높이 */
+        padding: 10px 6px;
+        min-height: 60px; /* 모바일에서 최소 높이 설정 */
+        height: auto; /* 모바일에서도 높이 자동 조정 */
     }
     
     .program-table tbody tr {
-        height: 80px; /* 모바일에서 행 높이 조정 */
+        height: auto; /* 모바일에서도 행 높이 자동 조정 */
     }
     
     .program-table td {
-        height: 80px; /* 모바일에서 셀 높이 조정 */
+        height: auto; /* 모바일에서도 셀 높이 자동 조정 */
         vertical-align: middle;
     }
     
     .time-cell {
-        height: 80px; /* 모바일에서 시간 셀 높이 조정 */
+        height: auto; /* 모바일에서도 시간 셀 높이 자동 조정 */
         vertical-align: middle;
     }
     
     .program-cell {
-        height: 80px; /* 모바일에서 프로그램 셀 높이 조정 */
+        height: auto; /* 모바일에서도 프로그램 셀 높이 자동 조정 */
         vertical-align: middle;
         text-align: center;
     }

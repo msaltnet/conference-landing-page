@@ -60,13 +60,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // 언어 초기화 함수
 function initializeLanguage() {
-    // URL에서 언어 감지
+    // URL에서 언어 감지 - /en 경로가 포함되어 있는지 확인
     const path = window.location.pathname;
-    if (path.startsWith('/en')) {
+    if (path.includes('/en/') || path.endsWith('/en')) {
         currentLanguage = 'en';
     } else {
         currentLanguage = 'ko';
     }
+    
+    console.log('언어 초기화:', { path, currentLanguage });
     
     // HTML lang 속성 업데이트
     document.documentElement.lang = currentLanguage;
@@ -99,17 +101,22 @@ function switchLanguage(lang) {
     
     // URL 업데이트 - 서빙되는 host path를 고려한 절대 경로 사용
     const currentPath = window.location.pathname;
-    const basePath = window.location.pathname.replace(/\/en.*$/, '') || '';
     
     if (lang === 'en') {
-        if (!currentPath.startsWith('/en')) {
-            const newPath = basePath + '/en';
+        if (!currentPath.includes('/en/') && !currentPath.endsWith('/en')) {
+            // /dist/index.html -> /dist/en/index.html
+            const basePath = currentPath.replace(/\/index\.html$/, '');
+            const newPath = basePath + '/en/index.html';
+            console.log('영어로 전환:', { currentPath, basePath, newPath });
             window.location.href = newPath;
             return; // 페이지 이동이므로 이후 코드 실행하지 않음
         }
     } else {
-        if (currentPath.startsWith('/en')) {
-            window.location.href = basePath + '/';
+        if (currentPath.includes('/en/') || currentPath.endsWith('/en')) {
+            // /dist/en/index.html -> /dist/index.html
+            const newPath = currentPath.replace(/\/en\/index\.html$/, '/index.html');
+            console.log('한국어로 전환:', { currentPath, newPath });
+            window.location.href = newPath;
             return; // 페이지 이동이므로 이후 코드 실행하지 않음
         }
     }
@@ -127,6 +134,11 @@ function switchLanguage(lang) {
     // 데이터 다시 로드
     loadEventInfo();
     loadProgramData();
+    
+    // 페이지 정보 업데이트 (날짜/시간 텍스트 포함)
+    if (eventInfo) {
+        updatePageInfo();
+    }
 }
 
 // 언어 선택 버튼 상태 업데이트
@@ -148,6 +160,30 @@ function updatePageTexts() {
     const elements = document.querySelectorAll('[data-ko][data-en]');
     
     elements.forEach(element => {
+        // build-info 관련 요소는 내부 span을 보존하면서 텍스트만 업데이트
+        if (element.classList.contains('build-version') || element.classList.contains('build-time')) {
+            const text = element.getAttribute(`data-${currentLanguage}`);
+            if (text) {
+                // 첫 번째 텍스트 노드만 업데이트 (내부 span은 보존)
+                const textNodes = Array.from(element.childNodes).filter(node => node.nodeType === Node.TEXT_NODE);
+                if (textNodes.length > 0) {
+                    textNodes[0].textContent = text;
+                } else {
+                    // 텍스트 노드가 없으면 span 앞에 텍스트 추가
+                    const span = element.querySelector('span');
+                    if (span) {
+                        element.insertBefore(document.createTextNode(text), span);
+                    }
+                }
+            }
+            return;
+        }
+        
+        // date-text, time-text는 updatePageInfo()에서 처리하므로 제외
+        if (element.classList.contains('date-text') || element.classList.contains('time-text')) {
+            return;
+        }
+        
         const text = element.getAttribute(`data-${currentLanguage}`);
         if (text) {
             element.textContent = text;
@@ -291,7 +327,7 @@ window.addEventListener('resize', function() {
 async function loadProgramData() {
     try {
         let fileName;
-        const isEnPath = window.location.pathname.startsWith('/en');
+        const isEnPath = window.location.pathname.includes('/en/');
         
         if (currentLanguage === 'en' || isEnPath) {
             // 영어 버전일 때는 -en.json 파일 사용
@@ -301,7 +337,7 @@ async function loadProgramData() {
             fileName = 'data/program-schedule.json';
         }
         
-        console.log('프로그램 데이터 로드 시도:', fileName, '언어:', currentLanguage);
+        console.log('프로그램 데이터 로드 시도:', fileName, '언어:', currentLanguage, 'isEnPath:', isEnPath);
         const response = await fetch(fileName);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -473,7 +509,7 @@ function groupProgramsByTime(programs) {
 async function loadEventInfo() {
     try {
         let fileName;
-        const isEnPath = window.location.pathname.startsWith('/en');
+        const isEnPath = window.location.pathname.includes('/en/');
         
         if (currentLanguage === 'en' || isEnPath) {
             // 영어 버전일 때는 -en.json 파일 사용
@@ -483,7 +519,7 @@ async function loadEventInfo() {
             fileName = 'data/event-info.json';
         }
         
-        console.log('행사 정보 로드 시도:', fileName, '언어:', currentLanguage);
+        console.log('행사 정보 로드 시도:', fileName, '언어:', currentLanguage, 'isEnPath:', isEnPath);
         const response = await fetch(fileName);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -531,7 +567,8 @@ function updatePageInfo() {
     // 날짜 업데이트
     if (eventInfo.eventDate) {
         const eventDate = new Date(eventInfo.eventDate);
-        const formattedDate = eventDate.toLocaleDateString('ko-KR', {
+        const locale = currentLanguage === 'en' ? 'en-US' : 'ko-KR';
+        const formattedDate = eventDate.toLocaleDateString(locale, {
             year: 'numeric',
             month: 'long',
             day: 'numeric',
@@ -548,7 +585,11 @@ function updatePageInfo() {
     if (eventInfo.eventTime && eventInfo.eventEndTime) {
         const timeText = document.querySelector('.time-text');
         if (timeText) {
-            timeText.textContent = `오전 ${eventInfo.eventTime} - 오후 ${eventInfo.eventEndTime}`;
+            if (currentLanguage === 'en') {
+                timeText.textContent = `${eventInfo.eventTime} AM - ${eventInfo.eventEndTime} PM`;
+            } else {
+                timeText.textContent = `오전 ${eventInfo.eventTime} - 오후 ${eventInfo.eventEndTime}`;
+            }
         }
     }
     
@@ -561,11 +602,83 @@ function updatePageInfo() {
     }
     
     if (registrationImage && eventInfo.registrationButtonImage) {
-        registrationImage.src = eventInfo.registrationButtonImage;
+        // 영어 페이지에서는 상대 경로 수정
+        const isEnPath = window.location.pathname.includes('/en/');
+        const imagePath = isEnPath ? '../' + eventInfo.registrationButtonImage : eventInfo.registrationButtonImage;
+        registrationImage.src = imagePath;
     }
     
     if (registrationImage && eventInfo.registrationButtonAlt) {
         registrationImage.alt = eventInfo.registrationButtonAlt;
+    }
+    
+    // 섹션 이미지들 업데이트
+    updateSectionImages();
+}
+
+// 섹션 이미지들 업데이트 함수
+function updateSectionImages() {
+    if (!eventInfo || !eventInfo.sectionImages) return;
+    
+    const isEnPath = window.location.pathname.includes('/en/');
+    
+    // 영어 페이지에서만 동적으로 이미지 추가 (한국어는 build.js에서 정적으로 생성됨)
+    if (!isEnPath) {
+        return;
+    }
+    
+    const pathPrefix = '../';
+    
+    // 행사 소개 이미지들 업데이트
+    if (eventInfo.sectionImages.about) {
+        const aboutImagesContainer = document.getElementById('about-images');
+        if (aboutImagesContainer) {
+            // 기존 내용 지우기
+            aboutImagesContainer.innerHTML = '';
+            // 새 이미지들 추가
+            aboutImagesContainer.innerHTML = eventInfo.sectionImages.about.map(img => 
+                `<img src="${pathPrefix}${img}" alt="행사 소개 이미지" class="section-image">`
+            ).join('');
+        }
+    }
+    
+    // 이벤트 이미지들 업데이트
+    if (eventInfo.sectionImages.events) {
+        const eventsImagesContainer = document.getElementById('events-images');
+        if (eventsImagesContainer) {
+            // 기존 내용 지우기
+            eventsImagesContainer.innerHTML = '';
+            // 새 이미지들 추가
+            eventsImagesContainer.innerHTML = eventInfo.sectionImages.events.map(img => 
+                `<img src="${pathPrefix}${img}" alt="이벤트 소개 이미지" class="section-image">`
+            ).join('');
+        }
+    }
+    
+    // 안내 이미지들 업데이트
+    if (eventInfo.sectionImages.info) {
+        const infoImagesContainer = document.getElementById('info-images');
+        if (infoImagesContainer) {
+            // 기존 내용 지우기
+            infoImagesContainer.innerHTML = '';
+            // 새 이미지들 추가
+            infoImagesContainer.innerHTML = eventInfo.sectionImages.info.map(img => 
+                `<img src="${pathPrefix}${img}" alt="행사 안내 이미지" class="section-image">`
+            ).join('');
+        }
+    }
+    
+    // 장소 이미지들 업데이트
+    if (eventInfo.sectionImages.location) {
+        const locationImagesContainer = document.getElementById('location-images');
+        if (locationImagesContainer) {
+            // 기존 내용 지우기
+            locationImagesContainer.innerHTML = '';
+            // 새 이미지들 추가
+            locationImagesContainer.innerHTML = eventInfo.sectionImages.location.map(img => 
+                `<img src="${pathPrefix}${img}" alt="장소 안내 이미지" class="section-image">`
+            ).join('');
+        }
     }
 }
 
@@ -740,10 +853,10 @@ function showCountdownComplete() {
 async function loadBuildInfo() {
     try {
         // 현재 경로에 따라 build-info.json 경로 결정
-        const isEnPath = window.location.pathname.startsWith('/en');
+        const isEnPath = window.location.pathname.includes('/en/');
         const buildInfoPath = isEnPath ? '../build-info.json' : 'build-info.json';
-    
-        console.log('빌드 정보 로드 시도:', buildInfoPath);
+        
+        console.log('빌드 정보 로드 시도:', buildInfoPath, 'isEnPath:', isEnPath);
         const response = await fetch(buildInfoPath);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);

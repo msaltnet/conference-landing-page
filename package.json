@@ -7,6 +7,7 @@
     "dev": "live-server --port=3000 --open=/index.html",
     "build": "node build.js",
     "build:prod": "NODE_ENV=production node build.js",
+    "validate": "node -e \"const { validateProgramData } = require('./js/validator.js'); const fs = require('fs'); const data = JSON.parse(fs.readFileSync('./data/program-schedule.json', 'utf8')); const result = validateProgramData(data); if (!result.isValid) { console.error('❌ 검증 실패:', result.errors.join('\\n')); process.exit(1); } else { console.log('✅ 데이터 검증 성공'); }\"",
     "preview": "live-server --port=8080 --open=/dist/index.html",
     "clean": "rimraf dist",
     "start": "npm run dev"

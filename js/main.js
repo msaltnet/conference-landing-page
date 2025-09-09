@@ -1,12 +1,15 @@
 // 전역 변수
 let eventInfo = null;
 let countdownInterval = null;
+let programData = null;
 
 // DOM이 로드된 후 실행
 document.addEventListener('DOMContentLoaded', function() {
     
     // 행사 정보 로드
     loadEventInfo();
+    // 프로그램 데이터 로드
+    loadProgramData();
     // 모바일 네비게이션 토글
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
@@ -42,114 +45,58 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // 프로그램 데이터
-    const programData = [
-        {
-            time: '09:00 - 09:30',
-            title: '등록 및 네트워킹',
-            speaker: '전체',
-            description: '참가자 등록 및 네트워킹 시간입니다.'
-        },
-        {
-            time: '09:30 - 10:30',
-            title: '키노트: 미래 기술의 방향',
-            speaker: '김기술',
-            description: 'AI, 블록체인, IoT 등 미래 기술의 발전 방향과 우리의 준비에 대해 이야기합니다.'
-        },
-        {
-            time: '10:45 - 11:45',
-            title: '세션 1: AI와 머신러닝',
-            speaker: '이인공지능',
-            description: '최신 AI 기술과 머신러닝의 실제 적용 사례를 살펴봅니다.'
-        },
-        {
-            time: '11:45 - 12:45',
-            title: '세션 2: 클라우드 컴퓨팅',
-            speaker: '박클라우드',
-            description: '클라우드 기술의 현재와 미래, 그리고 기업의 클라우드 전환 전략을 다룹니다.'
-        },
-        {
-            time: '12:45 - 14:00',
-            title: '점심 및 네트워킹',
-            speaker: '전체',
-            description: '점심 식사와 함께 네트워킹 시간을 가집니다.'
-        },
-        {
-            time: '14:00 - 15:00',
-            title: '세션 3: 웹 개발 트렌드',
-            speaker: '최웹개발',
-            description: '최신 웹 개발 기술과 프레임워크에 대해 알아봅니다.'
-        },
-        {
-            time: '15:15 - 16:15',
-            title: '세션 4: 데이터 사이언스',
-            speaker: '정데이터',
-            description: '빅데이터 분석과 데이터 사이언스의 실무 적용 사례를 공유합니다.'
-        },
-        {
-            time: '16:30 - 17:30',
-            title: '패널 토론: 기술의 미래',
-            speaker: '패널',
-            description: '전문가들과 함께 기술의 미래에 대해 토론합니다.'
-        },
-        {
-            time: '17:30 - 18:00',
-            title: '마무리 및 네트워킹',
-            speaker: '전체',
-            description: '컨퍼런스를 마무리하고 마지막 네트워킹 시간을 가집니다.'
+    // 프로그램 일정 생성 (JSON 데이터 로드 후 실행)
+    createProgramSchedule();
+});
+
+// 모달 열기 함수 (전역으로 이동)
+function openModal(program, categoryInfo = null) {
+    const modal = document.getElementById('modal');
+    const modalBody = document.querySelector('.modal-body');
+    
+    if (modal && modalBody) {
+        // 분류 색상 정보 가져오기
+        if (!categoryInfo && programData && programData.categories) {
+            categoryInfo = getCategoryInfo(program.category, programData.categories);
         }
-    ];
-    
-    // 프로그램 일정 생성
-    const programSchedule = document.querySelector('.program-schedule');
-    if (programSchedule) {
-        programData.forEach((program, index) => {
-            const programItem = document.createElement('div');
-            programItem.className = 'program-item';
-            programItem.innerHTML = `
-                <div class="program-time">${program.time}</div>
-                <div class="program-info">
-                    <h3 class="program-title">${program.title}</h3>
-                    <p class="program-speaker">발표자: ${program.speaker}</p>
-                </div>
-            `;
-            
-            // 클릭 이벤트 추가
-            programItem.addEventListener('click', function() {
-                openModal(program);
-            });
-            
-            programSchedule.appendChild(programItem);
-        });
-    }
-    
-    // 모달 열기 함수
-    function openModal(program) {
-        const modal = document.getElementById('modal');
-        const modalBody = document.querySelector('.modal-body');
         
-        if (modal && modalBody) {
-            modalBody.innerHTML = `
-                <h2>${program.title}</h2>
-                <div class="modal-time">${program.time}</div>
-                <div class="modal-speaker">발표자: ${program.speaker}</div>
-                <div class="modal-description">${program.description}</div>
-            `;
-            
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden'; // 스크롤 방지
-        }
+        // 기본 색상 설정
+        const defaultCategoryInfo = {
+            color: '#3498db',
+            backgroundColor: 'rgba(52, 152, 219, 0.1)',
+            borderColor: 'rgba(52, 152, 219, 0.2)'
+        };
+        
+        const finalCategoryInfo = categoryInfo || defaultCategoryInfo;
+        
+        modalBody.innerHTML = `
+            <h2>${program.title}</h2>
+            <div class="modal-time">${program.time}</div>
+            <div class="modal-location">장소: ${program.location}</div>
+            <div class="modal-speaker">발표자: ${program.speaker} (${program.affiliation})</div>
+            <div class="modal-category" style="
+                --category-color: ${finalCategoryInfo.color};
+                --category-color-hover: ${finalCategoryInfo.color.replace('#', '#')};
+            ">${program.category}</div>
+            <div class="modal-description">${program.content}</div>
+        `;
+        
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // 스크롤 방지
     }
-    
-    // 모달 닫기 함수
-    function closeModal() {
-        const modal = document.getElementById('modal');
-        if (modal) {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto'; // 스크롤 복원
-        }
+}
+
+// 모달 닫기 함수 (전역으로 이동)
+function closeModal() {
+    const modal = document.getElementById('modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // 스크롤 복원
     }
+}
     
+// 모달 이벤트 리스너 설정
+document.addEventListener('DOMContentLoaded', function() {
     // 모달 닫기 이벤트
     const closeBtn = document.querySelector('.close');
     const modal = document.getElementById('modal');
@@ -172,37 +119,39 @@ document.addEventListener('DOMContentLoaded', function() {
             closeModal();
         }
     });
-    
-    // 스크롤 시 네비게이션 스타일 변경
-    window.addEventListener('scroll', function() {
-        const navbar = document.querySelector('.navbar');
-        if (navbar) {
-            if (window.scrollY > 50) {
-                navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
-                navbar.style.backdropFilter = 'blur(10px)';
-            } else {
-                navbar.style.backgroundColor = '#fff';
-                navbar.style.backdropFilter = 'none';
-            }
+});
+
+// 스크롤 시 네비게이션 스타일 변경
+window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+        if (window.scrollY > 50) {
+            navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+            navbar.style.backdropFilter = 'blur(10px)';
+        } else {
+            navbar.style.backgroundColor = '#fff';
+            navbar.style.backdropFilter = 'none';
+        }
+    }
+});
+
+// 스크롤 애니메이션
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
         }
     });
-    
-    // 스크롤 애니메이션
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-    
-    // 카운트다운 섹션 애니메이션
+}, observerOptions);
+
+// 카운트다운 섹션 애니메이션
+document.addEventListener('DOMContentLoaded', function() {
     const countdownSection = document.querySelector('.countdown-section');
     if (countdownSection) {
         countdownSection.style.opacity = '0';
@@ -210,24 +159,193 @@ document.addEventListener('DOMContentLoaded', function() {
         countdownSection.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
         observer.observe(countdownSection);
     }
-    
-    // 창 크기 변경 시 카드 너비 재조정
-    window.addEventListener('resize', function() {
-        if (eventInfo && eventInfo.countdownTarget) {
-            const targetDate = new Date(eventInfo.countdownTarget).getTime();
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-            
-            if (distance > 0) {
-                const totalHours = Math.floor(distance / (1000 * 60 * 60));
-                const hoursElement = document.querySelector('[data-unit="hours"]');
-                if (hoursElement) {
-                    adjustCardWidth(hoursElement, totalHours);
-                }
+});
+
+// 창 크기 변경 시 카드 너비 재조정
+window.addEventListener('resize', function() {
+    if (eventInfo && eventInfo.countdownTarget) {
+        const targetDate = new Date(eventInfo.countdownTarget).getTime();
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+        
+        if (distance > 0) {
+            const totalHours = Math.floor(distance / (1000 * 60 * 60));
+            const hoursElement = document.querySelector('[data-unit="hours"]');
+            if (hoursElement) {
+                adjustCardWidth(hoursElement, totalHours);
             }
         }
-    });
+    }
 });
+
+// 프로그램 데이터 로드 함수
+async function loadProgramData() {
+    try {
+        const response = await fetch('data/program-schedule.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        programData = await response.json();
+        
+        // 프로그램 일정 생성
+        createProgramSchedule();
+    } catch (error) {
+        console.error('프로그램 데이터 로드 실패:', error);
+        // 기본값으로 설정
+        programData = {
+            programs: [],
+            locations: [],
+            categories: []
+        };
+    }
+}
+
+// 프로그램 일정 생성 함수
+function createProgramSchedule() {
+    if (!programData || !programData.programs) {
+        return;
+    }
+    
+    const programSchedule = document.querySelector('.program-schedule');
+    if (!programSchedule) {
+        return;
+    }
+    
+    // 기존 내용 초기화
+    programSchedule.innerHTML = '';
+    
+    // 테이블 생성
+    const table = createProgramTable(programData.programs, programData.locations, programData.categories);
+    programSchedule.appendChild(table);
+}
+
+// 프로그램 테이블 생성 함수
+function createProgramTable(programs, locations, categories) {
+    const table = document.createElement('table');
+    table.className = 'program-table';
+    
+    // 테이블 헤더 생성
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    
+    // 시간 열
+    const timeHeader = document.createElement('th');
+    timeHeader.textContent = '시간';
+    timeHeader.className = 'time-column';
+    headerRow.appendChild(timeHeader);
+    
+    // 장소별 열 생성
+    locations.forEach(location => {
+        const locationHeader = document.createElement('th');
+        locationHeader.textContent = location;
+        locationHeader.className = 'location-column';
+        headerRow.appendChild(locationHeader);
+    });
+    
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+    
+    // 시간대별로 그룹화
+    const timeSlots = groupProgramsByTime(programs);
+    
+    // 테이블 바디 생성
+    const tbody = document.createElement('tbody');
+    
+    timeSlots.forEach(timeSlot => {
+        const row = document.createElement('tr');
+        row.className = 'time-row';
+        
+        // 시간 셀
+        const timeCell = document.createElement('td');
+        timeCell.textContent = timeSlot.time;
+        timeCell.className = 'time-cell';
+        row.appendChild(timeCell);
+        
+        // 각 장소별 셀 생성
+        locations.forEach(location => {
+            const cell = document.createElement('td');
+            cell.className = 'program-cell';
+            
+            // 해당 시간대와 장소의 프로그램 찾기
+            const program = timeSlot.programs.find(p => p.location === location);
+            
+            if (program) {
+                const programDiv = document.createElement('div');
+                programDiv.className = 'program-item-table';
+                
+                // 분류 색상 정보 가져오기
+                const categoryInfo = getCategoryInfo(program.category, categories);
+                
+                programDiv.innerHTML = `
+                    <div class="program-title-table">${program.title}</div>
+                    <div class="program-speaker-table">${program.speaker}</div>
+                    <div class="program-category-table" style="
+                        --category-color: ${categoryInfo.color};
+                        --category-bg-color: ${categoryInfo.backgroundColor};
+                        --category-border-color: ${categoryInfo.borderColor};
+                        --category-bg-color-hover: ${categoryInfo.backgroundColor.replace('0.1', '0.2')};
+                    ">${program.category}</div>
+                `;
+                
+                // 클릭 이벤트 추가
+                programDiv.addEventListener('click', function() {
+                    openModal(program, categoryInfo);
+                });
+                
+                cell.appendChild(programDiv);
+            }
+            
+            row.appendChild(cell);
+        });
+        
+        tbody.appendChild(row);
+    });
+    
+    table.appendChild(tbody);
+    return table;
+}
+
+// 분류 정보를 가져오는 함수
+function getCategoryInfo(categoryName, categories) {
+    const category = categories.find(cat => 
+        typeof cat === 'string' ? cat === categoryName : cat.name === categoryName
+    );
+    
+    if (typeof category === 'object' && category !== null) {
+        return {
+            color: category.color || '#3498db',
+            backgroundColor: category.backgroundColor || 'rgba(52, 152, 219, 0.1)',
+            borderColor: category.borderColor || 'rgba(52, 152, 219, 0.2)'
+        };
+    }
+    
+    // 기본값 반환
+    return {
+        color: '#3498db',
+        backgroundColor: 'rgba(52, 152, 219, 0.1)',
+        borderColor: 'rgba(52, 152, 219, 0.2)'
+    };
+}
+
+// 프로그램을 시간대별로 그룹화하는 함수
+function groupProgramsByTime(programs) {
+    const timeGroups = {};
+    
+    programs.forEach(program => {
+        if (!timeGroups[program.time]) {
+            timeGroups[program.time] = {
+                time: program.time,
+                programs: []
+            };
+        }
+        timeGroups[program.time].programs.push(program);
+    });
+    
+    // 시간순으로 정렬
+    return Object.values(timeGroups).sort((a, b) => {
+        return a.time.localeCompare(b.time);
+    });
+}
 
 // 행사 정보 로드 함수
 async function loadEventInfo() {

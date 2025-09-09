@@ -4,6 +4,9 @@ const { minify: minifyJS } = require('terser');
 const { minify: minifyCSS } = require('clean-css');
 const { minify: minifyHTML } = require('html-minifier-terser');
 
+// 검증 함수들 import
+const { validateProgramData } = require('./js/validator.js');
+
 // 빌드 설정
 const config = {
   sourceDir: './',
@@ -115,10 +118,49 @@ function processHTML(htmlContent, eventData) {
   return processedHTML;
 }
 
+// 프로그램 데이터 검증 함수
+function validateProgramDataFile() {
+  const programDataPath = path.join(config.sourceDir, 'data', 'program-schedule.json');
+  
+  if (!fs.existsSync(programDataPath)) {
+    console.error('❌ 프로그램 데이터 파일이 없습니다:', programDataPath);
+    process.exit(1);
+  }
+  
+  try {
+    const programDataContent = fs.readFileSync(programDataPath, 'utf8');
+    const programData = JSON.parse(programDataContent);
+    
+    console.log('🔍 프로그램 데이터 검증 중...');
+    const validation = validateProgramData(programData);
+    
+    if (!validation.isValid) {
+      console.error('❌ 프로그램 데이터 검증 실패:');
+      validation.errors.forEach(error => {
+        console.error(`  - ${error}`);
+      });
+      console.error('\n💡 해결 방법:');
+      console.error('  1. data/program-schedule.json 파일의 locations와 categories 배열을 확인하세요.');
+      console.error('  2. 모든 프로그램의 location과 category가 정의된 값과 일치하는지 확인하세요.');
+      console.error('  3. 날짜와 시간 형식이 올바른지 확인하세요. (YYYY-MM-DD, HH:MM-HH:MM)');
+      process.exit(1);
+    }
+    
+    console.log('✅ 프로그램 데이터 검증 완료');
+    return programData;
+  } catch (error) {
+    console.error('❌ 프로그램 데이터 파일 읽기 오류:', error.message);
+    process.exit(1);
+  }
+}
+
 // 메인 빌드 함수
 async function build() {
   
   try {
+    // 프로그램 데이터 검증
+    const programData = validateProgramDataFile();
+    
     // dist 디렉토리 정리
     if (fs.existsSync(config.distDir)) {
       fs.rmSync(config.distDir, { recursive: true });
@@ -195,13 +237,19 @@ async function build() {
       buildTime: new Date().toISOString(),
       version: require('./package.json').version,
       environment: config.isProduction ? 'production' : 'development',
-      eventData: eventData
+      eventData: eventData,
+      programData: {
+        totalPrograms: programData.programs.length,
+        locations: programData.locations,
+        categories: programData.categories
+      }
     };
     
     const buildInfoPath = path.join(config.distDir, 'build-info.json');
     fs.writeFileSync(buildInfoPath, JSON.stringify(buildInfo, null, 2));
     
   } catch (error) {
+    console.error('❌ 빌드 실패:', error.message);
     process.exit(1);
   }
 }

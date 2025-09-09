@@ -388,6 +388,33 @@ body {
     background-color: #c0392b;
 }
 
+/* 이미지 버튼 스타일 */
+.cta-image-button {
+    display: inline-block;
+    text-decoration: none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cta-image-button:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.cta-image-button img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border: none;
+    transition: filter 0.3s ease;
+}
+
+.cta-image-button:hover img {
+    filter: brightness(1.1);
+}
+
 /* 섹션 공통 스타일 */
 section {
     padding: 80px 0;
@@ -825,6 +852,15 @@ section {
     .cta-button {
         padding: 12px 24px;
         font-size: 1rem;
+    }
+    
+    .cta-image-button {
+        max-width: 250px;
+    }
+    
+    .cta-image-button img {
+        width: 100%;
+        height: auto;
     }
     
     .program-item {

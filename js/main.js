@@ -369,6 +369,9 @@ async function loadEventInfo() {
             eventDate: "2024-12-15",
             eventTime: "09:00",
             eventEndTime: "18:00",
+            registrationUrl: "#",
+            registrationButtonImage: "assets/images/register-button.svg",
+            registrationButtonAlt: "지금 등록하기",
             countdownTarget: "2024-12-15T09:00:00+09:00"
         };
         updatePageInfo();
@@ -412,6 +415,22 @@ function updatePageInfo() {
         if (timeText) {
             timeText.textContent = `오전 ${eventInfo.eventTime} - 오후 ${eventInfo.eventEndTime}`;
         }
+    }
+    
+    // 등록 버튼 업데이트
+    const registrationButton = document.querySelector('#registration-button');
+    const registrationImage = document.querySelector('#registration-image');
+    
+    if (registrationButton && eventInfo.registrationUrl) {
+        registrationButton.href = eventInfo.registrationUrl;
+    }
+    
+    if (registrationImage && eventInfo.registrationButtonImage) {
+        registrationImage.src = eventInfo.registrationButtonImage;
+    }
+    
+    if (registrationImage && eventInfo.registrationButtonAlt) {
+        registrationImage.alt = eventInfo.registrationButtonAlt;
     }
 }
 

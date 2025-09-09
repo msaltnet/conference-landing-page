@@ -1,0 +1,66 @@
+{
+  "buildTime": "2025-09-09T05:13:50.443Z",
+  "version": "1.0.0",
+  "environment": "production",
+  "eventData": {
+    "eventName": "Conference 2025",
+    "eventSubtitle": "미래를 위한 기술과 혁신의 만남",
+    "eventDate": "2025-12-15",
+    "eventTime": "10:00",
+    "eventEndTime": "17:00",
+    "eventLocation": "서울 코엑스 컨벤션센터",
+    "eventDescription": "Conference 2024는 업계 최고의 전문가들과 함께하는 기술 컨퍼런스입니다. 최신 기술 트렌드와 혁신적인 아이디어를 공유하고, 네트워킹의 기회를 제공합니다.",
+    "registrationUrl": "https://example.com/register",
+    "registrationButtonImage": "assets/images/register-button.svg",
+    "registrationButtonAlt": "지금 등록하기",
+    "countdownTarget": "2025-12-15T09:00:00+09:00"
+  },
+  "programData": {
+    "totalPrograms": 22,
+    "locations": [
+      "201호",
+      "202호",
+      "203호",
+      "205호",
+      "로비"
+    ],
+    "categories": [
+      {
+        "name": "키노트",
+        "color": "#e74c3c",
+        "backgroundColor": "#fdf2f2",
+        "borderColor": "#fecaca"
+      },
+      {
+        "name": "기술세션",
+        "color": "#3498db",
+        "backgroundColor": "#f0f9ff",
+        "borderColor": "#bfdbfe"
+      },
+      {
+        "name": "토론",
+        "color": "#9b59b6",
+        "backgroundColor": "#faf5ff",
+        "borderColor": "#e9d5ff"
+      },
+      {
+        "name": "네트워킹",
+        "color": "#27ae60",
+        "backgroundColor": "#f0fdf4",
+        "borderColor": "#bbf7d0"
+      },
+      {
+        "name": "등록",
+        "color": "#f39c12",
+        "backgroundColor": "#fffbeb",
+        "borderColor": "#fed7aa"
+      },
+      {
+        "name": "마무리",
+        "color": "#95a5a6",
+        "backgroundColor": "#f8fafc",
+        "borderColor": "#e2e8f0"
+      }
+    ]
+  }
+}

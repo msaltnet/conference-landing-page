@@ -6,10 +6,10 @@
   "scripts": {
     "dev": "live-server --port=3000 --open=/index.html",
     "build": "node build.js",
-    "build:prod": "NODE_ENV=production node build.js",
+    "build:prod": "cross-env NODE_ENV=production node build.js",
     "validate": "node -e \"const { validateProgramData } = require('./js/validator.js'); const fs = require('fs'); const data = JSON.parse(fs.readFileSync('./data/program-schedule.json', 'utf8')); const result = validateProgramData(data); if (!result.isValid) { console.error('❌ 검증 실패:', result.errors.join('\\n')); process.exit(1); } else { console.log('✅ 데이터 검증 성공'); }\"",
-    "preview": "live-server --port=8080 --open=/dist/index.html",
-    "clean": "rimraf dist",
+    "preview": "live-server --port=8080 --open=/docs/index.html",
+    "clean": "rimraf dist docs",
     "start": "npm run dev"
   },
   "keywords": [
@@ -23,13 +23,14 @@
   "author": "Conference Team",
   "license": "MIT",
   "devDependencies": {
+    "clean-css": "5.3.3",
+    "clean-css-cli": "^5.6.2",
+    "cross-env": "10.0.0",
+    "html-minifier-terser": "^7.2.0",
     "live-server": "^1.2.2",
     "rimraf": "^5.0.5",
-    "terser": "^5.24.0",
-    "clean-css-cli": "^5.6.2",
-    "html-minifier-terser": "^7.2.0"
+    "terser": "^5.24.0"
   },
-  "dependencies": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/your-username/conference-landing-page.git"

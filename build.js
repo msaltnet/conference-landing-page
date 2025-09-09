@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { minify: minifyJS } = require('terser');
-const { minify: minifyCSS } = require('clean-css');
+const CleanCSS = require('clean-css');
 const { minify: minifyHTML } = require('html-minifier-terser');
 
 // 검증 함수들 import
@@ -10,7 +10,7 @@ const { validateProgramData } = require('./js/validator.js');
 // 빌드 설정
 const config = {
   sourceDir: './',
-  distDir: './dist',
+  distDir: process.env.NODE_ENV === 'production' ? './docs' : './dist',
   isProduction: process.env.NODE_ENV === 'production'
 };
 
@@ -46,13 +46,15 @@ function copyDir(src, dest) {
 }
 
 // CSS 최적화 함수
-async function optimizeCSS(cssContent) {
+function optimizeCSS(cssContent) {
   if (!config.isProduction) return cssContent;
   
   try {
-    const result = await minifyCSS(cssContent);
+    const minifier = new CleanCSS();
+    const result = minifier.minify(cssContent);
     return result.styles;
   } catch (error) {
+    console.warn('CSS 최적화 실패:', error.message);
     return cssContent;
   }
 }
@@ -73,16 +75,17 @@ async function optimizeJS(jsContent) {
     });
     return result.code;
   } catch (error) {
+    console.warn('JavaScript 최적화 실패:', error.message);
     return jsContent;
   }
 }
 
 // HTML 최적화 함수
-function optimizeHTML(htmlContent) {
+async function optimizeHTML(htmlContent) {
   if (!config.isProduction) return htmlContent;
   
   try {
-    return minifyHTML(htmlContent, {
+    return await minifyHTML(htmlContent, {
       removeComments: true,
       collapseWhitespace: true,
       removeRedundantAttributes: true,
@@ -97,6 +100,7 @@ function optimizeHTML(htmlContent) {
       minifyCSS: false  // 이미 별도로 최적화됨
     });
   } catch (error) {
+    console.warn('HTML 최적화 실패:', error.message);
     return htmlContent;
   }
 }
@@ -161,7 +165,7 @@ async function build() {
     // 프로그램 데이터 검증
     const programData = validateProgramDataFile();
     
-    // dist 디렉토리 정리
+    // dist/docs 디렉토리 정리
     if (fs.existsSync(config.distDir)) {
       fs.rmSync(config.distDir, { recursive: true });
     }
@@ -194,7 +198,7 @@ async function build() {
         const cssPath = path.join(config.sourceDir, 'css', 'style.css');
         if (fs.existsSync(cssPath)) {
           let cssContent = fs.readFileSync(cssPath, 'utf8');
-          cssContent = await optimizeCSS(cssContent);
+          cssContent = optimizeCSS(cssContent);
           htmlContent = htmlContent.replace(
             '<link rel="stylesheet" href="css/style.css">',
             `<style>${cssContent}</style>`
@@ -213,7 +217,7 @@ async function build() {
         }
         
         // HTML 최적화
-        htmlContent = optimizeHTML(htmlContent);
+        htmlContent = await optimizeHTML(htmlContent);
         
         const distHtmlPath = path.join(config.distDir, 'index.html');
         fs.writeFileSync(distHtmlPath, htmlContent);
@@ -247,6 +251,9 @@ async function build() {
     
     const buildInfoPath = path.join(config.distDir, 'build-info.json');
     fs.writeFileSync(buildInfoPath, JSON.stringify(buildInfo, null, 2));
+    
+    console.log(`✅ 빌드 완료: ${config.distDir} 폴더에 산출물이 저장되었습니다.`);
+    console.log(`📁 환경: ${config.isProduction ? 'production' : 'development'}`);
     
   } catch (error) {
     console.error('❌ 빌드 실패:', error.message);

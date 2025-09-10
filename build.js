@@ -8,7 +8,8 @@ const { validateProgramData } = require('./js/validator.js');
 const config = {
   sourceDir: './',
   distDir: process.env.NODE_ENV === 'production' ? './docs' : './dist',
-  isProduction: process.env.NODE_ENV === 'production'
+  isProduction: process.env.NODE_ENV === 'production',
+  baseUrl: process.env.BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://msaltnet.github.io/conference-landing-page' : '')
 };
 
 // 디렉토리 생성 함수
@@ -103,6 +104,27 @@ async function build() {
     const htmlPath = path.join(config.sourceDir, 'index.html');
     if (fs.existsSync(htmlPath)) {
       let htmlContent = fs.readFileSync(htmlPath, 'utf8');
+      
+      // 프로덕션 환경에서 경로 수정
+      if (config.isProduction && config.baseUrl) {
+        // CSS 경로 수정
+        htmlContent = htmlContent.replace(
+          'href="css/style.css"',
+          `href="${config.baseUrl}/css/style.css"`
+        );
+        
+        // JavaScript 경로 수정
+        htmlContent = htmlContent.replace(
+          'src="js/main.js"',
+          `src="${config.baseUrl}/js/main.js"`
+        );
+        
+        // 이미지 경로 수정
+        htmlContent = htmlContent.replace(
+          'src="assets/images/register-button.svg"',
+          `src="${config.baseUrl}/assets/images/register-button.svg"`
+        );
+      }
       
       // 히어로 배경 이미지 처리
       if (eventData.heroBackgroundImage) {
@@ -231,6 +253,27 @@ async function build() {
       const enHtmlPath = path.join(enSourceDir, 'index.html');
       if (fs.existsSync(enHtmlPath)) {
         let enHtmlContent = fs.readFileSync(enHtmlPath, 'utf8');
+        
+        // 프로덕션 환경에서 경로 수정
+        if (config.isProduction && config.baseUrl) {
+          // CSS 경로 수정
+          enHtmlContent = enHtmlContent.replace(
+            'href="../css/style.css"',
+            `href="${config.baseUrl}/css/style.css"`
+          );
+          
+          // JavaScript 경로 수정
+          enHtmlContent = enHtmlContent.replace(
+            'src="../js/main.js"',
+            `src="${config.baseUrl}/js/main.js"`
+          );
+          
+          // 이미지 경로 수정
+          enHtmlContent = enHtmlContent.replace(
+            'src="../assets/images/register-button.svg"',
+            `src="${config.baseUrl}/assets/images/register-button.svg"`
+          );
+        }
         
         // 히어로 배경 이미지 처리
         if (enEventData.heroBackgroundImage) {

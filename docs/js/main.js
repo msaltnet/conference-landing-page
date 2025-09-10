@@ -4,6 +4,8 @@ let countdownInterval = null;
 let programData = null;
 let currentLanguage = 'ko'; // 기본 언어는 한국어
 
+// 빌드 타임에 HTML에 경로가 하드코딩되므로 상대 경로만 사용
+
 // DOM이 로드된 후 실행
 document.addEventListener('DOMContentLoaded', function() {
     
@@ -101,7 +103,7 @@ function switchLanguage(lang) {
     
     currentLanguage = lang;
     
-    // URL 업데이트 - GitHub Pages 환경을 고려한 경로 처리
+    // URL 업데이트 - 빌드 타임에 경로가 처리되므로 상대 경로 사용
     const currentPath = window.location.pathname;
     const baseUrl = window.location.origin;
     
@@ -116,7 +118,7 @@ function switchLanguage(lang) {
             } else {
                 newPath = currentPath + '/en/';
             }
-            console.log('영어로 전환:', { currentPath, newPath });
+            console.log('영어로 전환:', { currentPath, newPath, baseUrl });
             window.location.href = baseUrl + newPath;
             return; // 페이지 이동이므로 이후 코드 실행하지 않음
         }
@@ -131,7 +133,7 @@ function switchLanguage(lang) {
             } else {
                 newPath = currentPath.replace('/en/', '/');
             }
-            console.log('한국어로 전환:', { currentPath, newPath });
+            console.log('한국어로 전환:', { currentPath, newPath, baseUrl });
             window.location.href = baseUrl + newPath;
             return; // 페이지 이동이므로 이후 코드 실행하지 않음
         }
@@ -353,6 +355,8 @@ async function loadProgramData() {
             fileName = 'data/program-schedule.json';
         }
         
+        // 빌드 타임에 경로가 이미 처리되므로 상대 경로만 사용
+        
         console.log('프로그램 데이터 로드 시도:', fileName, '언어:', currentLanguage, 'isEnPath:', isEnPath);
         const response = await fetch(fileName);
         if (!response.ok) {
@@ -535,6 +539,8 @@ async function loadEventInfo() {
             fileName = 'data/event-info.json';
         }
         
+        // 빌드 타임에 경로가 이미 처리되므로 상대 경로만 사용
+        
         console.log('행사 정보 로드 시도:', fileName, '언어:', currentLanguage, 'isEnPath:', isEnPath);
         const response = await fetch(fileName);
         if (!response.ok) {
@@ -618,9 +624,16 @@ function updatePageInfo() {
     }
     
     if (registrationImage && eventInfo.registrationButtonImage) {
-        // 영어 페이지에서는 상대 경로 수정
+        // GitHub Pages 환경을 고려한 이미지 경로 설정
         const isEnPath = window.location.pathname.includes('/en/');
-        const imagePath = isEnPath ? '../' + eventInfo.registrationButtonImage : eventInfo.registrationButtonImage;
+        let imagePath = eventInfo.registrationButtonImage;
+        
+        if (isEnPath) {
+            imagePath = '../' + eventInfo.registrationButtonImage;
+        }
+        
+        // 빌드 타임에 경로가 이미 처리되므로 상대 경로만 사용
+        
         registrationImage.src = imagePath;
     }
     
@@ -803,7 +816,7 @@ async function loadBuildInfo() {
     try {
         // 현재 경로에 따라 build-info.json 경로 결정
         const isEnPath = window.location.pathname.includes('/en/');
-        const buildInfoPath = isEnPath ? '../build-info.json' : 'build-info.json';
+        let buildInfoPath = isEnPath ? '../build-info.json' : 'build-info.json';
         
         console.log('빌드 정보 로드 시도:', buildInfoPath, 'isEnPath:', isEnPath);
         const response = await fetch(buildInfoPath);

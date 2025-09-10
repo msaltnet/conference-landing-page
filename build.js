@@ -241,8 +241,8 @@ async function build() {
     if (fs.existsSync(enSourceDir)) {
       ensureDir(enDistDir);
       
-      // 영어 버전 이벤트 데이터 로드
-      const enEventDataPath = path.join(enSourceDir, 'data', 'event-info.json');
+      // 영어 버전 이벤트 데이터 로드 (data/ 폴더의 -en.json 파일 사용)
+      const enEventDataPath = path.join(config.sourceDir, 'data', 'event-info-en.json');
       
       if (fs.existsSync(enEventDataPath)) {
         const enEventDataContent = fs.readFileSync(enEventDataPath, 'utf8');
@@ -359,11 +359,8 @@ async function build() {
         fs.writeFileSync(path.join(enDistDir, 'index.html'), enHtmlContent);
       }
       
-      // 영어 버전 데이터 폴더 복사
-      const enDataDir = path.join(enSourceDir, 'data');
-      if (fs.existsSync(enDataDir)) {
-        copyDir(enDataDir, path.join(enDistDir, 'data'));
-      }
+      // 영어 버전 데이터 폴더 복사 (data/ 폴더의 모든 파일 복사)
+      copyDir(path.join(config.sourceDir, 'data'), path.join(enDistDir, 'data'));
       
       // 영어 버전 assets 폴더 복사
       copyDir(path.join(config.sourceDir, 'assets'), path.join(enDistDir, 'assets'));
@@ -389,7 +386,7 @@ async function build() {
     
     // 영어 버전 빌드 정보 생성
     if (fs.existsSync(enDistDir)) {
-      const enProgramDataPath = path.join(enDistDir, 'data', 'program-schedule.json');
+      const enProgramDataPath = path.join(config.sourceDir, 'data', 'program-schedule-en.json');
       const enProgramData = fs.existsSync(enProgramDataPath) ? 
         JSON.parse(fs.readFileSync(enProgramDataPath, 'utf8')) : programData;
       

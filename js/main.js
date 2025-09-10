@@ -62,13 +62,15 @@ document.addEventListener('DOMContentLoaded', function() {
 function initializeLanguage() {
     // URL에서 언어 감지 - /en 경로가 포함되어 있는지 확인
     const path = window.location.pathname;
-    if (path.includes('/en/') || path.endsWith('/en')) {
+    const hash = window.location.hash;
+    
+    if (path.includes('/en/') || path.endsWith('/en') || hash === '#en') {
         currentLanguage = 'en';
     } else {
         currentLanguage = 'ko';
     }
     
-    console.log('언어 초기화:', { path, currentLanguage });
+    console.log('언어 초기화:', { path, hash, currentLanguage });
     
     // HTML lang 속성 업데이트
     document.documentElement.lang = currentLanguage;
@@ -99,24 +101,38 @@ function switchLanguage(lang) {
     
     currentLanguage = lang;
     
-    // URL 업데이트 - 서빙되는 host path를 고려한 절대 경로 사용
+    // URL 업데이트 - GitHub Pages 환경을 고려한 경로 처리
     const currentPath = window.location.pathname;
+    const baseUrl = window.location.origin;
     
     if (lang === 'en') {
         if (!currentPath.includes('/en/') && !currentPath.endsWith('/en')) {
-            // /dist/index.html -> /dist/en/index.html
-            const basePath = currentPath.replace(/\/index\.html$/, '');
-            const newPath = basePath + '/en/index.html';
-            console.log('영어로 전환:', { currentPath, basePath, newPath });
-            window.location.href = newPath;
+            // 현재 경로에서 /en/ 경로로 전환
+            let newPath;
+            if (currentPath === '/' || currentPath.endsWith('/')) {
+                newPath = '/en/';
+            } else if (currentPath.endsWith('/index.html')) {
+                newPath = currentPath.replace('/index.html', '/en/index.html');
+            } else {
+                newPath = currentPath + '/en/';
+            }
+            console.log('영어로 전환:', { currentPath, newPath });
+            window.location.href = baseUrl + newPath;
             return; // 페이지 이동이므로 이후 코드 실행하지 않음
         }
     } else {
         if (currentPath.includes('/en/') || currentPath.endsWith('/en')) {
-            // /dist/en/index.html -> /dist/index.html
-            const newPath = currentPath.replace(/\/en\/index\.html$/, '/index.html');
+            // /en/ 경로에서 루트 경로로 전환
+            let newPath;
+            if (currentPath.endsWith('/en/') || currentPath.endsWith('/en')) {
+                newPath = '/';
+            } else if (currentPath.endsWith('/en/index.html')) {
+                newPath = currentPath.replace('/en/index.html', '/index.html');
+            } else {
+                newPath = currentPath.replace('/en/', '/');
+            }
             console.log('한국어로 전환:', { currentPath, newPath });
-            window.location.href = newPath;
+            window.location.href = baseUrl + newPath;
             return; // 페이지 이동이므로 이후 코드 실행하지 않음
         }
     }

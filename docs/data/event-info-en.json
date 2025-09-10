@@ -13,23 +13,23 @@
   "heroBackgroundImage": "assets/images/hero-bg.svg",
   "sectionImages": {
     "about": [
-      "assets/images/sections/about-1.svg",
-      "assets/images/sections/about-2.svg"
+      "assets/images/sections-en/about-1-en.svg",
+      "assets/images/sections-en/about-2-en.svg"
     ],
     "events": [
-      "assets/images/sections/events-1.svg",
-      "assets/images/sections/events-2.svg",
-      "assets/images/sections/events-3.svg"
+      "assets/images/sections-en/events-1-en.svg",
+      "assets/images/sections-en/events-2-en.svg",
+      "assets/images/sections-en/events-3-en.svg"
     ],
     "info": [
-      "assets/images/sections/info-1.svg",
-      "assets/images/sections/info-2.svg"
+      "assets/images/sections-en/info-1-en.svg",
+      "assets/images/sections-en/info-2-en.svg"
     ],
     "location": [
-      "assets/images/sections/location-1.svg",
-      "assets/images/sections/location-2.svg",
-      "assets/images/sections/location-3.svg",
-      "assets/images/sections/location-4.svg"
+      "assets/images/sections-en/location-1-en.svg",
+      "assets/images/sections-en/location-2-en.svg",
+      "assets/images/sections-en/location-3-en.svg",
+      "assets/images/sections-en/location-4-en.svg"
     ]
   }
 }

@@ -6,6 +6,30 @@
     <title>Conference Landing Page</title>
     <meta name="description" content="Conference Landing Page - Check event information, program, events, and announcements at a glance">
     <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+      .hero {
+        background-image: url('assets/images/hero-bg.svg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+      }
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%);
+        z-index: 1;
+      }
+      .hero .hero-container {
+        position: relative;
+        z-index: 2;
+      }
+    </style>
 </head>
 <body>
     <!-- 네비게이션 -->
@@ -107,6 +131,12 @@
         </div>
     </section>
 
+    <!-- 행사 소개 이미지들 -->
+    <div class="section-images-container">
+<img src="../assets/images/sections-en/about-1-en.svg" alt="About section image" class="section-image">
+<img src="../assets/images/sections-en/about-2-en.svg" alt="About section image" class="section-image">
+    </div>
+
     <!-- 프로그램 소개 섹션 -->
     <section id="program" class="program">
         <div class="container">
@@ -124,11 +154,15 @@
             <div class="events-content">
                 <p data-ko="특별한 이벤트와 네트워킹 세션을 통해 더욱 풍부한 경험을 제공합니다." data-en="We provide a richer experience through special events and networking sessions.">We provide a richer experience through special events and networking sessions.</p>
             </div>
-            <div class="section-images" id="events-images">
-                <!-- 이벤트 이미지들이 여기에 동적으로 추가됩니다 -->
-            </div>
         </div>
     </section>
+
+    <!-- 이벤트 소개 이미지들 -->
+    <div class="section-images-container">
+<img src="../assets/images/sections-en/events-1-en.svg" alt="Events section image" class="section-image">
+<img src="../assets/images/sections-en/events-2-en.svg" alt="Events section image" class="section-image">
+<img src="../assets/images/sections-en/events-3-en.svg" alt="Events section image" class="section-image">
+    </div>
 
     <!-- 안내 섹션 -->
     <section id="info" class="info">
@@ -137,11 +171,14 @@
             <div class="info-content">
                 <p data-ko="참가자들을 위한 중요 안내사항을 확인해주세요." data-en="Please check important information for participants.">Please check important information for participants.</p>
             </div>
-            <div class="section-images" id="info-images">
-                <!-- 안내 이미지들이 여기에 동적으로 추가됩니다 -->
-            </div>
         </div>
     </section>
+
+    <!-- 행사 안내 이미지들 -->
+    <div class="section-images-container">
+<img src="../assets/images/sections-en/info-1-en.svg" alt="Info section image" class="section-image">
+<img src="../assets/images/sections-en/info-2-en.svg" alt="Info section image" class="section-image">
+    </div>
 
     <!-- 장소 안내 섹션 -->
     <section id="location" class="location">
@@ -150,11 +187,16 @@
             <div class="location-content">
                 <p data-ko="행사 장소 정보와 교통편 안내를 확인하세요." data-en="Please check event venue information and transportation guide.">Please check event venue information and transportation guide.</p>
             </div>
-            <div class="section-images" id="location-images">
-                <!-- 장소 이미지들이 여기에 동적으로 추가됩니다 -->
-            </div>
         </div>
     </section>
+
+    <!-- 장소 안내 이미지들 -->
+    <div class="section-images-container">
+<img src="../assets/images/sections-en/location-1-en.svg" alt="Location section image" class="section-image">
+<img src="../assets/images/sections-en/location-2-en.svg" alt="Location section image" class="section-image">
+<img src="../assets/images/sections-en/location-3-en.svg" alt="Location section image" class="section-image">
+<img src="../assets/images/sections-en/location-4-en.svg" alt="Location section image" class="section-image">
+    </div>
 
     <!-- 모달 -->
     <div id="modal" class="modal">

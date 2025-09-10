@@ -6,6 +6,6 @@
     </linearGradient>
   </defs>
   <rect width="100%" height="100%" fill="url(#grad1)"/>
-  <text x="400" y="150" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="white">행사 소개 이미지 1</text>
+  <text x="400" y="150" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="white">About Event Image 1</text>
   <text x="400" y="200" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="rgba(255,255,255,0.8)">Conference 2025</text>
 </svg>

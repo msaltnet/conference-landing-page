@@ -1,7 +1,7 @@
 {
-  "buildTime": "2025-09-10T09:04:09.682Z",
+  "buildTime": "2025-09-10T09:55:26.297Z",
   "version": "1.0.0",
-  "environment": "production",
+  "environment": "development",
   "eventData": {
     "eventName": "Conference 2025",
     "eventSubtitle": "미래를 위한 기술과 혁신의 만남",

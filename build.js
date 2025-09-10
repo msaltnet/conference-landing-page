@@ -8,8 +8,7 @@ const { validateProgramData } = require('./js/validator.js');
 const config = {
   sourceDir: './',
   distDir: process.env.NODE_ENV === 'production' ? './docs' : './dist',
-  isProduction: process.env.NODE_ENV === 'production',
-  baseUrl: process.env.BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://msaltnet.github.io/conference-landing-page' : '')
+  baseUrl: process.env.BASE_URL || 'https://msaltnet.github.io/conference-landing-page'
 };
 
 // 디렉토리 생성 함수
@@ -105,26 +104,24 @@ async function build() {
     if (fs.existsSync(htmlPath)) {
       let htmlContent = fs.readFileSync(htmlPath, 'utf8');
       
-      // 프로덕션 환경에서 경로 수정
-      if (config.isProduction && config.baseUrl) {
-        // CSS 경로 수정
-        htmlContent = htmlContent.replace(
-          'href="css/style.css"',
-          `href="${config.baseUrl}/css/style.css"`
-        );
-        
-        // JavaScript 경로 수정
-        htmlContent = htmlContent.replace(
-          'src="js/main.js"',
-          `src="${config.baseUrl}/js/main.js"`
-        );
-        
-        // 이미지 경로 수정
-        htmlContent = htmlContent.replace(
-          'src="assets/images/register-button.svg"',
-          `src="${config.baseUrl}/assets/images/register-button.svg"`
-        );
-      }
+      // 경로 수정
+      // CSS 경로 수정
+      htmlContent = htmlContent.replace(
+        'href="css/style.css"',
+        `href="${config.baseUrl}/css/style.css"`
+      );
+      
+      // JavaScript 경로 수정
+      htmlContent = htmlContent.replace(
+        'src="js/main.js"',
+        `src="${config.baseUrl}/js/main.js"`
+      );
+      
+      // 이미지 경로 수정
+      htmlContent = htmlContent.replace(
+        'src="assets/images/register-button.svg"',
+        `src="${config.baseUrl}/assets/images/register-button.svg"`
+      );
       
       // 히어로 배경 이미지 처리
       if (eventData.heroBackgroundImage) {
@@ -206,32 +203,41 @@ async function build() {
         }
       }
       
-      // 개발 모드에서는 JSON 파일을 그대로 사용
-      if (!config.isProduction) {
-        // CSS와 JS를 인라인으로 삽입하지 않고 링크로 유지
-        const distHtmlPath = path.join(config.distDir, 'index.html');
-        fs.writeFileSync(distHtmlPath, htmlContent);
-      } else {
-        // 프로덕션 모드에서도 별도 파일로 유지 (템플릿 처리 제거)
-        const distHtmlPath = path.join(config.distDir, 'index.html');
-        fs.writeFileSync(distHtmlPath, htmlContent);
-      }
+      // HTML 파일 저장
+      const distHtmlPath = path.join(config.distDir, 'index.html');
+      fs.writeFileSync(distHtmlPath, htmlContent);
     }
     
     // 정적 파일들 복사
-    if (!config.isProduction) {
-      // 개발 모드: 모든 파일 복사
-      copyDir(path.join(config.sourceDir, 'css'), path.join(config.distDir, 'css'));
-      copyDir(path.join(config.sourceDir, 'js'), path.join(config.distDir, 'js'));
-      copyDir(path.join(config.sourceDir, 'assets'), path.join(config.distDir, 'assets'));
-      copyDir(path.join(config.sourceDir, 'data'), path.join(config.distDir, 'data'));
-    } else {
-      // 프로덕션 모드: 필요한 파일만 복사
-      copyDir(path.join(config.sourceDir, 'assets'), path.join(config.distDir, 'assets'));
-      copyDir(path.join(config.sourceDir, 'data'), path.join(config.distDir, 'data'));
-      copyDir(path.join(config.sourceDir, 'css'), path.join(config.distDir, 'css'));
-      copyDir(path.join(config.sourceDir, 'js'), path.join(config.distDir, 'js'));
+    copyDir(path.join(config.sourceDir, 'css'), path.join(config.distDir, 'css'));
+    
+    // JavaScript 파일 처리 (main.js의 baseUrl 설정 수정)
+    const jsSourceDir = path.join(config.sourceDir, 'js');
+    const jsDistDir = path.join(config.distDir, 'js');
+    ensureDir(jsDistDir);
+    
+    // main.js 파일 처리
+    const mainJsPath = path.join(jsSourceDir, 'main.js');
+    if (fs.existsSync(mainJsPath)) {
+      let mainJsContent = fs.readFileSync(mainJsPath, 'utf8');
+      
+      // baseUrl 설정을 빌드 시점의 값으로 교체
+      mainJsContent = mainJsContent.replace(
+        'const baseUrl = window.location.origin;',
+        `const baseUrl = '${config.baseUrl}';`
+      );
+      
+      fs.writeFileSync(path.join(jsDistDir, 'main.js'), mainJsContent);
     }
+    
+    // validator.js 파일 복사
+    const validatorJsPath = path.join(jsSourceDir, 'validator.js');
+    if (fs.existsSync(validatorJsPath)) {
+      fs.copyFileSync(validatorJsPath, path.join(jsDistDir, 'validator.js'));
+    }
+    
+    copyDir(path.join(config.sourceDir, 'assets'), path.join(config.distDir, 'assets'));
+    copyDir(path.join(config.sourceDir, 'data'), path.join(config.distDir, 'data'));
     
     // 영어 버전 폴더 복사
     const enSourceDir = path.join(config.sourceDir, 'en');
@@ -254,26 +260,24 @@ async function build() {
       if (fs.existsSync(enHtmlPath)) {
         let enHtmlContent = fs.readFileSync(enHtmlPath, 'utf8');
         
-        // 프로덕션 환경에서 경로 수정
-        if (config.isProduction && config.baseUrl) {
-          // CSS 경로 수정
-          enHtmlContent = enHtmlContent.replace(
-            'href="../css/style.css"',
-            `href="${config.baseUrl}/css/style.css"`
-          );
-          
-          // JavaScript 경로 수정
-          enHtmlContent = enHtmlContent.replace(
-            'src="../js/main.js"',
-            `src="${config.baseUrl}/js/main.js"`
-          );
-          
-          // 이미지 경로 수정
-          enHtmlContent = enHtmlContent.replace(
-            'src="../assets/images/register-button.svg"',
-            `src="${config.baseUrl}/assets/images/register-button.svg"`
-          );
-        }
+        // 경로 수정
+        // CSS 경로 수정
+        enHtmlContent = enHtmlContent.replace(
+          'href="../css/style.css"',
+          `href="${config.baseUrl}/css/style.css"`
+        );
+        
+        // JavaScript 경로 수정
+        enHtmlContent = enHtmlContent.replace(
+          'src="../js/main.js"',
+          `src="${config.baseUrl}/js/main.js"`
+        );
+        
+        // 이미지 경로 수정
+        enHtmlContent = enHtmlContent.replace(
+          'src="../assets/images/register-button.svg"',
+          `src="${config.baseUrl}/assets/images/register-button.svg"`
+        );
         
         // 히어로 배경 이미지 처리
         if (enEventData.heroBackgroundImage) {
@@ -365,7 +369,30 @@ async function build() {
       // 영어 버전 assets 폴더 복사
       copyDir(path.join(config.sourceDir, 'assets'), path.join(enDistDir, 'assets'));
       copyDir(path.join(config.sourceDir, 'css'), path.join(enDistDir, 'css'));
-      copyDir(path.join(config.sourceDir, 'js'), path.join(enDistDir, 'js'));
+      
+      // 영어 버전 JavaScript 파일 처리 (main.js의 baseUrl 설정 수정)
+      const enJsDistDir = path.join(enDistDir, 'js');
+      ensureDir(enJsDistDir);
+      
+      // main.js 파일 처리
+      const enMainJsPath = path.join(jsSourceDir, 'main.js');
+      if (fs.existsSync(enMainJsPath)) {
+        let enMainJsContent = fs.readFileSync(enMainJsPath, 'utf8');
+        
+        // baseUrl 설정을 빌드 시점의 값으로 교체
+        enMainJsContent = enMainJsContent.replace(
+          'const baseUrl = window.location.origin;',
+          `const baseUrl = '${config.baseUrl}';`
+        );
+        
+        fs.writeFileSync(path.join(enJsDistDir, 'main.js'), enMainJsContent);
+      }
+      
+      // validator.js 파일 복사
+      const enValidatorJsPath = path.join(jsSourceDir, 'validator.js');
+      if (fs.existsSync(enValidatorJsPath)) {
+        fs.copyFileSync(enValidatorJsPath, path.join(enJsDistDir, 'validator.js'));
+      }
     }
     
     // 빌드 정보 생성

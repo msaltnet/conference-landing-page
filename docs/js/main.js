@@ -105,7 +105,7 @@ function switchLanguage(lang) {
     
     // URL 업데이트 - 빌드 타임에 경로가 처리되므로 상대 경로 사용
     const currentPath = window.location.pathname;
-    const baseUrl = window.location.origin;
+    const baseUrl = 'https://msaltnet.github.io/conference-landing-page';
     
     if (lang === 'en') {
         if (!currentPath.includes('/en/') && !currentPath.endsWith('/en')) {

@@ -214,14 +214,106 @@ async function build() {
     // 영어 버전 폴더 복사
     const enSourceDir = path.join(config.sourceDir, 'en');
     const enDistDir = path.join(config.distDir, 'en');
+    let enEventData = {}; // 스코프를 밖으로 이동
     
     if (fs.existsSync(enSourceDir)) {
       ensureDir(enDistDir);
       
-      // 영어 버전 HTML 복사
+      // 영어 버전 이벤트 데이터 로드
+      const enEventDataPath = path.join(enSourceDir, 'data', 'event-info.json');
+      
+      if (fs.existsSync(enEventDataPath)) {
+        const enEventDataContent = fs.readFileSync(enEventDataPath, 'utf8');
+        enEventData = JSON.parse(enEventDataContent);
+      }
+      
+      // 영어 버전 HTML 처리
       const enHtmlPath = path.join(enSourceDir, 'index.html');
       if (fs.existsSync(enHtmlPath)) {
-        copyFile(enHtmlPath, path.join(enDistDir, 'index.html'));
+        let enHtmlContent = fs.readFileSync(enHtmlPath, 'utf8');
+        
+        // 히어로 배경 이미지 처리
+        if (enEventData.heroBackgroundImage) {
+          // 히어로 섹션에 배경 이미지 스타일 추가
+          const heroStyle = `
+    <style>
+      .hero {
+        background-image: url('${enEventData.heroBackgroundImage}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+      }
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%);
+        z-index: 1;
+      }
+      .hero .hero-container {
+        position: relative;
+        z-index: 2;
+      }
+    </style>`;
+          
+          // head 태그 안에 스타일 삽입
+          enHtmlContent = enHtmlContent.replace('</head>', `${heroStyle}\n</head>`);
+        }
+        
+        // 섹션 이미지들 삽입
+        if (enEventData.sectionImages) {
+          // 행사 소개 섹션 이미지 삽입
+          if (enEventData.sectionImages.about && enEventData.sectionImages.about.length > 0) {
+            const aboutImagesHtml = enEventData.sectionImages.about.map(img => 
+              `<img src="../${img}" alt="About section image" class="section-image">`
+            ).join('\n');
+            
+            enHtmlContent = enHtmlContent.replace(
+              '    </section>\r\n\r\n    <!-- 프로그램 소개 섹션 -->',
+              `    </section>\r\n\r\n    <!-- 행사 소개 이미지들 -->\r\n    <div class="section-images-container">\r\n${aboutImagesHtml}\r\n    </div>\r\n\r\n    <!-- 프로그램 소개 섹션 -->`
+            );
+          }
+          
+          // 이벤트 소개 섹션 이미지 삽입
+          if (enEventData.sectionImages.events && enEventData.sectionImages.events.length > 0) {
+            const eventsImagesHtml = enEventData.sectionImages.events.map(img => 
+              `<img src="../${img}" alt="Events section image" class="section-image">`
+            ).join('\n');
+            enHtmlContent = enHtmlContent.replace(
+              '    </section>\r\n\r\n    <!-- 안내 섹션 -->',
+              `    </section>\r\n\r\n    <!-- 이벤트 소개 이미지들 -->\r\n    <div class="section-images-container">\r\n${eventsImagesHtml}\r\n    </div>\r\n\r\n    <!-- 안내 섹션 -->`
+            );
+          }
+          
+          // 행사 안내 섹션 이미지 삽입
+          if (enEventData.sectionImages.info && enEventData.sectionImages.info.length > 0) {
+            const infoImagesHtml = enEventData.sectionImages.info.map(img => 
+              `<img src="../${img}" alt="Info section image" class="section-image">`
+            ).join('\n');
+            enHtmlContent = enHtmlContent.replace(
+              '    </section>\r\n\r\n    <!-- 장소 안내 섹션 -->',
+              `    </section>\r\n\r\n    <!-- 행사 안내 이미지들 -->\r\n    <div class="section-images-container">\r\n${infoImagesHtml}\r\n    </div>\r\n\r\n    <!-- 장소 안내 섹션 -->`
+            );
+          }
+          
+          // 장소 안내 섹션 이미지 삽입
+          if (enEventData.sectionImages.location && enEventData.sectionImages.location.length > 0) {
+            const locationImagesHtml = enEventData.sectionImages.location.map(img => 
+              `<img src="../${img}" alt="Location section image" class="section-image">`
+            ).join('\n');
+            enHtmlContent = enHtmlContent.replace(
+              '    </section>\r\n\r\n    <!-- 모달 -->',
+              `    </section>\r\n\r\n    <!-- 장소 안내 이미지들 -->\r\n    <div class="section-images-container">\r\n${locationImagesHtml}\r\n    </div>\r\n\r\n    <!-- 모달 -->`
+            );
+          }
+        }
+        
+        // 영어 버전 HTML 저장
+        fs.writeFileSync(path.join(enDistDir, 'index.html'), enHtmlContent);
       }
       
       // 영어 버전 데이터 폴더 복사
@@ -254,28 +346,24 @@ async function build() {
     
     // 영어 버전 빌드 정보 생성
     if (fs.existsSync(enDistDir)) {
-      const enEventDataPath = path.join(enDistDir, 'data', 'event-info.json');
-      if (fs.existsSync(enEventDataPath)) {
-        const enEventData = JSON.parse(fs.readFileSync(enEventDataPath, 'utf8'));
-        const enProgramDataPath = path.join(enDistDir, 'data', 'program-schedule.json');
-        const enProgramData = fs.existsSync(enProgramDataPath) ? 
-          JSON.parse(fs.readFileSync(enProgramDataPath, 'utf8')) : programData;
-        
-        const enBuildInfo = {
-          buildTime: new Date().toISOString(),
-          version: require('./package.json').version,
-          environment: config.isProduction ? 'production' : 'development',
-          eventData: enEventData,
-          programData: {
-            totalPrograms: enProgramData.programs.length,
-            locations: enProgramData.locations,
-            categories: enProgramData.categories
-          }
-        };
-        
-        const enBuildInfoPath = path.join(enDistDir, 'build-info.json');
-        fs.writeFileSync(enBuildInfoPath, JSON.stringify(enBuildInfo, null, 2));
-      }
+      const enProgramDataPath = path.join(enDistDir, 'data', 'program-schedule.json');
+      const enProgramData = fs.existsSync(enProgramDataPath) ? 
+        JSON.parse(fs.readFileSync(enProgramDataPath, 'utf8')) : programData;
+      
+      const enBuildInfo = {
+        buildTime: new Date().toISOString(),
+        version: require('./package.json').version,
+        environment: config.isProduction ? 'production' : 'development',
+        eventData: enEventData,
+        programData: {
+          totalPrograms: enProgramData.programs.length,
+          locations: enProgramData.locations,
+          categories: enProgramData.categories
+        }
+      };
+      
+      const enBuildInfoPath = path.join(enDistDir, 'build-info.json');
+      fs.writeFileSync(enBuildInfoPath, JSON.stringify(enBuildInfo, null, 2));
     }
     
     console.log(`✅ 빌드 완료: ${config.distDir} 폴더에 산출물이 저장되었습니다.`);

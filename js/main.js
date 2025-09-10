@@ -628,75 +628,8 @@ function updatePageInfo() {
         registrationImage.alt = eventInfo.registrationButtonAlt;
     }
     
-    // 섹션 이미지들 업데이트
-    updateSectionImages();
 }
 
-// 섹션 이미지들 업데이트 함수
-function updateSectionImages() {
-    if (!eventInfo || !eventInfo.sectionImages) return;
-    
-    const isEnPath = window.location.pathname.includes('/en/');
-    
-    // 영어 페이지에서만 동적으로 이미지 추가 (한국어는 build.js에서 정적으로 생성됨)
-    if (!isEnPath) {
-        return;
-    }
-    
-    const pathPrefix = '../';
-    
-    // 행사 소개 이미지들 업데이트
-    if (eventInfo.sectionImages.about) {
-        const aboutImagesContainer = document.getElementById('about-images');
-        if (aboutImagesContainer) {
-            // 기존 내용 지우기
-            aboutImagesContainer.innerHTML = '';
-            // 새 이미지들 추가
-            aboutImagesContainer.innerHTML = eventInfo.sectionImages.about.map(img => 
-                `<img src="${pathPrefix}${img}" alt="행사 소개 이미지" class="section-image">`
-            ).join('');
-        }
-    }
-    
-    // 이벤트 이미지들 업데이트
-    if (eventInfo.sectionImages.events) {
-        const eventsImagesContainer = document.getElementById('events-images');
-        if (eventsImagesContainer) {
-            // 기존 내용 지우기
-            eventsImagesContainer.innerHTML = '';
-            // 새 이미지들 추가
-            eventsImagesContainer.innerHTML = eventInfo.sectionImages.events.map(img => 
-                `<img src="${pathPrefix}${img}" alt="이벤트 소개 이미지" class="section-image">`
-            ).join('');
-        }
-    }
-    
-    // 안내 이미지들 업데이트
-    if (eventInfo.sectionImages.info) {
-        const infoImagesContainer = document.getElementById('info-images');
-        if (infoImagesContainer) {
-            // 기존 내용 지우기
-            infoImagesContainer.innerHTML = '';
-            // 새 이미지들 추가
-            infoImagesContainer.innerHTML = eventInfo.sectionImages.info.map(img => 
-                `<img src="${pathPrefix}${img}" alt="행사 안내 이미지" class="section-image">`
-            ).join('');
-        }
-    }
-    
-    // 장소 이미지들 업데이트
-    if (eventInfo.sectionImages.location) {
-        const locationImagesContainer = document.getElementById('location-images');
-        if (locationImagesContainer) {
-            // 기존 내용 지우기
-            locationImagesContainer.innerHTML = '';
-            // 새 이미지들 추가
-            locationImagesContainer.innerHTML = eventInfo.sectionImages.location.map(img => 
-                `<img src="${pathPrefix}${img}" alt="장소 안내 이미지" class="section-image">`
-            ).join('');
-        }
-    }
-}
 
 // 카운트다운 시작 함수
 function startCountdown() {

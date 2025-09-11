@@ -230,6 +230,17 @@
       "speaker": "All",
       "affiliation": "Organizer",
       "category": "Closing"
+    },
+    {
+      "id": 31,
+      "date": "2025-12-15",
+      "time": "11:00-11:15",
+      "location": "all",
+      "title": "Group Photo Session",
+      "content": "A special moment for all participants to take a group photo together. Let's capture this memorable moment of the conference.",
+      "speaker": "All",
+      "affiliation": "Organizer",
+      "category": "Networking"
     }
   ],
   "locations": [
@@ -237,7 +248,8 @@
     "Room 202", 
     "Room 203",
     "Room 205",
-    "Lobby"
+    "Lobby",
+    "all"
   ],
   "categories": [
     {

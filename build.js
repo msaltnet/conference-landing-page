@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
 
 // 검증 함수들 import
 const { validateProgramData } = require('./js/validator.js');
@@ -164,8 +165,8 @@ async function build() {
           ).join('\n');
           
           htmlContent = htmlContent.replace(
-            '    </section>\r\n\r\n    <!-- 프로그램 소개 섹션 -->',
-            `    </section>\r\n\r\n    <!-- 행사 소개 이미지들 -->\r\n    <div class="section-images-container">\r\n${aboutImagesHtml}\r\n    </div>\r\n\r\n    <!-- 프로그램 소개 섹션 -->`
+            `    </section>${os.EOL}${os.EOL}    <!-- 프로그램 소개 섹션 -->`,
+            `    </section>${os.EOL}${os.EOL}    <!-- 행사 소개 이미지들 -->${os.EOL}    <div class="section-images-container">${os.EOL}${aboutImagesHtml}${os.EOL}    </div>${os.EOL}${os.EOL}    <!-- 프로그램 소개 섹션 -->`
           );
         }
         
@@ -175,8 +176,8 @@ async function build() {
             `<img src="${img}" alt="이벤트 소개 이미지" class="section-image">`
           ).join('\n');
           htmlContent = htmlContent.replace(
-            '    </section>\r\n\r\n    <!-- 안내 섹션 -->',
-            `    </section>\r\n\r\n    <!-- 이벤트 소개 이미지들 -->\r\n    <div class="section-images-container">\r\n${eventsImagesHtml}\r\n    </div>\r\n\r\n    <!-- 안내 섹션 -->`
+            `    </section>${os.EOL}${os.EOL}    <!-- 안내 섹션 -->`,
+            `    </section>${os.EOL}${os.EOL}    <!-- 이벤트 소개 이미지들 -->${os.EOL}    <div class="section-images-container">${os.EOL}${eventsImagesHtml}${os.EOL}    </div>${os.EOL}${os.EOL}    <!-- 안내 섹션 -->`
           );
         }
         
@@ -186,8 +187,8 @@ async function build() {
             `<img src="${img}" alt="행사 안내 이미지" class="section-image">`
           ).join('\n');
           htmlContent = htmlContent.replace(
-            '    </section>\r\n\r\n    <!-- 장소 안내 섹션 -->',
-            `    </section>\r\n\r\n    <!-- 행사 안내 이미지들 -->\r\n    <div class="section-images-container">\r\n${infoImagesHtml}\r\n    </div>\r\n\r\n    <!-- 장소 안내 섹션 -->`
+            `    </section>${os.EOL}${os.EOL}    <!-- 장소 안내 섹션 -->`,
+            `    </section>${os.EOL}${os.EOL}    <!-- 행사 안내 이미지들 -->${os.EOL}    <div class="section-images-container">${os.EOL}${infoImagesHtml}${os.EOL}    </div>${os.EOL}${os.EOL}    <!-- 장소 안내 섹션 -->`
           );
         }
         
@@ -197,8 +198,8 @@ async function build() {
             `<img src="${img}" alt="장소 안내 이미지" class="section-image">`
           ).join('\n');
           htmlContent = htmlContent.replace(
-            '    </section>\r\n\r\n    <!-- 모달 -->',
-            `    </section>\r\n\r\n    <!-- 장소 안내 이미지들 -->\r\n    <div class="section-images-container">\r\n${locationImagesHtml}\r\n    </div>\r\n\r\n    <!-- 모달 -->`
+            `    </section>${os.EOL}${os.EOL}    <!-- 모달 -->`,
+            `    </section>${os.EOL}${os.EOL}    <!-- 장소 안내 이미지들 -->${os.EOL}    <div class="section-images-container">${os.EOL}${locationImagesHtml}${os.EOL}    </div>${os.EOL}${os.EOL}    <!-- 모달 -->`
           );
         }
       }
@@ -320,8 +321,8 @@ async function build() {
             ).join('\n');
             
             enHtmlContent = enHtmlContent.replace(
-              '    </section>\r\n\r\n    <!-- 프로그램 소개 섹션 -->',
-              `    </section>\r\n\r\n    <!-- 행사 소개 이미지들 -->\r\n    <div class="section-images-container">\r\n${aboutImagesHtml}\r\n    </div>\r\n\r\n    <!-- 프로그램 소개 섹션 -->`
+              `    </section>${os.EOL}${os.EOL}    <!-- 프로그램 소개 섹션 -->`,
+              `    </section>${os.EOL}${os.EOL}    <!-- 행사 소개 이미지들 -->${os.EOL}    <div class="section-images-container">${os.EOL}${aboutImagesHtml}${os.EOL}    </div>${os.EOL}${os.EOL}    <!-- 프로그램 소개 섹션 -->`
             );
           }
           
@@ -331,8 +332,8 @@ async function build() {
               `<img src="../${img}" alt="Events section image" class="section-image">`
             ).join('\n');
             enHtmlContent = enHtmlContent.replace(
-              '    </section>\r\n\r\n    <!-- 안내 섹션 -->',
-              `    </section>\r\n\r\n    <!-- 이벤트 소개 이미지들 -->\r\n    <div class="section-images-container">\r\n${eventsImagesHtml}\r\n    </div>\r\n\r\n    <!-- 안내 섹션 -->`
+              `    </section>${os.EOL}${os.EOL}    <!-- 안내 섹션 -->`,
+              `    </section>${os.EOL}${os.EOL}    <!-- 이벤트 소개 이미지들 -->${os.EOL}    <div class="section-images-container">${os.EOL}${eventsImagesHtml}${os.EOL}    </div>${os.EOL}${os.EOL}    <!-- 안내 섹션 -->`
             );
           }
           
@@ -342,8 +343,8 @@ async function build() {
               `<img src="../${img}" alt="Info section image" class="section-image">`
             ).join('\n');
             enHtmlContent = enHtmlContent.replace(
-              '    </section>\r\n\r\n    <!-- 장소 안내 섹션 -->',
-              `    </section>\r\n\r\n    <!-- 행사 안내 이미지들 -->\r\n    <div class="section-images-container">\r\n${infoImagesHtml}\r\n    </div>\r\n\r\n    <!-- 장소 안내 섹션 -->`
+              `    </section>${os.EOL}${os.EOL}    <!-- 장소 안내 섹션 -->`,
+              `    </section>${os.EOL}${os.EOL}    <!-- 행사 안내 이미지들 -->${os.EOL}    <div class="section-images-container">${os.EOL}${infoImagesHtml}${os.EOL}    </div>${os.EOL}${os.EOL}    <!-- 장소 안내 섹션 -->`
             );
           }
           
@@ -353,8 +354,8 @@ async function build() {
               `<img src="../${img}" alt="Location section image" class="section-image">`
             ).join('\n');
             enHtmlContent = enHtmlContent.replace(
-              '    </section>\r\n\r\n    <!-- 모달 -->',
-              `    </section>\r\n\r\n    <!-- 장소 안내 이미지들 -->\r\n    <div class="section-images-container">\r\n${locationImagesHtml}\r\n    </div>\r\n\r\n    <!-- 모달 -->`
+              `    </section>${os.EOL}${os.EOL}    <!-- 모달 -->`,
+              `    </section>${os.EOL}${os.EOL}    <!-- 장소 안내 이미지들 -->${os.EOL}    <div class="section-images-container">${os.EOL}${locationImagesHtml}${os.EOL}    </div>${os.EOL}${os.EOL}    <!-- 모달 -->`
             );
           }
         }

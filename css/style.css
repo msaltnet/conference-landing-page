@@ -799,7 +799,7 @@ section {
 }
 
 .modal-time {
-    background-color: #3498db;
+    background-color: #383838;
     color: white;
     padding: 8px 15px;
     border-radius: 20px;
@@ -810,14 +810,14 @@ section {
 }
 
 .modal-location {
-    background-color: #27ae60;
+    background-color: #383838;
     color: white;
-    padding: 6px 12px;
-    border-radius: 15px;
+    padding: 8px 15px;
+    border-radius: 20px;
     display: inline-block;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 600;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .modal-speaker {

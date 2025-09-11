@@ -756,9 +756,12 @@ section {
     border-radius: 15px;
     width: 80%;
     max-width: 600px;
+    max-height: 80vh;
     position: relative;
     animation: slideIn 0.3s ease;
     box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
 }
 
 @keyframes slideIn {
@@ -841,11 +844,43 @@ section {
     transform: scale(1.05);
 }
 
+.modal-body {
+    flex: 1;
+    display: block;
+    overflow: hidden;
+}
+
 .modal-description {
     color: #555;
     line-height: 1.6;
     font-size: 1.1rem;
     white-space: pre-line;
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px 0;
+    /* 스크롤바 스타일링 */
+    scrollbar-width: thin;
+    scrollbar-color: #3498db #f1f1f1;
+}
+
+/* 웹킷 브라우저용 스크롤바 스타일 - description만 */
+.modal-description::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-description::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.modal-description::-webkit-scrollbar-thumb {
+    background: #3498db;
+    border-radius: 4px;
+}
+
+.modal-description::-webkit-scrollbar-thumb:hover {
+    background: #2980b9;
 }
 
 /* 푸터 */
@@ -1088,5 +1123,11 @@ section {
         width: 95%;
         margin: 10% auto;
         padding: 20px;
+        max-height: 85vh;
+    }
+    
+    .modal-description {
+        padding: 8px 0;
+        max-height: 250px;
     }
 }

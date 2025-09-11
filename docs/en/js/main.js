@@ -210,12 +210,13 @@ function updatePageTexts() {
 }
 
 // 모달 열기 함수 (전역으로 이동)
-function openModal(program, categoryInfo = null) {
+function openModal(program, passedCategoryInfo = null) {
     const modal = document.getElementById('modal');
     const modalBody = document.querySelector('.modal-body');
     
     if (modal && modalBody) {
         // 분류 색상 정보 가져오기
+        let categoryInfo = passedCategoryInfo;
         if (!categoryInfo && programData && programData.categories) {
             categoryInfo = getCategoryInfo(program.category, programData.categories);
         }
@@ -232,15 +233,37 @@ function openModal(program, categoryInfo = null) {
         const locationLabel = currentLanguage === 'en' ? 'Location' : '장소';
         const speakerLabel = currentLanguage === 'en' ? 'Speaker' : '발표자';
         
+        // 'all' 장소인 경우 장소, 발표자, 카테고리 정보를 숨김
+        const locationInfo = program.location === 'all' ? '' : `<div class="modal-location">${program.location}</div>`;
+        
+        // 스피커 정보 생성 (프로필 이미지 포함)
+        let speakerInfo = '';
+        if (program.location !== 'all') {
+            const profileImage = program.profile_file ? 
+                `<img src="assets/images/speakers/${program.profile_file}" alt="${program.speaker}" class="modal-speaker-profile" onerror="this.style.display='none'">` : 
+                '';
+            speakerInfo = `
+                <div class="modal-speaker">
+                    ${profileImage}
+                    <div class="modal-speaker-info">
+                        <div class="speaker-name">${program.speaker}</div>
+                        <div class="speaker-affiliation">${program.affiliation}</div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        const categoryInfoHtml = program.location === 'all' ? '' : `<div class="modal-category" style="
+            --category-color: ${finalCategoryInfo.color};
+            --category-color-hover: ${finalCategoryInfo.color.replace('#', '#')};
+        ">${program.category}</div>`;
+        
         modalBody.innerHTML = `
             <h2>${program.title}</h2>
             <div class="modal-time">${program.time}</div>
-            <div class="modal-location">${locationLabel}: ${program.location}</div>
-            <div class="modal-speaker">${speakerLabel}: ${program.speaker} (${program.affiliation})</div>
-            <div class="modal-category" style="
-                --category-color: ${finalCategoryInfo.color};
-                --category-color-hover: ${finalCategoryInfo.color.replace('#', '#')};
-            ">${program.category}</div>
+            ${locationInfo}
+            ${speakerInfo}
+            ${categoryInfoHtml}
             <div class="modal-description">${program.content}</div>
         `;
         
@@ -402,6 +425,9 @@ function createProgramTable(programs, locations, categories) {
     const table = document.createElement('table');
     table.className = 'program-table';
     
+    // 'all' 장소를 제외한 일반 장소들만 필터링
+    const regularLocations = locations.filter(location => location !== 'all');
+    
     // 테이블 헤더 생성
     const thead = document.createElement('thead');
     const headerRow = document.createElement('tr');
@@ -412,8 +438,8 @@ function createProgramTable(programs, locations, categories) {
     timeHeader.className = 'time-column';
     headerRow.appendChild(timeHeader);
     
-    // 장소별 열 생성
-    locations.forEach(location => {
+    // 일반 장소별 열 생성
+    regularLocations.forEach(location => {
         const locationHeader = document.createElement('th');
         locationHeader.textContent = location;
         locationHeader.className = 'location-column';
@@ -430,53 +456,93 @@ function createProgramTable(programs, locations, categories) {
     const tbody = document.createElement('tbody');
     
     timeSlots.forEach(timeSlot => {
-        const row = document.createElement('tr');
-        row.className = 'time-row';
+        // 'all' 장소 프로그램이 있는지 확인
+        const allProgram = timeSlot.programs.find(p => p.location === 'all');
         
-        // 시간 셀
-        const timeCell = document.createElement('td');
-        timeCell.textContent = timeSlot.time;
-        timeCell.className = 'time-cell';
-        row.appendChild(timeCell);
-        
-        // 각 장소별 셀 생성
-        locations.forEach(location => {
-            const cell = document.createElement('td');
-            cell.className = 'program-cell';
+        if (allProgram) {
+            // 'all' 프로그램이 있는 경우 전체 너비 행 생성
+            const allRow = document.createElement('tr');
+            allRow.className = 'time-row all-row';
             
-            // 해당 시간대와 장소의 프로그램 찾기
-            const program = timeSlot.programs.find(p => p.location === location);
+            // 시간 셀
+            const timeCell = document.createElement('td');
+            timeCell.textContent = timeSlot.time;
+            timeCell.className = 'time-cell';
+            allRow.appendChild(timeCell);
             
-            if (program) {
-                const programDiv = document.createElement('div');
-                programDiv.className = 'program-item-table';
-                
-                // 분류 색상 정보 가져오기
-                const categoryInfo = getCategoryInfo(program.category, categories);
-                
-                programDiv.innerHTML = `
-                    <div class="program-title-table">${program.title}</div>
-                    <div class="program-speaker-table">${program.speaker}</div>
-                    <div class="program-category-table" style="
-                        --category-color: ${categoryInfo.color};
-                        --category-bg-color: ${categoryInfo.backgroundColor};
-                        --category-border-color: ${categoryInfo.borderColor};
-                        --category-bg-color-hover: ${categoryInfo.backgroundColor.replace('0.1', '0.2')};
-                    ">${program.category}</div>
-                `;
-                
-                // 클릭 이벤트 추가
-                programDiv.addEventListener('click', function() {
-                    openModal(program, categoryInfo);
-                });
-                
-                cell.appendChild(programDiv);
-            }
+            // 전체 너비 셀 생성
+            const allCell = document.createElement('td');
+            allCell.className = 'program-cell all-cell';
+            allCell.colSpan = regularLocations.length;
             
-            row.appendChild(cell);
-        });
-        
-        tbody.appendChild(row);
+            const programDiv = document.createElement('div');
+            programDiv.className = 'program-item-table all-program';
+            
+            // 분류 색상 정보 가져오기
+            const categoryInfo = getCategoryInfo(allProgram.category, categories);
+            
+            programDiv.innerHTML = `
+                <div class="program-title-table">${allProgram.title}</div>
+            `;
+            
+            // 클릭 이벤트 추가
+            programDiv.addEventListener('click', function() {
+                openModal(allProgram, categoryInfo);
+            });
+            
+            allCell.appendChild(programDiv);
+            allRow.appendChild(allCell);
+            tbody.appendChild(allRow);
+        } else {
+            // 일반 행 생성
+            const row = document.createElement('tr');
+            row.className = 'time-row';
+            
+            // 시간 셀
+            const timeCell = document.createElement('td');
+            timeCell.textContent = timeSlot.time;
+            timeCell.className = 'time-cell';
+            row.appendChild(timeCell);
+            
+            // 각 장소별 셀 생성
+            regularLocations.forEach(location => {
+                const cell = document.createElement('td');
+                cell.className = 'program-cell';
+                
+                // 해당 시간대와 장소의 프로그램 찾기
+                const program = timeSlot.programs.find(p => p.location === location);
+                
+                if (program) {
+                    const programDiv = document.createElement('div');
+                    programDiv.className = 'program-item-table';
+                    
+                    // 분류 색상 정보 가져오기
+                    const categoryInfo = getCategoryInfo(program.category, categories);
+                    
+                    programDiv.innerHTML = `
+                        <div class="program-title-table">${program.title}</div>
+                        <div class="program-speaker-table">${program.speaker}</div>
+                        <div class="program-category-table" style="
+                            --category-color: ${categoryInfo.color};
+                            --category-bg-color: ${categoryInfo.backgroundColor};
+                            --category-border-color: ${categoryInfo.borderColor};
+                            --category-bg-color-hover: ${categoryInfo.backgroundColor.replace('0.1', '0.2')};
+                        ">${program.category}</div>
+                    `;
+                    
+                    // 클릭 이벤트 추가
+                    programDiv.addEventListener('click', function() {
+                        openModal(program, categoryInfo);
+                    });
+                    
+                    cell.appendChild(programDiv);
+                }
+                
+                row.appendChild(cell);
+            });
+            
+            tbody.appendChild(row);
+        }
     });
     
     table.appendChild(tbody);

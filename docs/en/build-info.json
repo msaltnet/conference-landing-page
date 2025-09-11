@@ -1,5 +1,5 @@
 {
-  "buildTime": "2025-09-10T10:43:42.467Z",
+  "buildTime": "2025-09-11T05:02:59.017Z",
   "version": "1.0.0",
   "environment": "development",
   "eventData": {
@@ -38,13 +38,14 @@
     }
   },
   "programData": {
-    "totalPrograms": 21,
+    "totalPrograms": 22,
     "locations": [
       "Room 201",
       "Room 202",
       "Room 203",
       "Room 205",
-      "Lobby"
+      "Lobby",
+      "all"
     ],
     "categories": [
       {

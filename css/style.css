@@ -805,8 +805,8 @@ section {
     margin: 5% auto;
     padding: 30px;
     border-radius: 15px;
-    width: 80%;
-    max-width: 600px;
+    width: 96%;
+    max-width: 720px;
     max-height: 80vh;
     position: relative;
     animation: slideIn 0.3s ease;
@@ -876,6 +876,32 @@ section {
     font-size: 1rem;
     margin-bottom: 10px;
     font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.modal-speaker-profile {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.modal-speaker-info {
+    flex: 1;
+}
+
+.speaker-name {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+}
+
+.speaker-affiliation {
+    color: #7f8c8d;
+    font-size: 0.9rem;
 }
 
 .modal-category {
@@ -1198,5 +1224,14 @@ section {
     .modal-description {
         padding: 8px 0;
         max-height: 250px;
+    }
+    
+    .modal-speaker-profile {
+        width: 75px;
+        height: 75px;
+    }
+    
+    .modal-speaker {
+        gap: 10px;
     }
 }

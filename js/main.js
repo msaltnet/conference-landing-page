@@ -234,8 +234,25 @@ function openModal(program, passedCategoryInfo = null) {
         const speakerLabel = currentLanguage === 'en' ? 'Speaker' : '발표자';
         
         // 'all' 장소인 경우 장소, 발표자, 카테고리 정보를 숨김
-        const locationInfo = program.location === 'all' ? '' : `<div class="modal-location">${locationLabel}: ${program.location}</div>`;
-        const speakerInfo = program.location === 'all' ? '' : `<div class="modal-speaker">${speakerLabel}: ${program.speaker} (${program.affiliation})</div>`;
+        const locationInfo = program.location === 'all' ? '' : `<div class="modal-location">${program.location}</div>`;
+        
+        // 스피커 정보 생성 (프로필 이미지 포함)
+        let speakerInfo = '';
+        if (program.location !== 'all') {
+            const profileImage = program.profile_file ? 
+                `<img src="assets/images/speakers/${program.profile_file}" alt="${program.speaker}" class="modal-speaker-profile" onerror="this.style.display='none'">` : 
+                '';
+            speakerInfo = `
+                <div class="modal-speaker">
+                    ${profileImage}
+                    <div class="modal-speaker-info">
+                        <div class="speaker-name">${program.speaker}</div>
+                        <div class="speaker-affiliation">${program.affiliation}</div>
+                    </div>
+                </div>
+            `;
+        }
+        
         const categoryInfoHtml = program.location === 'all' ? '' : `<div class="modal-category" style="
             --category-color: ${finalCategoryInfo.color};
             --category-color-hover: ${finalCategoryInfo.color.replace('#', '#')};

@@ -20,7 +20,8 @@
       "content": "We discuss the development direction of future technologies such as AI, blockchain, and IoT, and our preparation for them. We explore technology trends and business opportunities together.",
       "speaker": "Kim Tech",
       "affiliation": "Tech Leaders",
-      "category": "Keynote"
+      "category": "Keynote",
+      "profile_file": "kim-tech.svg"
     },
     {
       "id": 3,
@@ -31,7 +32,8 @@
       "content": "We explore the latest AI technologies and real-world applications of machine learning. We cover various AI technologies including deep learning, natural language processing, and computer vision.",
       "speaker": "Lee AI",
       "affiliation": "AI Research Lab",
-      "category": "Tech Session"
+      "category": "Tech Session",
+      "profile_file": "lee-ai.svg"
     },
     {
       "id": 4,
@@ -42,7 +44,8 @@
       "content": "We cover the present and future of cloud technology and enterprise cloud migration strategies. We compare major cloud platforms including AWS, Azure, and GCP.",
       "speaker": "Park Cloud",
       "affiliation": "Cloud Solutions",
-      "category": "Tech Session"
+      "category": "Tech Session",
+      "profile_file": "park-cloud.svg"
     },
     {
       "id": 10,
@@ -53,7 +56,8 @@
       "content": "We learn about the latest trends in iOS and Android app development and cross-platform development tools. We cover various technologies including React Native and Flutter.",
       "speaker": "Kim Mobile",
       "affiliation": "Mobile Team",
-      "category": "Tech Session"
+      "category": "Tech Session",
+      "profile_file": "kim-mobile.svg"
     },
     {
       "id": 5,
@@ -75,7 +79,8 @@
       "content": "We learn about the latest web development technologies and frameworks. We cover frontend technologies like React, Vue, Angular and backend technologies like Node.js and Python.",
       "speaker": "Choi Web",
       "affiliation": "Web Tech",
-      "category": "Tech Session"
+      "category": "Tech Session",
+      "profile_file": "choi-web.svg"
     },
     {
       "id": 14,
@@ -86,7 +91,8 @@
       "content": "We explore the principles of blockchain technology and real-world applications. We cover the latest blockchain trends including smart contracts, DeFi, and NFTs.",
       "speaker": "Park Blockchain",
       "affiliation": "Blockchain Lab",
-      "category": "Tech Session"
+      "category": "Tech Session",
+      "profile_file": "park-blockchain.svg"
     },
     {
       "id": 15,
@@ -97,7 +103,8 @@
       "content": "We learn about IoT technology and smart city construction. We cover sensor networks, data collection, and real-time monitoring systems.",
       "speaker": "Lee IoT",
       "affiliation": "IoT Research Lab",
-      "category": "Tech Session"
+      "category": "Tech Session",
+      "profile_file": "lee-iot.svg"
     },
     {
       "id": 16,
@@ -108,7 +115,8 @@
       "content": "We learn about design methodologies centered on user experience and the latest design tools. We cover tool usage including Figma, Sketch, and Adobe XD.",
       "speaker": "Kim Design",
       "affiliation": "Design Team",
-      "category": "Tech Session"
+      "category": "Tech Session",
+      "profile_file": "kim-design.svg"
     },
     {
       "id": 7,
@@ -119,7 +127,8 @@
       "content": "We share real-world applications of big data analysis and data science. We learn about data analysis tools and machine learning model building methods.",
       "speaker": "Jung Data",
       "affiliation": "Data Lab",
-      "category": "Tech Session"
+      "category": "Tech Session",
+      "profile_file": "jung-data.svg"
     },
     {
       "id": 20,
@@ -130,7 +139,8 @@
       "content": "We explore the concept of edge computing and real-world applications. We cover efficient data processing methods between IoT devices and the cloud.",
       "speaker": "Park Edge",
       "affiliation": "Edge Team",
-      "category": "Tech Session"
+      "category": "Tech Session",
+      "profile_file": "park-edge.svg"
     },
     {
       "id": 21,
@@ -141,7 +151,8 @@
       "content": "We learn about the pros and cons of serverless computing and actual implementation methods. We cover serverless platforms like AWS Lambda and Azure Functions.",
       "speaker": "Lee Serverless",
       "affiliation": "Serverless Team",
-      "category": "Tech Session"
+      "category": "Tech Session",
+      "profile_file": "lee-serverless.svg"
     },
     {
       "id": 22,
@@ -152,7 +163,8 @@
       "content": "We learn about machine learning model deployment and operations. We cover MLOps pipeline construction and model monitoring methods.",
       "speaker": "Kim MLOps",
       "affiliation": "ML Team",
-      "category": "Tech Session"
+      "category": "Tech Session",
+      "profile_file": "kim-mlops.svg"
     },
     {
       "id": 23,
@@ -163,7 +175,8 @@
       "content": "We explore the characteristics and applications of graph databases. We cover relational data processing methods using Neo4j, Amazon Neptune, etc.",
       "speaker": "Jung Graph",
       "affiliation": "Graph Team",
-      "category": "Tech Session"
+      "category": "Tech Session",
+      "profile_file": "jung-graph.svg"
     },
     {
       "id": 8,

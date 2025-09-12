@@ -4,7 +4,7 @@
   "description": "컨퍼런스 랜딩 페이지",
   "main": "index.html",
   "scripts": {
-    "dev": "npm run build && live-server --port=3000 --open=/dist/index.html",
+    "dev": "cross-env BASE_URL=http://127.0.0.1:3000/dist npm run build && live-server --port=3000 --open=/dist/index.html",
     "dev:watch": "npm run build && live-server --port=3000 --open=/dist/index.html --watch=dist,data",
     "build": "node build.js",
     "build:prod": "cross-env NODE_ENV=production node build.js",

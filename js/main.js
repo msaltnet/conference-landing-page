@@ -8,7 +8,7 @@ let currentLanguage = 'ko'; // 기본 언어는 한국어
 
 // DOM이 로드된 후 실행
 document.addEventListener('DOMContentLoaded', function() {
-    
+    console.log("HIT=====================================");
     // 언어 감지 및 초기화
     initializeLanguage();
     
@@ -72,7 +72,7 @@ function initializeLanguage() {
         currentLanguage = 'ko';
     }
     
-    console.log('언어 초기화:', { path, hash, currentLanguage });
+    console.log('언어 초기화aaa:', { path, hash, currentLanguage });
     
     // HTML lang 속성 업데이트
     document.documentElement.lang = currentLanguage;
@@ -175,6 +175,8 @@ function updateLanguageButtons() {
 
 // 페이지 텍스트 업데이트
 function updatePageTexts() {
+    console.log("HIT=====================================");
+
     const elements = document.querySelectorAll('[data-ko][data-en]');
     
     elements.forEach(element => {
@@ -257,13 +259,19 @@ function openModal(program, passedCategoryInfo = null) {
             --category-color: ${finalCategoryInfo.color};
             --category-color-hover: ${finalCategoryInfo.color.replace('#', '#')};
         ">${program.category}</div>`;
-        
+        console.log("HIT=====================================");
         modalBody.innerHTML = `
             <h2>${program.title}</h2>
-            <div class="modal-time">${program.time}</div>
-            ${locationInfo}
+            <div class="modal-info-row">
+                <div class="modal-info-left">
+                    ${categoryInfoHtml}
+                </div>
+                <div class="modal-info-right">
+                    <div class="modal-time">${program.time}</div>
+                    ${locationInfo}
+                </div>
+            </div>
             ${speakerInfo}
-            ${categoryInfoHtml}
             <div class="modal-description">${program.content}</div>
         `;
         

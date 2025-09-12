@@ -849,6 +849,24 @@ section {
     white-space: pre-line;
 }
 
+.modal-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    gap: 15px;
+}
+
+.modal-info-left {
+    flex: 1;
+}
+
+.modal-info-right {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
 .modal-time {
     background-color: #383838;
     color: white;
@@ -857,7 +875,7 @@ section {
     display: inline-block;
     font-size: 0.9rem;
     font-weight: 600;
-    margin-bottom: 15px;
+    margin: 0;
 }
 
 .modal-location {
@@ -868,7 +886,7 @@ section {
     display: inline-block;
     font-size: 0.9rem;
     font-weight: 600;
-    margin-bottom: 15px;
+    margin: 0;
 }
 
 .modal-speaker {
@@ -907,12 +925,12 @@ section {
 .modal-category {
     background-color: var(--category-color, #3498db);
     color: white;
-    padding: 4px 10px;
-    border-radius: 12px;
+    padding: 8px 15px;
+    border-radius: 20px;
     display: inline-block;
-    font-size: 0.8rem;
-    font-weight: 500;
-    margin-bottom: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 0;
     transition: all 0.3s ease;
 }
 

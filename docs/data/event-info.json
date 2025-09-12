@@ -1,17 +1,14 @@
 {
   "eventName": "Conference 2025",
-  "eventSubtitle": "미래를 위한 기술과 혁신의 만남",
   "eventDate": "2025-12-15",
   "eventTime": "10:00",
   "eventEndTime": "17:00",
-  "eventLocation": "서울 코엑스 컨벤션센터",
-  "eventDescription": "Conference 2024는 업계 최고의 전문가들과 함께하는 기술 컨퍼런스입니다. 최신 기술 트렌드와 혁신적인 아이디어를 공유하고, 네트워킹의 기회를 제공합니다.",
-  "registrationUrl": "https://example.com/register",
-  "registrationButtonImage": "assets/images/register-button.svg",
-  "registrationButtonAlt": "지금 등록하기",
   "countdownTarget": "2025-12-15T09:00:00+09:00",
-  "heroBackgroundImage": "assets/images/hero-bg.svg",
   "sectionImages": {
+    "hero": [
+      "assets/images/sections/hero-1.svg",
+      "assets/images/sections/hero-2.svg"
+    ],
     "about": [
       "assets/images/sections/about-1.svg",
       "assets/images/sections/about-2.svg"

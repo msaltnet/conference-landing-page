@@ -8,7 +8,6 @@ let currentLanguage = 'ko'; // 기본 언어는 한국어
 
 // DOM이 로드된 후 실행
 document.addEventListener('DOMContentLoaded', function() {
-    console.log("HIT=====================================");
     // 언어 감지 및 초기화
     initializeLanguage();
     
@@ -175,8 +174,6 @@ function updateLanguageButtons() {
 
 // 페이지 텍스트 업데이트
 function updatePageTexts() {
-    console.log("HIT=====================================");
-
     const elements = document.querySelectorAll('[data-ko][data-en]');
     
     elements.forEach(element => {
@@ -259,7 +256,6 @@ function openModal(program, passedCategoryInfo = null) {
             --category-color: ${finalCategoryInfo.color};
             --category-color-hover: ${finalCategoryInfo.color.replace('#', '#')};
         ">${program.category}</div>`;
-        console.log("HIT=====================================");
         modalBody.innerHTML = `
             <h2>${program.title}</h2>
             <div class="modal-info-row">
@@ -632,13 +628,9 @@ async function loadEventInfo() {
         // 기본값으로 설정
         eventInfo = {
             eventName: "Conference 2024",
-            eventSubtitle: "미래를 위한 기술과 혁신의 만남",
             eventDate: "2024-12-15",
             eventTime: "09:00",
             eventEndTime: "18:00",
-            registrationUrl: "#",
-            registrationButtonImage: "assets/images/register-button.svg",
-            registrationButtonAlt: "지금 등록하기",
             countdownTarget: "2024-12-15T09:00:00+09:00"
         };
         updatePageInfo();
@@ -656,9 +648,6 @@ function updatePageInfo() {
     if (heroTitle) heroTitle.textContent = eventInfo.eventName;
     if (navLogo) navLogo.textContent = eventInfo.eventName;
     
-    // 부제목 업데이트
-    const heroSubtitle = document.querySelector('.hero-subtitle');
-    if (heroSubtitle) heroSubtitle.textContent = eventInfo.eventSubtitle;
     
     // 날짜 업데이트
     if (eventInfo.eventDate) {
@@ -689,31 +678,6 @@ function updatePageInfo() {
         }
     }
     
-    // 등록 버튼 업데이트
-    const registrationButton = document.querySelector('#registration-button');
-    const registrationImage = document.querySelector('#registration-image');
-    
-    if (registrationButton && eventInfo.registrationUrl) {
-        registrationButton.href = eventInfo.registrationUrl;
-    }
-    
-    if (registrationImage && eventInfo.registrationButtonImage) {
-        // GitHub Pages 환경을 고려한 이미지 경로 설정
-        const isEnPath = window.location.pathname.includes('/en/');
-        let imagePath = eventInfo.registrationButtonImage;
-        
-        if (isEnPath) {
-            imagePath = '../' + eventInfo.registrationButtonImage;
-        }
-        
-        // 빌드 타임에 경로가 이미 처리되므로 상대 경로만 사용
-        
-        registrationImage.src = imagePath;
-    }
-    
-    if (registrationImage && eventInfo.registrationButtonAlt) {
-        registrationImage.alt = eventInfo.registrationButtonAlt;
-    }
     
 }
 

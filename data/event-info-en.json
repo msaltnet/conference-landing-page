@@ -1,17 +1,14 @@
 {
   "eventName": "Conference 2025",
-  "eventSubtitle": "Technology and Innovation for the Future",
   "eventDate": "2025-12-15",
   "eventTime": "10:00",
   "eventEndTime": "17:00",
-  "eventLocation": "COEX Convention Center, Seoul",
-  "eventDescription": "Conference 2025 is a technology conference featuring industry-leading experts. We share the latest technology trends and innovative ideas while providing networking opportunities.",
-  "registrationUrl": "https://example.com/register",
-  "registrationButtonImage": "assets/images/register-button.svg",
-  "registrationButtonAlt": "Register Now",
   "countdownTarget": "2025-12-15T09:00:00+09:00",
-  "heroBackgroundImage": "assets/images/hero-bg.svg",
   "sectionImages": {
+    "hero": [
+      "assets/images/sections-en/hero-1-en.svg",
+      "assets/images/sections-en/hero-2-en.svg"
+    ],
     "about": [
       "assets/images/sections-en/about-1-en.svg",
       "assets/images/sections-en/about-2-en.svg"

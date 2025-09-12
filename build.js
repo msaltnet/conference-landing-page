@@ -124,40 +124,21 @@ async function build() {
         `src="${config.baseUrl}/assets/images/register-button.svg"`
       );
       
-      // 히어로 배경 이미지 처리
-      if (eventData.heroBackgroundImage) {
-        // 히어로 섹션에 배경 이미지 스타일 추가
-        const heroStyle = `
-    <style>
-      .hero {
-        background-image: url('${eventData.heroBackgroundImage}');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        position: relative;
-      }
-      .hero::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%);
-        z-index: 1;
-      }
-      .hero .hero-container {
-        position: relative;
-        z-index: 2;
-      }
-    </style>`;
-        
-        // head 태그 안에 스타일 삽입
-        htmlContent = htmlContent.replace('</head>', `${heroStyle}\n</head>`);
-      }
       
       // 섹션 이미지들 삽입
       if (eventData.sectionImages) {
+        // 히어로 섹션 이미지 삽입
+        if (eventData.sectionImages.hero && eventData.sectionImages.hero.length > 0) {
+          const heroImagesHtml = eventData.sectionImages.hero.map(img => 
+            `<img src="${img}" alt="히어로 섹션 이미지" class="section-image">`
+          ).join('\n');
+          
+          htmlContent = htmlContent.replace(
+            `    <!-- 히어로 섹션 이미지들 -->${os.EOL}    <div class="section-images-container">${os.EOL}        <!-- 히어로 섹션 이미지들이 여기에 동적으로 추가됩니다 -->${os.EOL}    </div>`,
+            `    <!-- 히어로 섹션 이미지들 -->${os.EOL}    <div class="section-images-container">${os.EOL}${heroImagesHtml}${os.EOL}    </div>`
+          );
+        }
+        
         // 행사 소개 섹션 이미지 삽입
         if (eventData.sectionImages.about && eventData.sectionImages.about.length > 0) {
           const aboutImagesHtml = eventData.sectionImages.about.map(img => 
@@ -280,40 +261,21 @@ async function build() {
           `src="${config.baseUrl}/assets/images/register-button.svg"`
         );
         
-        // 히어로 배경 이미지 처리
-        if (enEventData.heroBackgroundImage) {
-          // 히어로 섹션에 배경 이미지 스타일 추가
-          const heroStyle = `
-    <style>
-      .hero {
-        background-image: url('${enEventData.heroBackgroundImage}');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        position: relative;
-      }
-      .hero::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%);
-        z-index: 1;
-      }
-      .hero .hero-container {
-        position: relative;
-        z-index: 2;
-      }
-    </style>`;
-          
-          // head 태그 안에 스타일 삽입
-          enHtmlContent = enHtmlContent.replace('</head>', `${heroStyle}\n</head>`);
-        }
         
         // 섹션 이미지들 삽입
         if (enEventData.sectionImages) {
+          // 히어로 섹션 이미지 삽입
+          if (enEventData.sectionImages.hero && enEventData.sectionImages.hero.length > 0) {
+            const heroImagesHtml = enEventData.sectionImages.hero.map(img => 
+              `<img src="../${img}" alt="Hero section image" class="section-image">`
+            ).join('\n');
+            
+            enHtmlContent = enHtmlContent.replace(
+              `    <!-- 히어로 섹션 이미지들 -->${os.EOL}    <div class="section-images-container">${os.EOL}        <!-- 히어로 섹션 이미지들이 여기에 동적으로 추가됩니다 -->${os.EOL}    </div>`,
+              `    <!-- 히어로 섹션 이미지들 -->${os.EOL}    <div class="section-images-container">${os.EOL}${heroImagesHtml}${os.EOL}    </div>`
+            );
+          }
+          
           // 행사 소개 섹션 이미지 삽입
           if (enEventData.sectionImages.about && enEventData.sectionImages.about.length > 0) {
             const aboutImagesHtml = enEventData.sectionImages.about.map(img => 

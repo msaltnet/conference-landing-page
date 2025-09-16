@@ -1,0 +1,6 @@
+<svg width="500" height="30" xmlns="http://www.w3.org/2000/svg">
+  <rect width="500" height="30" fill="#e8f5e8" stroke="#c8e6c9" stroke-width="1"/>
+  <text x="10" y="20" font-family="Arial, sans-serif" font-size="12" fill="#2e7d32">
+    이서버리스 | 서버리스 아키텍트 | AWS Lambda/Azure Functions 전문가 | 마이크로서비스 설계 50+ 프로젝트
+  </text>
+</svg>

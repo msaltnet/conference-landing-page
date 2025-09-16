@@ -241,12 +241,16 @@ function openModal(program, passedCategoryInfo = null) {
             const profileImage = program.profile_file ? 
                 `<img src="assets/images/speakers/${program.profile_file}" alt="${program.speaker}" class="modal-speaker-profile" onerror="this.style.display='none'">` : 
                 '';
+            const bioImage = program.bio ? 
+                `<img src="assets/images/speakers/${program.bio}" alt="${program.speaker} bio" class="modal-speaker-bio" onerror="this.style.display='none'">` : 
+                '';
             speakerInfo = `
                 <div class="modal-speaker">
                     ${profileImage}
                     <div class="modal-speaker-info">
                         <div class="speaker-name">${program.speaker}</div>
                         <div class="speaker-affiliation">${program.affiliation}</div>
+                        ${bioImage}
                     </div>
                 </div>
             `;

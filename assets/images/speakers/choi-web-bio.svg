@@ -1,0 +1,6 @@
+<svg width="500" height="30" xmlns="http://www.w3.org/2000/svg">
+  <rect width="500" height="30" fill="#fff3e0" stroke="#ffcc02" stroke-width="1"/>
+  <text x="10" y="20" font-family="Arial, sans-serif" font-size="12" fill="#f57c00">
+    최웹개발 | 웹 개발 전문가 | React/Vue/Angular | Node.js/Python 백엔드 | 오픈소스 기여자
+  </text>
+</svg>

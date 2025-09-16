@@ -1,0 +1,6 @@
+<svg width="500" height="30" xmlns="http://www.w3.org/2000/svg">
+  <rect width="500" height="30" fill="#e0f2f1" stroke="#b2dfdb" stroke-width="1"/>
+  <text x="10" y="20" font-family="Arial, sans-serif" font-size="12" fill="#00695c">
+    이아이오티 | IoT 연구소 수석 | 센서 네트워크/스마트시티 전문가 | IoT 디바이스 1000+ 대 관리
+  </text>
+</svg>

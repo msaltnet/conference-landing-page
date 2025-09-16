@@ -1,0 +1,6 @@
+<svg width="500" height="30" xmlns="http://www.w3.org/2000/svg">
+  <rect width="500" height="30" fill="#f3e5f5" stroke="#e1bee7" stroke-width="1"/>
+  <text x="10" y="20" font-family="Arial, sans-serif" font-size="12" fill="#6a1b9a">
+    박엣지 | 엣지 컴퓨팅 전문가 | IoT/클라우드 엣지 아키텍처 | 실시간 데이터 처리 시스템 구축
+  </text>
+</svg>

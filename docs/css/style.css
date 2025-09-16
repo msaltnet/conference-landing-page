@@ -861,6 +861,13 @@ section {
     font-size: 0.9rem;
 }
 
+.modal-speaker-bio {
+    height: 30px;
+    width: auto;
+    margin-top: 8px;
+    object-fit: contain;
+}
+
 .modal-category {
     background-color: var(--category-color, #3498db);
     color: white;

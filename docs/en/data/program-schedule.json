@@ -21,7 +21,8 @@
       "speaker": "김기술",
       "affiliation": "테크리더스",
       "category": "키노트",
-      "profile_file": "kim-tech.svg"
+      "profile_file": "kim-tech.svg",
+      "bio": "kim-tech-bio.svg"
     },
     {
       "id": 3,
@@ -33,7 +34,8 @@
       "speaker": "이인공지능",
       "affiliation": "AI연구소",
       "category": "기술세션",
-      "profile_file": "lee-ai.svg"
+      "profile_file": "lee-ai.svg",
+      "bio": "lee-ai-bio.svg"
     },
     {
       "id": 4,
@@ -45,7 +47,8 @@
       "speaker": "박클라우드",
       "affiliation": "클라우드솔루션",
       "category": "기술세션",
-      "profile_file": "park-cloud.svg"
+      "profile_file": "park-cloud.svg",
+      "bio": "park-cloud-bio.svg"
     },
     {
       "id": 10,
@@ -57,7 +60,8 @@
       "speaker": "김모바일",
       "affiliation": "모바일팀",
       "category": "기술세션",
-      "profile_file": "kim-mobile.svg"
+      "profile_file": "kim-mobile.svg",
+      "bio": "kim-mobile-bio.svg"
     },
     {
       "id": 5,
@@ -80,7 +84,8 @@
       "speaker": "최웹개발",
       "affiliation": "웹테크",
       "category": "기술세션",
-      "profile_file": "choi-web.svg"
+      "profile_file": "choi-web.svg",
+      "bio": "choi-web-bio.svg"
     },
     {
       "id": 14,
@@ -92,7 +97,8 @@
       "speaker": "박블록체인",
       "affiliation": "블록체인랩",
       "category": "기술세션",
-      "profile_file": "park-blockchain.svg"
+      "profile_file": "park-blockchain.svg",
+      "bio": "park-blockchain-bio.svg"
     },
     {
       "id": 15,
@@ -104,7 +110,8 @@
       "speaker": "이아이오티",
       "affiliation": "IoT연구소",
       "category": "기술세션",
-      "profile_file": "lee-iot.svg"
+      "profile_file": "lee-iot.svg",
+      "bio": "lee-iot-bio.svg"
     },
     {
       "id": 16,
@@ -116,7 +123,8 @@
       "speaker": "김디자인",
       "affiliation": "디자인팀",
       "category": "기술세션",
-      "profile_file": "speaker1.png"
+      "profile_file": "speaker1.png",
+      "bio": "kim-design-bio.svg"
     },
     {
       "id": 7,
@@ -128,7 +136,8 @@
       "speaker": "정데이터",
       "affiliation": "데이터랩",
       "category": "기술세션",
-      "profile_file": "jung-data.svg"
+      "profile_file": "jung-data.svg",
+      "bio": "jung-data-bio.svg"
     },
     {
       "id": 20,
@@ -140,7 +149,8 @@
       "speaker": "박엣지",
       "affiliation": "엣지팀",
       "category": "기술세션",
-      "profile_file": "park-edge.svg"
+      "profile_file": "park-edge.svg",
+      "bio": "park-edge-bio.svg"
     },
     {
       "id": 21,
@@ -152,7 +162,8 @@
       "speaker": "이서버리스",
       "affiliation": "서버리스팀",
       "category": "기술세션",
-      "profile_file": "lee-serverless.svg"
+      "profile_file": "lee-serverless.svg",
+      "bio": "lee-serverless-bio.svg"
     },
     {
       "id": 22,
@@ -164,7 +175,8 @@
       "speaker": "김MLOps",
       "affiliation": "ML팀",
       "category": "기술세션",
-      "profile_file": "kim-mlops.svg"
+      "profile_file": "kim-mlops.svg",
+      "bio": "kim-mlops-bio.svg"
     },
     {
       "id": 23,
@@ -176,7 +188,8 @@
       "speaker": "정그래프",
       "affiliation": "그래프팀",
       "category": "기술세션",
-      "profile_file": "jung-graph.svg"
+      "profile_file": "jung-graph.svg",
+      "bio": "jung-graph-bio.svg"
     },
     {
       "id": 8,

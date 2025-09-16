@@ -1,0 +1,6 @@
+<svg width="500" height="30" xmlns="http://www.w3.org/2000/svg">
+  <rect width="500" height="30" fill="#e8f5e8" stroke="#c8e6c9" stroke-width="1"/>
+  <text x="10" y="20" font-family="Arial, sans-serif" font-size="12" fill="#388e3c">
+    김모바일 | 모바일 개발팀 리드 | iOS/Android/React Native 전문가 | 앱스토어 1위 앱 개발
+  </text>
+</svg>

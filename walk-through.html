@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko" data-lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습 체험 - Conference Landing Page</title>
+    <meta name="description" content="다양한 기술 분야의 실습을 직접 체험해보세요">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- 언어 선택 바 -->
+    <nav class="language-nav">
+        <div class="language-nav-container">
+            <div class="language-nav-logo">
+                <a href="../index.html">
+                    <h2>Conference 2024</h2>
+                </a>
+            </div>
+            <div class="language-selector">
+                <button class="lang-btn active" data-lang="ko">한국어</button>
+                <button class="lang-btn" data-lang="en">English</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 실습 소개 섹션 -->
+    <section class="walkthrough-hero">
+        <div class="container">
+            <div class="walkthrough-header">
+                <h1 class="walkthrough-title" data-ko="실습 체험" data-en="Hands-on Labs">실습 체험</h1>
+                <p class="walkthrough-subtitle" data-ko="다양한 기술 분야의 실습을 직접 체험해보세요" data-en="Experience hands-on learning in various technology fields">다양한 기술 분야의 실습을 직접 체험해보세요</p>
+                <p class="walkthrough-description" data-ko="컨퍼런스에서 제공하는 다양한 실습 프로그램을 통해 실제 기술을 경험하고 학습할 수 있습니다." data-en="Experience and learn real technologies through various hands-on programs provided at the conference.">컨퍼런스에서 제공하는 다양한 실습 프로그램을 통해 실제 기술을 경험하고 학습할 수 있습니다.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 실습 카드 섹션 -->
+    <section class="walkthrough-cards">
+        <div class="container">
+            <div class="intro-content">
+                <h2 class="intro-title" data-ko="지금 기술을 직접 경험해보세요!" data-en="Experience Technology Hands-On Now!">Experience Technology Hands-On Now!</h2>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="walkthrough-grid">
+                <!-- 실습 카드들이 여기에 동적으로 추가됩니다 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 msalt.net. All rights reserved.</p>
+            <div class="build-info">
+                <span class="build-version" data-ko="버전: " data-en="Version: ">버전: <span id="build-version">-</span></span>
+                <span class="build-separator">|</span>
+                <span class="build-time" data-ko="빌드: " data-en="Build: ">빌드: <span id="build-time">-</span></span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/walkthrough.js"></script>
+</body>
+</html>

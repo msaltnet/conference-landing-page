@@ -185,10 +185,69 @@ async function build() {
         }
       }
       
-      // HTML 파일 저장
-      const distHtmlPath = path.join(config.distDir, 'index.html');
-      fs.writeFileSync(distHtmlPath, htmlContent);
-    }
+    // HTML 파일 저장
+    const distHtmlPath = path.join(config.distDir, 'index.html');
+    fs.writeFileSync(distHtmlPath, htmlContent);
+  }
+  
+  // walk-through 페이지 처리
+  const walkthroughPath = path.join(config.sourceDir, 'walk-through.html');
+  if (fs.existsSync(walkthroughPath)) {
+    let walkthroughContent = fs.readFileSync(walkthroughPath, 'utf8');
+    
+    // 경로 수정
+    walkthroughContent = walkthroughContent.replace(
+      'href="../css/style.css"',
+      `href="${config.baseUrl}/css/style.css"`
+    );
+    
+    walkthroughContent = walkthroughContent.replace(
+      'src="../js/main.js"',
+      `src="${config.baseUrl}/js/main.js"`
+    );
+    
+    walkthroughContent = walkthroughContent.replace(
+      'src="../js/walkthrough.js"',
+      `src="${config.baseUrl}/js/walkthrough.js"`
+    );
+    
+    // walk-through HTML 파일 저장
+    const distWalkthroughPath = path.join(config.distDir, 'walk-through.html');
+    fs.writeFileSync(distWalkthroughPath, walkthroughContent);
+  }
+  
+  // walk-through 디렉토리 생성 및 리다이렉션 파일 생성
+  const walkthroughDir = path.join(config.distDir, 'walk-through');
+  ensureDir(walkthroughDir);
+  
+  const redirectHtml = `<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <script>
+        // URL 경로에 따라 적절한 페이지로 리다이렉트
+        const path = window.location.pathname;
+        
+        if (path === '/walk-through' || path === '/walk-through/') {
+            window.location.href = '/walk-through.html';
+        } else if (path === '/en/walk-through' || path === '/en/walk-through/') {
+            window.location.href = '/en/walk-through.html';
+        } else if (path === '/' || path === '') {
+            window.location.href = '/index.html';
+        } else {
+            // 404 페이지로 리다이렉트
+            window.location.href = '/index.html';
+        }
+    </script>
+</head>
+<body>
+    <p>리다이렉트 중...</p>
+</body>
+</html>`;
+  
+  fs.writeFileSync(path.join(walkthroughDir, 'index.html'), redirectHtml);
     
     // 정적 파일들 복사
     copyDir(path.join(config.sourceDir, 'css'), path.join(config.distDir, 'css'));
@@ -216,6 +275,12 @@ async function build() {
     const validatorJsPath = path.join(jsSourceDir, 'validator.js');
     if (fs.existsSync(validatorJsPath)) {
       fs.copyFileSync(validatorJsPath, path.join(jsDistDir, 'validator.js'));
+    }
+    
+    // walkthrough.js 파일 복사
+    const walkthroughJsPath = path.join(jsSourceDir, 'walkthrough.js');
+    if (fs.existsSync(walkthroughJsPath)) {
+      fs.copyFileSync(walkthroughJsPath, path.join(jsDistDir, 'walkthrough.js'));
     }
     
     copyDir(path.join(config.sourceDir, 'assets'), path.join(config.distDir, 'assets'));
@@ -356,6 +421,70 @@ async function build() {
       if (fs.existsSync(enValidatorJsPath)) {
         fs.copyFileSync(enValidatorJsPath, path.join(enJsDistDir, 'validator.js'));
       }
+      
+      // walkthrough.js 파일 복사
+      const walkthroughJsPath = path.join(jsSourceDir, 'walkthrough.js');
+      if (fs.existsSync(walkthroughJsPath)) {
+        fs.copyFileSync(walkthroughJsPath, path.join(enJsDistDir, 'walkthrough.js'));
+      }
+      
+      // 영어 버전 walk-through 페이지 처리
+      const enWalkthroughPath = path.join(enSourceDir, 'walk-through.html');
+      if (fs.existsSync(enWalkthroughPath)) {
+        let enWalkthroughContent = fs.readFileSync(enWalkthroughPath, 'utf8');
+        
+        // 경로 수정
+        enWalkthroughContent = enWalkthroughContent.replace(
+          'href="../css/style.css"',
+          `href="${config.baseUrl}/css/style.css"`
+        );
+        
+        enWalkthroughContent = enWalkthroughContent.replace(
+          'src="../js/main.js"',
+          `src="${config.baseUrl}/js/main.js"`
+        );
+        
+        enWalkthroughContent = enWalkthroughContent.replace(
+          'src="js/walkthrough.js"',
+          `src="${config.baseUrl}/en/js/walkthrough.js"`
+        );
+        
+        // 영어 버전 walk-through HTML 파일 저장
+        fs.writeFileSync(path.join(enDistDir, 'walk-through.html'), enWalkthroughContent);
+      }
+      
+      // 영어 버전 walk-through 디렉토리 생성 및 리다이렉션 파일 생성
+      const enWalkthroughDir = path.join(enDistDir, 'walk-through');
+      ensureDir(enWalkthroughDir);
+      
+      const enRedirectHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <script>
+        // URL 경로에 따라 적절한 페이지로 리다이렉트
+        const path = window.location.pathname;
+        
+        if (path === '/en/walk-through' || path === '/en/walk-through/') {
+            window.location.href = '/en/walk-through.html';
+        } else if (path === '/walk-through' || path === '/walk-through/') {
+            window.location.href = '/walk-through.html';
+        } else if (path === '/' || path === '') {
+            window.location.href = '/index.html';
+        } else {
+            // 404 페이지로 리다이렉트
+            window.location.href = '/index.html';
+        }
+    </script>
+</head>
+<body>
+    <p>Redirecting...</p>
+</body>
+</html>`;
+      
+      fs.writeFileSync(path.join(enWalkthroughDir, 'index.html'), enRedirectHtml);
     }
     
     // 빌드 정보 생성

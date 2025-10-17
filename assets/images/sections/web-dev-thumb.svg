@@ -1,0 +1,18 @@
+<svg width="300" height="240" viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="webGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="300" height="240" fill="url(#webGradient)"/>
+  <g transform="translate(150, 120)">
+    <!-- 웹 개발 아이콘 -->
+    <rect x="-40" y="-25" width="80" height="50" fill="white" opacity="0.9" rx="5"/>
+    <rect x="-32" y="-17" width="64" height="34" fill="#667eea" opacity="0.8"/>
+    <circle cx="-16" cy="0" r="5" fill="white"/>
+    <circle cx="0" cy="0" r="5" fill="white"/>
+    <circle cx="16" cy="0" r="5" fill="white"/>
+    <text x="0" y="40" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="18" font-weight="bold">WEB DEVELOPMENT</text>
+  </g>
+</svg>

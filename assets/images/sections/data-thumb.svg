@@ -1,0 +1,18 @@
+<svg width="300" height="240" viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="dataGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00b894;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00a085;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="300" height="240" fill="url(#dataGradient)"/>
+  <g transform="translate(150, 120)">
+    <!-- 데이터 분석 아이콘 -->
+    <rect x="-32" y="-24" width="64" height="48" fill="white" opacity="0.9" rx="5"/>
+    <rect x="-24" y="-16" width="12" height="32" fill="#00b894"/>
+    <rect x="-8" y="-8" width="12" height="40" fill="#00b894"/>
+    <rect x="8" y="-19" width="12" height="51" fill="#00b894"/>
+    <line x1="-32" y1="24" x2="32" y2="24" stroke="white" stroke-width="3" opacity="0.7"/>
+    <text x="0" y="40" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="18" font-weight="bold">DATA ANALYSIS</text>
+  </g>
+</svg>

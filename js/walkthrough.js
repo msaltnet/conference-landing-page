@@ -18,16 +18,25 @@ async function loadWalkthroughData() {
     try {
         let fileName;
         const isEnPath = window.location.pathname.includes('/en/');
+        const isWalkThroughPath = window.location.pathname.includes('/walk-through');
         
         if (currentLanguage === 'en' || isEnPath) {
             // 영어 버전일 때는 -en.json 파일 사용
-            fileName = isEnPath ? '../data/walkthrough-info-en.json' : 'data/walkthrough-info-en.json';
+            if (isWalkThroughPath) {
+                fileName = '../data/walkthrough-info-en.json';
+            } else {
+                fileName = 'data/walkthrough-info-en.json';
+            }
         } else {
             // 한국어 버전일 때는 기본 파일 사용
-            fileName = 'data/walkthrough-info.json';
+            if (isWalkThroughPath) {
+                fileName = '../data/walkthrough-info.json';
+            } else {
+                fileName = 'data/walkthrough-info.json';
+            }
         }
         
-        console.log('실습 데이터 로드 시도:', fileName, '언어:', currentLanguage, 'isEnPath:', isEnPath);
+        console.log('실습 데이터 로드 시도:', fileName, '언어:', currentLanguage, 'isEnPath:', isEnPath, 'isWalkThroughPath:', isWalkThroughPath);
         const response = await fetch(fileName);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -75,8 +84,8 @@ function createWalkthroughCard(walkthrough) {
     const card = document.createElement('div');
     card.className = 'walkthrough-card';
     
-    // 썸네일 이미지 생성 (카테고리별로 다른 이미지)
-    const thumbnailImage = getThumbnailImage(walkthrough.category);
+    // JSON에 정의된 썸네일 이미지 사용
+    const thumbnailImage = `<img src="../${walkthrough.thumbnail}" alt="${walkthrough.title}" style="width: 100%; height: 100%; object-fit: cover;">`;
     
     card.innerHTML = `
         <div class="walkthrough-card-thumbnail">
@@ -92,22 +101,6 @@ function createWalkthroughCard(walkthrough) {
     `;
     
     return card;
-}
-
-// 카테고리별 썸네일 이미지 반환 함수
-function getThumbnailImage(category) {
-    const imageMap = {
-        '웹 개발': '<img src="../assets/images/sections/web-dev-thumb.svg" alt="웹 개발" style="width: 100%; height: 100%; object-fit: cover;">',
-        'Web Development': '<img src="../assets/images/sections/web-dev-thumb.svg" alt="Web Development" style="width: 100%; height: 100%; object-fit: cover;">',
-        'AI/ML': '<img src="../assets/images/sections/ml-thumb.svg" alt="AI/ML" style="width: 100%; height: 100%; object-fit: cover;">',
-        'Machine Learning': '<img src="../assets/images/sections/ml-thumb.svg" alt="Machine Learning" style="width: 100%; height: 100%; object-fit: cover;">',
-        '클라우드': '<img src="../assets/images/sections/cloud-thumb.svg" alt="클라우드" style="width: 100%; height: 100%; object-fit: cover;">',
-        'Cloud': '<img src="../assets/images/sections/cloud-thumb.svg" alt="Cloud" style="width: 100%; height: 100%; object-fit: cover;">',
-        '데이터 분석': '<img src="../assets/images/sections/data-thumb.svg" alt="데이터 분석" style="width: 100%; height: 100%; object-fit: cover;">',
-        'Data Analysis': '<img src="../assets/images/sections/data-thumb.svg" alt="Data Analysis" style="width: 100%; height: 100%; object-fit: cover;">'
-    };
-    
-    return imageMap[category] || '<img src="../assets/images/sections/default-thumb.svg" alt="Default" style="width: 100%; height: 100%; object-fit: cover;">';
 }
 
 // 언어 전환 함수 (메인 페이지의 함수를 오버라이드)

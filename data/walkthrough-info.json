@@ -6,7 +6,7 @@
     {
       "id": 1,
       "title": "웹 개발 실습",
-      "thumbnail": "assets/images/sections/web-dev-thumb.svg",
+      "thumbnail": "assets/images/sections/ml-thumb.svg",
       "description": "React와 Node.js를 활용한 풀스택 웹 애플리케이션 개발을 실습합니다.",
       "link": "https://example.com/web-dev-lab",
       "duration": "2시간",

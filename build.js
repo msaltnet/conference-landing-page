@@ -216,38 +216,34 @@ async function build() {
     fs.writeFileSync(distWalkthroughPath, walkthroughContent);
   }
   
-  // walk-through 디렉토리 생성 및 리다이렉션 파일 생성
+  // walk-through 디렉토리 생성 및 실제 페이지 생성
   const walkthroughDir = path.join(config.distDir, 'walk-through');
   ensureDir(walkthroughDir);
   
-  const redirectHtml = `<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
-    <script>
-        // URL 경로에 따라 적절한 페이지로 리다이렉트
-        const path = window.location.pathname;
-        
-        if (path === '/walk-through' || path === '/walk-through/') {
-            window.location.href = '/walk-through.html';
-        } else if (path === '/en/walk-through' || path === '/en/walk-through/') {
-            window.location.href = '/en/walk-through.html';
-        } else if (path === '/' || path === '') {
-            window.location.href = '/index.html';
-        } else {
-            // 404 페이지로 리다이렉트
-            window.location.href = '/index.html';
-        }
-    </script>
-</head>
-<body>
-    <p>리다이렉트 중...</p>
-</body>
-</html>`;
-  
-  fs.writeFileSync(path.join(walkthroughDir, 'index.html'), redirectHtml);
+  // walk-through.html의 내용을 읽어서 index.html로 저장
+  const walkthroughHtmlPath = path.join(config.distDir, 'walk-through.html');
+  if (fs.existsSync(walkthroughHtmlPath)) {
+    let walkthroughContent = fs.readFileSync(walkthroughHtmlPath, 'utf8');
+    
+    // 경로 수정 (상대 경로로 변경)
+    walkthroughContent = walkthroughContent.replace(
+      `href="${config.baseUrl}/css/style.css"`,
+      'href="../css/style.css"'
+    );
+    
+    walkthroughContent = walkthroughContent.replace(
+      `src="${config.baseUrl}/js/main.js"`,
+      'src="../js/main.js"'
+    );
+    
+    walkthroughContent = walkthroughContent.replace(
+      `src="${config.baseUrl}/js/walkthrough.js"`,
+      'src="../js/walkthrough.js"'
+    );
+    
+    // walk-through/index.html로 저장
+    fs.writeFileSync(path.join(walkthroughDir, 'index.html'), walkthroughContent);
+  }
     
     // 정적 파일들 복사
     copyDir(path.join(config.sourceDir, 'css'), path.join(config.distDir, 'css'));
@@ -453,38 +449,34 @@ async function build() {
         fs.writeFileSync(path.join(enDistDir, 'walk-through.html'), enWalkthroughContent);
       }
       
-      // 영어 버전 walk-through 디렉토리 생성 및 리다이렉션 파일 생성
+      // 영어 버전 walk-through 디렉토리 생성 및 실제 페이지 생성
       const enWalkthroughDir = path.join(enDistDir, 'walk-through');
       ensureDir(enWalkthroughDir);
       
-      const enRedirectHtml = `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
-    <script>
-        // URL 경로에 따라 적절한 페이지로 리다이렉트
-        const path = window.location.pathname;
+      // 영어 버전 walk-through.html의 내용을 읽어서 index.html로 저장
+      const enWalkthroughHtmlPath = path.join(enDistDir, 'walk-through.html');
+      if (fs.existsSync(enWalkthroughHtmlPath)) {
+        let enWalkthroughContent = fs.readFileSync(enWalkthroughHtmlPath, 'utf8');
         
-        if (path === '/en/walk-through' || path === '/en/walk-through/') {
-            window.location.href = '/en/walk-through.html';
-        } else if (path === '/walk-through' || path === '/walk-through/') {
-            window.location.href = '/walk-through.html';
-        } else if (path === '/' || path === '') {
-            window.location.href = '/index.html';
-        } else {
-            // 404 페이지로 리다이렉트
-            window.location.href = '/index.html';
-        }
-    </script>
-</head>
-<body>
-    <p>Redirecting...</p>
-</body>
-</html>`;
-      
-      fs.writeFileSync(path.join(enWalkthroughDir, 'index.html'), enRedirectHtml);
+        // 경로 수정 (상대 경로로 변경)
+        enWalkthroughContent = enWalkthroughContent.replace(
+          `href="${config.baseUrl}/css/style.css"`,
+          'href="../../css/style.css"'
+        );
+        
+        enWalkthroughContent = enWalkthroughContent.replace(
+          `src="${config.baseUrl}/js/main.js"`,
+          'src="../../js/main.js"'
+        );
+        
+        enWalkthroughContent = enWalkthroughContent.replace(
+          `src="${config.baseUrl}/en/js/walkthrough.js"`,
+          'src="../js/walkthrough.js"'
+        );
+        
+        // en/walk-through/index.html로 저장
+        fs.writeFileSync(path.join(enWalkthroughDir, 'index.html'), enWalkthroughContent);
+      }
     }
     
     // 빌드 정보 생성

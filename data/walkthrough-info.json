@@ -1,5 +1,5 @@
 {
-  "title": "실습 체험",
+  "title": "실습 체험111",
   "subtitle": "다양한 기술 분야의 실습을 직접 체험해보세요",
   "description": "컨퍼런스에서 제공하는 다양한 실습 프로그램을 통해 실제 기술을 경험하고 학습할 수 있습니다.",
   "walkthroughs": [
@@ -8,40 +8,28 @@
       "title": "웹 개발 실습",
       "thumbnail": "assets/images/sections/ml-thumb.svg",
       "description": "React와 Node.js를 활용한 풀스택 웹 애플리케이션 개발을 실습합니다.",
-      "link": "https://example.com/web-dev-lab",
-      "duration": "2시간",
-      "level": "초급",
-      "category": "웹 개발"
+      "link": "https://example.com/web-dev-lab"
     },
     {
       "id": 2,
       "title": "머신러닝 실습",
       "thumbnail": "assets/images/sections/ml-thumb.svg",
       "description": "Python과 TensorFlow를 사용하여 이미지 분류 모델을 만들어봅니다.",
-      "link": "https://example.com/ml-lab",
-      "duration": "3시간",
-      "level": "중급",
-      "category": "AI/ML"
+      "link": "https://example.com/ml-lab"
     },
     {
       "id": 3,
       "title": "클라우드 배포 실습",
       "thumbnail": "assets/images/sections/cloud-thumb.svg",
       "description": "AWS를 활용하여 애플리케이션을 클라우드에 배포하는 과정을 실습합니다.",
-      "link": "https://example.com/cloud-lab",
-      "duration": "2.5시간",
-      "level": "중급",
-      "category": "클라우드"
+      "link": "https://example.com/cloud-lab"
     },
     {
       "id": 4,
       "title": "데이터 분석 실습",
       "thumbnail": "assets/images/sections/data-thumb.svg",
       "description": "Pandas와 Matplotlib을 사용하여 데이터를 분석하고 시각화합니다.",
-      "link": "https://example.com/data-lab",
-      "duration": "2시간",
-      "level": "초급",
-      "category": "데이터 분석"
+      "link": "https://example.com/data-lab"
     }
   ]
 }

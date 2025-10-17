@@ -44,6 +44,9 @@ async function loadWalkthroughData() {
         walkthroughData = await response.json();
         console.log('실습 데이터 로드 성공:', walkthroughData.walkthroughs.length, '개 실습');
         
+        // 페이지 제목 업데이트
+        updatePageTitle();
+        
         // 실습 카드 생성
         createWalkthroughCards();
     } catch (error) {
@@ -55,6 +58,36 @@ async function loadWalkthroughData() {
             description: "컨퍼런스에서 제공하는 다양한 실습 프로그램을 통해 실제 기술을 경험하고 학습할 수 있습니다.",
             walkthroughs: []
         };
+    }
+}
+
+// 페이지 제목 업데이트 함수
+function updatePageTitle() {
+    if (!walkthroughData) {
+        return;
+    }
+    
+    // 메인 제목 업데이트
+    const titleElement = document.querySelector('.walkthrough-title');
+    if (titleElement && walkthroughData.title) {
+        titleElement.textContent = walkthroughData.title;
+    }
+    
+    // 부제목 업데이트
+    const subtitleElement = document.querySelector('.walkthrough-subtitle');
+    if (subtitleElement && walkthroughData.subtitle) {
+        subtitleElement.textContent = walkthroughData.subtitle;
+    }
+    
+    // 설명 업데이트
+    const descriptionElement = document.querySelector('.walkthrough-description');
+    if (descriptionElement && walkthroughData.description) {
+        descriptionElement.textContent = walkthroughData.description;
+    }
+    
+    // 페이지 타이틀 업데이트
+    if (walkthroughData.title) {
+        document.title = `${walkthroughData.title} - Conference Landing Page`;
     }
 }
 
@@ -94,10 +127,10 @@ function createWalkthroughCard(walkthrough) {
         <div class="walkthrough-card-content">
             <h3 class="walkthrough-card-title">${walkthrough.title}</h3>
             <p class="walkthrough-card-description">${walkthrough.description}</p>
+            <a href="${walkthrough.link}" class="walkthrough-go-button" target="_blank" rel="noopener noreferrer">
+                ${currentLanguage === 'en' ? 'Start Experience' : '체험 시작'}
+            </a>
         </div>
-        <a href="${walkthrough.link}" class="walkthrough-go-button" target="_blank" rel="noopener noreferrer">
-            ${currentLanguage === 'en' ? 'Start' : 'Start'}
-        </a>
     `;
     
     return card;
@@ -151,6 +184,12 @@ function switchLanguage(lang) {
     
     // 데이터 다시 로드
     loadWalkthroughData();
+}
+
+// 페이지 텍스트 업데이트 함수
+function updatePageTexts() {
+    // 언어 전환 시 제목도 다시 업데이트
+    updatePageTitle();
 }
 
 // 빌드 정보 로드 함수 (메인 페이지와 동일)

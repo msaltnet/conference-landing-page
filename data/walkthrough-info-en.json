@@ -8,40 +8,28 @@
       "title": "Web Development Lab",
       "thumbnail": "assets/images/sections/web-dev-thumb.svg",
       "description": "Practice full-stack web application development using React and Node.js.",
-      "link": "https://example.com/web-dev-lab",
-      "duration": "2 hours",
-      "level": "Beginner",
-      "category": "Web Development"
+      "link": "https://example.com/web-dev-lab"
     },
     {
       "id": 2,
       "title": "Machine Learning Lab",
       "thumbnail": "assets/images/sections/ml-thumb.svg",
       "description": "Create an image classification model using Python and TensorFlow.",
-      "link": "https://example.com/ml-lab",
-      "duration": "3 hours",
-      "level": "Intermediate",
-      "category": "AI/ML"
+      "link": "https://example.com/ml-lab"
     },
     {
       "id": 3,
       "title": "Cloud Deployment Lab",
       "thumbnail": "assets/images/sections/cloud-thumb.svg",
       "description": "Practice deploying applications to the cloud using AWS.",
-      "link": "https://example.com/cloud-lab",
-      "duration": "2.5 hours",
-      "level": "Intermediate",
-      "category": "Cloud"
+      "link": "https://example.com/cloud-lab"
     },
     {
       "id": 4,
       "title": "Data Analysis Lab",
       "thumbnail": "assets/images/sections/data-thumb.svg",
       "description": "Analyze and visualize data using Pandas and Matplotlib.",
-      "link": "https://example.com/data-lab",
-      "duration": "2 hours",
-      "level": "Beginner",
-      "category": "Data Analysis"
+      "link": "https://example.com/data-lab"
     }
   ]
 }

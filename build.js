@@ -394,35 +394,7 @@ async function build() {
       copyDir(path.join(config.sourceDir, 'assets'), path.join(enDistDir, 'assets'));
       copyDir(path.join(config.sourceDir, 'css'), path.join(enDistDir, 'css'));
       
-      // 영어 버전 JavaScript 파일 처리 (main.js의 baseUrl 설정 수정)
-      const enJsDistDir = path.join(enDistDir, 'js');
-      ensureDir(enJsDistDir);
-      
-      // main.js 파일 처리
-      const enMainJsPath = path.join(jsSourceDir, 'main.js');
-      if (fs.existsSync(enMainJsPath)) {
-        let enMainJsContent = fs.readFileSync(enMainJsPath, 'utf8');
-        
-        // baseUrl 설정을 빌드 시점의 값으로 교체
-        enMainJsContent = enMainJsContent.replace(
-          'const baseUrl = window.location.origin;',
-          `const baseUrl = '${config.baseUrl}';`
-        );
-        
-        fs.writeFileSync(path.join(enJsDistDir, 'main.js'), enMainJsContent);
-      }
-      
-      // validator.js 파일 복사
-      const enValidatorJsPath = path.join(jsSourceDir, 'validator.js');
-      if (fs.existsSync(enValidatorJsPath)) {
-        fs.copyFileSync(enValidatorJsPath, path.join(enJsDistDir, 'validator.js'));
-      }
-      
-      // walkthrough.js 파일 복사
-      const walkthroughJsPath = path.join(jsSourceDir, 'walkthrough.js');
-      if (fs.existsSync(walkthroughJsPath)) {
-        fs.copyFileSync(walkthroughJsPath, path.join(enJsDistDir, 'walkthrough.js'));
-      }
+      // 영어 버전은 메인 js 폴더의 파일들을 공유 사용
       
       // 영어 버전 walk-through 페이지 처리
       const enWalkthroughPath = path.join(enSourceDir, 'walk-through.html');
@@ -441,8 +413,8 @@ async function build() {
         );
         
         enWalkthroughContent = enWalkthroughContent.replace(
-          'src="js/walkthrough.js"',
-          `src="${config.baseUrl}/en/js/walkthrough.js"`
+          'src="../js/walkthrough.js"',
+          `src="${config.baseUrl}/js/walkthrough.js"`
         );
         
         // 영어 버전 walk-through HTML 파일 저장
@@ -470,8 +442,8 @@ async function build() {
         );
         
         enWalkthroughContent = enWalkthroughContent.replace(
-          `src="${config.baseUrl}/en/js/walkthrough.js"`,
-          'src="../js/walkthrough.js"'
+          `src="${config.baseUrl}/js/walkthrough.js"`,
+          'src="../../js/walkthrough.js"'
         );
         
         // en/walk-through/index.html로 저장

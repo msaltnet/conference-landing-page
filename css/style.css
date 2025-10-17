@@ -1580,17 +1580,19 @@ section {
     background: linear-gradient(135deg, #667eea, #764ba2);
     color: white;
     border: none;
-    padding: 12px 25px;
-    border-radius: 25px;
-    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
     text-decoration: none;
     display: inline-block;
     flex-shrink: 0;
-    min-width: 80px;
+    min-width: 100px;
+    width: auto;
     text-align: center;
+    margin-top: 12px;
 }
 
 .walkthrough-go-button:hover {
